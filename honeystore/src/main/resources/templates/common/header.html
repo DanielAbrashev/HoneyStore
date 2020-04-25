@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head th:fragment="common-header">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+    <script src="https://cdn.tiny.cloud/1/3epp5di5a6agoibb5z61lb3xizpw6i8bu46dk9ndu755ad61/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+
+
+    <title>AbraHoney</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.js" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!--
+        <link href="/css/bootstrap.css" rel="stylesheet">
+    -->
+
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/image/bee_icon.jpg" rel="icon">
+    <script src="https://kit.fontawesome.com/b6513e2e62.js" crossorigin="anonymous"></script>
+
+    <style>.subscribe-area {
+background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+}
+
+.pb-50 {
+    padding-bottom: 50px;
+}
+.pt-70 {
+    padding-top: 70px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.subscribe-text span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 5px;
+}
+.subscribe-text h2 {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 6px;
+}
+.subscribe-wrapper {
+    overflow: hidden;
+}
+.mb-15 {
+    margin-bottom: 18px;
+}
+.subscribe-form {
+}
+.subscribe2-wrapper .subscribe-form input {
+    background: white;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    color: black;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 300;
+    height: 40px;
+    margin-right: 17px;
+    padding-left: 35px;
+    width: 40%;
+}
+
+.subscribe2-wrapper .subscribe-form button {
+    border: 1px solid #fff;
+
+    background: #ffff;
+    border: none;
+    border-radius: 30px;
+    color: #4b5d73;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 11px 46px;
+    transition: all 0.3s ease 0s;
+    padding-left: 20px;
+    padding-right: 20px;
+    width:20%;
+}
+.subscribe2-wrapper .subscribe-form button i {
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+
+<div th:fragment="navbar">
+
+
+    <div class="row justify-content-md-end" style="font-size: 15px;
+    background-color: rgba(232, 28, 28, 0.80);
+     background: -webkit-linear-gradient(top, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+    background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+    border-width: 1px;
+    border-radius: 4px;">
+            <a class="animated" style="color:black" onclick="gtag_report_conversion(https://localhost:8080)"
+               href="tel:+359899351757">
+                <i class="fa fa-phone"></i>
+                +359899351757
+            </a>
+            <a class="animated" style="color:black" href="#">
+                <i class="fa fa-truck"></i>
+                Доставка
+            </a>
+
+
+    </div>
+
+    <div class="container" style="padding-right: 0px;
+      padding-left: 0px;">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand" th:href="@{/} " style="font-size: 30px"><img src="/image/bee_icon.jpg"
+                                                                                 alt="Logo"
+                                                                                 width="40px;">AbraHoney</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 18px">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/} ">Начало<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" th:href="@{/productshelf}" id="navbarDropdown"
+                           role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Продукти
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/productshelf}">Всички продукти</a>
+                            <a class="dropdown-item" th:href="@{/faq}">Пчелен клей</a>
+                            <a class="dropdown-item" href="#">Пчелен прашец </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Всички</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">За нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакти</a>
+                    </li>
+
+                </ul>
+
+
+                <ul class="navbar-nav navbar-right">
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shoppingCart/cart}">Количка<span
+                                style="color:#db3208; font size:large;"></span>$<span
+                                th:each="cartItem : ${cartItemList}"
+                                th:text="${shoppingCart.grandTotal}"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/myProfile}">Моят
+                            акаунт</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Излизане</a>
+                    </li>
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/searchProduct}" method="post">
+                        <input class="form-control mr-sm-2" style="background: white;
+    border-radius: 30px;
+    color: black;" name="keyword" type="search" placeholder="Потърси продукт"
+                               aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                style="border-radius: 30px;">Търси
+                        </button>
+                    </form>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div th:fragment="footer">
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="page-footer font-small unique-color-dark">
+
+        <div style="font-size: 25px;
+    background-color: rgba(232, 28, 28, 0.80);
+     background: -webkit-linear-gradient(top, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+    background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+    border-width: 1px;
+    border-radius: 4px;">
+
+
+            <!-- Grid row-->
+            <!--<div class="row justify-content-md-end" >
+
+
+
+
+                &lt;!&ndash; Grid column &ndash;&gt;
+                <div class="col-md-2 col-lg-2 text-right text-md-right mb-0 mb-md-0">
+                    <h6 class="mb-0" style="font-size: 24px;">СПОДЕЛИ НИ В ...</h6>
+                </div>
+                &lt;!&ndash; Grid column &ndash;&gt;
+
+                &lt;!&ndash; Grid column &ndash;&gt;
+                <div class="col-md-2 col-lg-2 text-center ">
+
+                    &lt;!&ndash; Facebook &ndash;&gt;
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-f white-text mr-4"> </i>
+                    </a>
+                    &lt;!&ndash; Twitter &ndash;&gt;
+                    <a class="tw-ic">
+                        <i class="fab fa-twitter white-text mr-4"> </i>
+                    </a>
+                    &lt;!&ndash; Google +&ndash;&gt;
+                    <a class="gplus-ic">
+                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                    </a>
+                    &lt;!&ndash;Linkedin &ndash;&gt;
+                    <a class="li-ic">
+                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                    </a>
+                    &lt;!&ndash;Instagram&ndash;&gt;
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+                &lt;!&ndash; Grid column &ndash;&gt;
+
+            </div>-->
+            <div class="row justify-content-md-center">
+
+                <div class="col-md-3 text-right align-self-end">
+                    <div class="subscribe-text mb-15">
+                        <span style="color:black;">ЗАПИШИ СЕ ЗА НАШИЯ</span>
+                        <h2 style="color:black;">Е-БЮЛЕТИН</h2>
+                    </div>
+                </div>
+                <div class="col-sm-5  text-left align-self-end">
+                    <div class="subscribe-wrapper subscribe2-wrapper mb-15">
+                        <div class="subscribe-form">
+                            <form action="#">
+                                <input placeholder="въведете вашия имейл адрес" type="email">
+                                <button>ЗАПИШИ СЕ<i class="fas fa-long-arrow-alt-right"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 text-right align-self-center ">
+                    <h6 style="font-size: 24px;">СПОДЕЛИ НИ В ...</h6>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 text-left col align-self-center ">
+
+                    <!-- Facebook -->
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-f white-text mr-4"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic">
+                        <i class="fab fa-twitter white-text mr-4"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic">
+                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic">
+                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+
+            </div>
+            <!-- Grid row-->
+
+
+        </div>
+
+        <!-- Footer Links -->
+        <div class="text-center text-md-left mt-5">
+
+            <!-- Grid row -->
+            <div class="row justify-content-md-center">
+
+                <!-- Grid column -->
+                <div class="col-md-1 col-lg-1 col-xl-2 mx-right mb-2">
+
+                    <!-- Content -->
+                    <h6 class="text-uppercase font-weight-bold">За компанията</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                        consectetur
+                        adipisicing elit.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-right mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold" style="font-color:purple">Продукти</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="/productshelf">Пчелен мед</a>
+                    </p>
+                    <p>
+                        <a href="/productshelf">Пчелен клей</a>
+                    </p>
+                    <p>
+                        <a href="/productshelf">Пчелен прашец</a>
+                    </p>
+                    <p>
+                        <a href="/productshelf">Пчелни имуностимулатори</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-right mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">Меню</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">Your Account</a>
+                    </p>
+                    <p>
+                        <a href="#!">Become an Affiliate</a>
+                    </p>
+                    <p>
+                        <a href="#!">Shipping Rates</a>
+                    </p>
+                    <p>
+                        <a href="#!">Help</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-3 col-xl-3 mx-right mb-md-0 mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">Контакти</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+                    <p>
+                        <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <p>
+                        <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <footer class="page-footer" style="background: darkgrey;">
+            <div class="footer-copyright text-center py-3" style="">© 2020 :
+                <a href="/"> Abrahoney:</a> Всички права запазени!
+            </div>
+            <!-- Copyright -->
+        </footer>
+    </footer>
+    <!-- Footer -->
+</div>
+
+
+<div th:fragment="body-bottom-scripts">
+    <!--<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>-->
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+
+
+
+
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+            integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+            crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/scripts.js"></script>
+
+
+</div>
+
+
+</body>
+</html>

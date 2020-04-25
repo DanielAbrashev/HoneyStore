@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar"></div>
+
+<!-- Main component for a primary marketing message or call to action -->
+<div class="container">
+
+    <div class="row" style="margin-bottom: -100px">
+        <div class="col-sm-8">
+            <h2 class="section-headline">
+                <!--/*@thymesVar id="user" type="User"*/-->
+                <!--/*@thymesVar id="username" type="String"*/-->
+                <span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Products'"></span>
+            </h2>
+        </div>
+
+
+    </div>
+
+    <hr style="position: absolute; width: 90%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px"/>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row justify-content-between">
+                <div class="col-sm-6 text-left">
+                    <a class="btn btn-primary" th:href="@{/productshelf}">Continue shopping</a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a class="btn btn-primary" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Check out</a>
+                </div>
+            </div>
+            <br/>
+            <div th:if="${notEnoughStock}" class="alert alert-warning">
+                SOme products dont have enough stock please update quantity
+            </div>
+            <div th:if="${emptyCart}" class="alert alert-warning">
+                Your cart is empty
+            </div>
+            <br/> <br/> <br/>
+            <div class="row">
+                <div class="col-sm-8"><h4>Products</h4></div>
+                <div class="col-sm-2"><h4>Price</h4></div>
+                <div class="col-sm-2"><h4>Qty</h4></div>
+            </div>
+            <!--Display products-->
+            <div class="row" th:each="cartItem : ${cartItemList}">
+                <form th:action="@{/shoppingCart/updateCartItem}" method="post">
+                    <hr/>
+                    <div class="col-sm-4">
+                        <a th:href="@{productDetail(id=${cartItem.product.id})}">
+                            <img class="responsive"
+                                 th:src="#{adminPath} + @{/image/product/} + ${cartItem.product.id}+'.png'"/>
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.productName}">
+                            ...</h4></a>
+                        <p th:if="${cartItem.product.inStockNumber&gt;10}" style="color:green;">В наличност</p>
+                        <p th:if="${cartItem.product.inStockNumber&gt;10 and cartItem.product.inStockNumber&gt;0}"
+                           style="color:green;">Само<span th:text="${cartItem.product.inStockNumber}"></span> броя остават
+                        </p>
+                        <p th:if="${cartItem.product.inStockNumber==0}" style="color:red;">Продуктът не е наличен</p>
+                        <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Изтрий</a>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <h5 style="color:#db3208;font-size:large;">$<span th:text="${cartItem.product.ourPrice}"
+                                                                          th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''"></span>
+                        </h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <input hidden="hidden" name="id" th:value="${cartItem.id}"/>
+                        <input th:id="${cartItem.id}" th:name="qty" th:value="${cartItem.qty}"
+                               th:disabled="${cartItem.product.inStockNumber==0}" class="form-control cartItemQty"/>
+                        <button th:id="'update-item-'+${cartItem.id}" type="submit"
+                                class="btn btn-warning btn-cs">Промени
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <hr/>
+            <div class="row">
+                <hr/>
+                <h4 class="col-sm-12 text-right"><strong style="font-size:large;">Total Price(<span
+                        th:text="${#lists.size(cartItemList)}"></span> items):</strong><span
+                        style="color:#db3208; font size:large;"></span>$<span
+                        th:text="${shoppingCart.grandTotal}"></span></h4>
+            </div>
+        </div>
+    </div>
+
+
+</div>   <!--end of conatainer-->
+
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+
+</body>
+</html>

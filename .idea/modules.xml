@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/HoneyStore.iml" filepath="$PROJECT_DIR$/.idea/HoneyStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/adminportal/adminportal.iml" filepath="$PROJECT_DIR$/adminportal/adminportal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/honeystore/honeystore.iml" filepath="$PROJECT_DIR$/honeystore/honeystore.iml" />
+    </modules>
+  </component>
+</project>
