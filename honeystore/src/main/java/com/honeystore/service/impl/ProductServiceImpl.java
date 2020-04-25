@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -21,14 +22,13 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-
     public List<Product> findAll() {
-        List<Product> productList= (List<Product>) productRepository.findAll();
+        List<Product> productList = (List<Product>) productRepository.findAll();
 
         List<Product> activeProductList = new ArrayList<>();
 
         for (Product product : productList) {
-            if(product.isActive()) {
+            if (product.isActive()) {
                 activeProductList.add(product);
             }
         }
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> activeProductList = new ArrayList<>();
 
         for (Product product : productList) {
-            if(product.isActive()) {
+            if (product.isActive()) {
                 activeProductList.add(product);
             }
         }
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> activeProductList = new ArrayList<>();
 
         for (Product product : productList) {
-            if(product.isActive()) {
+            if (product.isActive()) {
                 activeProductList.add(product);
             }
         }

@@ -38,14 +38,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserBillingRepository userBillingRepository;
 
-
     public UserServiceImpl(PasswordResetTokenRepository passwordResetTokenRepository, UserRepository userRepository, RoleRepository roleRepository, UserShippingRepository userShippingRepository, UserPaymentRepository userPaymentRepository) {
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userShippingRepository = userShippingRepository;
         this.userPaymentRepository = userPaymentRepository;
-
     }
 
     @Override
@@ -65,7 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getOne (Long id){
+    public User getOne(Long id) {
         return userRepository.getOne(id);
     }
 
@@ -115,38 +113,33 @@ public class UserServiceImpl implements UserService {
         save(user);
     }
 
-
     @Override
     public void setUserDefaultPayment(Long userPaymentId, User user) {
 
-        List<UserPayment> userPaymentList =(List<UserPayment>) userPaymentRepository.findAll();
+        List<UserPayment> userPaymentList = (List<UserPayment>) userPaymentRepository.findAll();
 
-        for (UserPayment userPayment : userPaymentList)
-        {
-            if(userPayment.getId() == userPaymentId){
+        for (UserPayment userPayment : userPaymentList) {
+            if (userPayment.getId() == userPaymentId) {
                 userPayment.setDefaultPayment(true);
                 userPaymentRepository.save(userPayment);
-            }
-            else {
+            } else {
                 userPayment.setDefaultPayment(false);
                 userPaymentRepository.save(userPayment);
             }
         }
     }
 
-
     @Override
     public void setUserDefaultShipping(Long shippingAddressId, User user) {
 
         List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
 
-        for(UserShipping userShipping : userShippingList){
-            if(userShipping.getId() == shippingAddressId){
+        for (UserShipping userShipping : userShippingList) {
+            if (userShipping.getId() == shippingAddressId) {
                 userShipping.setUserShippingDefault(true);
                 userShippingRepository.save(userShipping);
 
-            }
-            else {
+            } else {
                 userShipping.setUserShippingDefault(false);
                 userShippingRepository.save(userShipping);
             }
@@ -169,6 +162,5 @@ public class UserServiceImpl implements UserService {
         userShippingRepository.save(userShipping);
         userPaymentRepository.save(userPayment);
     }
-
 
 }

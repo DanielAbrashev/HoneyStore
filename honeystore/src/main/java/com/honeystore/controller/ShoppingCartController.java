@@ -57,23 +57,20 @@ public class ShoppingCartController {
             Model model, Principal principal
     ) {
         User user = userService.findByUsername(principal.getName());
-/*
-        productService.findById(product.getId()).ifPresent(product1 -> product1 = product);
-*/
-
 
         product = productService.getOne(product.getId());
 
-        if(Integer.parseInt(qty) > product.getInStockNumber()){
+        if (Integer.parseInt(qty) > product.getInStockNumber()) {
             model.addAttribute("notEnoughStock", true);
-            return "forward:/productDetail?id=" +product.getId();
+            return "forward:/productDetail?id=" + product.getId();
         }
 
-        CartItem cartItem = cartItemService.addProductToCartItem(product,user,Integer.parseInt(qty));
-        model.addAttribute("addProductSuccess",true);
+        CartItem cartItem = cartItemService.addProductToCartItem(product, user, Integer.parseInt(qty));
+        model.addAttribute("addProductSuccess", true);
 
-        return "forward:/productDetail?id=" +product.getId();
+        return "forward:/productDetail?id=" + product.getId();
     }
+
     @RequestMapping("/removeItem")
     public String removeItem(@RequestParam("id") Long id) {
         cartItemService.removeCartItem(cartItemService.getOne(id));

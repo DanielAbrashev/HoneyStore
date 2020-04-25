@@ -19,12 +19,12 @@
         <div class="col-sm-5 col-sm-offset-3">
             <ul class="nav nav-tabs">
                 <li classappend="nav-item" th:classappend="${classActiveNewAccount}? 'in active'"><a href="#tab-1"
-                                                                                                  class="nav-link"
-                                                                                                  data-toggle="tab"><span
+                                                                                                     class="nav-link"
+                                                                                                     data-toggle="tab"><span
                         style="color:#f46b42;">Създай нов акаунт</span></a></li>
                 <li classappend="nav-item active" th:classappend="${classActiveLogin}? 'in active'"><a href="#tab-2"
-                                                                                                class="nav-link"
-                                                                                                data-toggle="tab"><span
+                                                                                                       class="nav-link"
+                                                                                                       data-toggle="tab"><span
                         style="color:#f46b42;">Влез</span></a></li>
                 <li classappend="nav-item" th:classappend="${classActiveForgottenPassword}? 'in active'"><a
                         href="#tab-3" class="nav-link" data-toggle="tab"><span
@@ -43,8 +43,9 @@
                                 </div>
                                 <form class="was-validated" th:action="@{/newUser}" method="post">
                                     <div class="form-group">
-                                        <label for="newUsername" style="">Потребителско име</label>&nbsp;<span style="color:red;"
-                                                                                                      th:if="${usernameExists}">Username already exists. Please chose another one.</span>
+                                        <label for="newUsername" style="">Потребителско име</label>&nbsp;<span
+                                            style="color:red;"
+                                            th:if="${usernameExists}">Username already exists. Please chose another one.</span>
                                         <input required="required" type="text" class="form-control" id="newUsername"
                                                name="username"/>
                                         <p style="color:#828282">Въведете вашето потребителско име.</p>
@@ -106,7 +107,7 @@
                                 <div th:if="${forgetPasswordEmailSent}" class="alert alert-success" style="color:red;">
                                     Email sent!
                                 </div>
-                                <form class="was-validated" th:action="@{/forgetPassword}" method="post" >
+                                <form class="was-validated" th:action="@{/forgetPassword}" method="post">
                                     <div class="form-group">
                                         <label for="recoverEmail">Имейл</label>
                                         <input required="required" type="text" class="form-control" id="recoverEmail"

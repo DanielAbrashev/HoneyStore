@@ -12,10 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-/**
- * created by saikat on 4/11/19
- */
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,23 +19,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
-
     private RoleRepository roleRepository;
-
-
-
-
 
     @Override
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
         User localUser = userRepository.findByUsername(user.getUsername());
 
-        if(localUser !=null){
-            LOG.info("user {} already exists.Nothing will be done.",user.getUsername());
+        if (localUser != null) {
+            LOG.info("user {} already exists.Nothing will be done.", user.getUsername());
 
-        }else
-        {
+        } else {
             for (UserRole ur : userRoles
             ) {
                 roleRepository.save(ur.getRole());

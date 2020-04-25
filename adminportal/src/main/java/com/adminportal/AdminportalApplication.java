@@ -15,12 +15,9 @@ import java.util.Set;
 
 @SpringBootApplication
 public class AdminportalApplication implements CommandLineRunner {
+
     @Autowired
     private UserService userService;
-
-    /*public AdminportalApplication(UserService userService) {
-        this.userService = userService;
-    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(AdminportalApplication.class, args);

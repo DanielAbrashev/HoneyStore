@@ -72,48 +72,46 @@ public class ProductController {
         return "productInfo";
     }
 
-    @RequestMapping(value = "/updateProduct" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.GET)
     public String updateProduct(
-            @RequestParam("id") Long id ,
+            @RequestParam("id") Long id,
             Model model
-    )
-    {
+    ) {
         productService.findById(id).ifPresent(product -> model.addAttribute("product", product));
         return "updateProduct";
     }
 
-    @RequestMapping(value = "/updateProduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
     public String updateProductPost(
             @ModelAttribute("product") Product product
             /*Model model*/, HttpServletRequest request
-    )
-    {
+    ) {
 
         productService.save(product);
         MultipartFile productImage = product.getProductImage();
 
-        if(!productImage.isEmpty()){
-            String name = product.getId()+".png";
-            try{
+        if (!productImage.isEmpty()) {
+            String name = product.getId() + ".png";
+            try {
                 byte[] bytes = productImage.getBytes();
-                Files.delete(Paths.get("src/main/resources/static/image/product/"+name));
+                Files.delete(Paths.get("src/main/resources/static/image/product/" + name));
                 BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(new File("src/main/resources/static/image/product/"+name)));
+                        new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
                 stream.write(bytes);
                 stream.close();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         /*model.addAttribute("product",product);*/
-        return "redirect:productInfo?id="+product.getId();
+        return "redirect:productInfo?id=" + product.getId();
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
     public String remove(
             @ModelAttribute("id") String id, Model model
-    ){
+    ) {
         productService.removeOne(Long.parseLong(id.substring(8)));
 
         List<Product> productList = productService.findAll();

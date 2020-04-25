@@ -8,15 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-/**
- * created by saikat on 4/19/19
- */
 @Service
 public class UserShippingServiceImpl implements UserShippingService {
+
     @Autowired
     private UserShippingRepository userShippingRepository;
-
-
 
     @Override
     public UserShipping getOne(Long id) {
@@ -25,6 +21,6 @@ public class UserShippingServiceImpl implements UserShippingService {
 
     @Override
     public void removeById(Long shippingId) {
-            userShippingRepository.deleteById(shippingId);
+        userShippingRepository.deleteById(shippingId);
     }
 }

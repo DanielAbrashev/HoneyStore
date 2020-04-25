@@ -18,6 +18,7 @@ import java.util.Objects;
 
 @Component
 public class MailConstructor {
+
     @Autowired
     private Environment env;
 
@@ -31,12 +32,12 @@ public class MailConstructor {
             User user,
             String password
     ) {
-        String url = contextPath + "/NewUser?token="+token;
-        String message = "\nPlease click on this link to verify your email and edit your personal information You password is: \n"+ password;
+        String url = contextPath + "/NewUser?token=" + token;
+        String message = "\nPlease click on this link to verify your email and edit your personal information You password is: \n" + password;
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
         email.setSubject("AbraHoney - New User");
-        email.setText(url+message);
+        email.setText(url + message);
         email.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
         return email;
 
@@ -44,7 +45,7 @@ public class MailConstructor {
 
     public MimeMessagePreparator constructOrderConfirmationEmail(
             User user, Order order, Locale locale
-    ){
+    ) {
         Context context = new Context();
         context.setVariable("order", order);
         context.setVariable("user", user);
@@ -56,7 +57,7 @@ public class MailConstructor {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 MimeMessageHelper email = new MimeMessageHelper(mimeMessage);
                 email.setTo(user.getEmail());
-                email.setSubject("Order Confirmation -"+order.getId());
+                email.setSubject("Order Confirmation -" + order.getId());
                 email.setText(text, true);
                 email.setFrom(new InternetAddress("danielabrashev93@gmail.com"));
             }

@@ -2,9 +2,6 @@ package com.honeystore.domain;
 
 import javax.persistence.*;
 
-/**
- * created by saikat on 4/16/19
- */
 @Entity
 public class UserShipping {
 
@@ -19,8 +16,6 @@ public class UserShipping {
     private String userShippingCountry;
     private String userShippingZipCode;
     private boolean userShippingDefault;
-
-
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -18,7 +18,7 @@ public class Product {
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
-    private boolean active=true;
+    private boolean active = true;
 
     @Column(columnDefinition = "text")
     private String description;
@@ -47,7 +47,6 @@ public class Product {
         this.productName = productName;
     }
 
-
     public String getHarvest() {
         return harvest;
     }
@@ -55,8 +54,6 @@ public class Product {
     public void setHarvest(String harvest) {
         this.harvest = harvest;
     }
-
-
 
     public String getCategory() {
         return category;

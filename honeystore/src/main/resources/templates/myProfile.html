@@ -28,8 +28,8 @@
                                                                                             data-toggle="tab"><span
                         style="color:#f46b42;">Редактиране</span></a></li>
                 <li classappend="nav-item" th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2"
-                                                                                             class="nav-link"
-                                                                                             data-toggle="tab"><span
+                                                                                              class="nav-link"
+                                                                                              data-toggle="tab"><span
                         style="color:#f46b42;">Поръчки</span></a></li>
                 <li classappend="nav-item" th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3"
                                                                                                class="nav-link"
@@ -405,20 +405,6 @@
                                                 </div>
                                             </div>
 
-                                            <!--<div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="billingCountry">* Country </label>
-                                                    <select id="CountryList" th:name="userBillingCountry"
-                                                            class="form-control"
-                                                            th:value="${userBilling.userBillingCountry}"
-                                                            required="required">
-                                                        <option value="" disabled="disabled">Please Select an option
-                                                        </option>
-                                                        <option th:each="country : ${countryList}" th:text="${country}"
-                                                                th:selected="(${userBilling.userBillingCountry} == ${country})"></option>
-                                                    </select>
-                                                </div>
-                                            </div>-->
                                         </div>
 
                                         <!--Credit Card information-->
@@ -710,23 +696,7 @@
                                                            th:value="${userShipping.userShippingZipCode}"/>
                                                 </div>
                                             </div>
-
-                                            <!-- <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                     <label for="ShippingCountry">* Country </label>
-                                                     <select id="CountryList" th:name="userShippingCountry"
-                                                             class="form-control"
-                                                             th:value="${userShipping.userShippingCountry}"
-                                                             required="required">
-                                                         <option value="" disabled="disabled">Please Select an option
-                                                         </option>
-                                                         <option th:each="country : ${countryList}" th:text="${country}"
-                                                                 th:selected="(${userShipping.userShippingCountry} == ${country})"></option>
-                                                     </select>
-                                                 </div>
-                                             </div>-->
                                         </div>
-
 
                                         <button type="submit" class="btn btn-primary btn-lg">Save All</button>
                                     </form>

@@ -21,6 +21,7 @@ import java.util.Locale;
 
 @Controller
 public class CheckoutController {
+
     private ShippingAddress shippingAddress = new ShippingAddress();
     private BillingAddress billingAddress = new BillingAddress();
     private Payment payment = new Payment();
@@ -57,7 +58,6 @@ public class CheckoutController {
 
     @Autowired
     private OrderService orderService;
-
 
     @RequestMapping("/checkout")
     public String checkout(
@@ -135,19 +135,19 @@ public class CheckoutController {
     }
 
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
-    public String checkoutPost (
+    public String checkoutPost(
             @ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
             @ModelAttribute("billingAddress") BillingAddress billingAddress,
             @ModelAttribute("payment") Payment payment,
             @ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
             @ModelAttribute("shippingMethod") String shippingMethod,
             Principal principal, Model model
-    ){
+    ) {
         ShoppingCart shoppingCart = userService.findByUsername(principal.getName()).getShoppingCart();
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         model.addAttribute("cartItemList", cartItemList);
 
-        if(billingSameAsShipping.equals("true")){
+        if (billingSameAsShipping.equals("true")) {
             billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
             billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
             billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
@@ -157,7 +157,7 @@ public class CheckoutController {
             billingAddress.setBillingAddressZipCode(shippingAddress.getShippingAddressZipCode());
         }
 
-        if(shippingAddress.getShippingAddressStreet1().isEmpty() ||
+        if (shippingAddress.getShippingAddressStreet1().isEmpty() ||
                 shippingAddress.getShippingAddressCity().isEmpty() ||
                 shippingAddress.getShippingAddressState().isEmpty() ||
                 shippingAddress.getShippingAddressName().isEmpty() ||
@@ -169,7 +169,7 @@ public class CheckoutController {
                 billingAddress.getBillingAddressState().isEmpty() ||
                 billingAddress.getBillingAddressName().isEmpty() ||
                 billingAddress.getBillingAddressZipCode().isEmpty())
-            return "redirect:/checkout?id="+shoppingCart.getId()+"&missingRequiredField=true";
+            return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
         User user = userService.findByUsername(principal.getName());
 
         Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
@@ -181,7 +181,7 @@ public class CheckoutController {
         LocalDate today = LocalDate.now();
         LocalDate estimatedDeliveryDate;
 
-        if(shippingMethod.equals("groundShipping")){
+        if (shippingMethod.equals("groundShipping")) {
             estimatedDeliveryDate = today.plusDays(5);
         } else {
             estimatedDeliveryDate = today.plusDays(3);

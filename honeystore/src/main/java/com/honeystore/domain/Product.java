@@ -47,9 +47,6 @@ public class Product {
         this.productName = productName;
     }
 
-
-
-
     public String getHarvest() {
         return harvest;
     }
@@ -58,7 +55,6 @@ public class Product {
         this.harvest = harvest;
     }
 
-
     public String getCategory() {
         return category;
     }
@@ -66,7 +62,6 @@ public class Product {
     public void setCategory(String category) {
         this.category = category;
     }
-
 
     public double getShippingWeight() {
         return shippingWeight;

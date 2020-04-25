@@ -16,7 +16,6 @@
             referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'textarea'});</script>
 
-
     <title>AbraHoney</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
@@ -27,11 +26,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
-    <!--
-        <link href="/css/bootstrap.css" rel="stylesheet">
-    -->
 
 
     <!-- Custom styles for this template -->
@@ -114,8 +108,6 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
 
 
-
-
     </style>
 </head>
 
@@ -124,24 +116,21 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
 <div th:fragment="navbar">
 
-
     <div class="row justify-content-md-end" style="font-size: 15px;
     background-color: rgba(232, 28, 28, 0.80);
      background: -webkit-linear-gradient(top, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
     background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
     border-width: 1px;
     border-radius: 4px;">
-            <a class="animated" style="color:black" onclick="gtag_report_conversion(https://localhost:8080)"
-               href="tel:+359899351757">
-                <i class="fa fa-phone"></i>
-                +359899351757
-            </a>
-            <a class="animated" style="color:black" href="#">
-                <i class="fa fa-truck"></i>
-                Доставка
-            </a>
-
-
+        <a class="animated" style="color:black" onclick="gtag_report_conversion(https://localhost:8080)"
+           href="tel:+359899351757">
+            <i class="fa fa-phone"></i>
+            +359899351757
+        </a>
+        <a class="animated" style="color:black" href="#">
+            <i class="fa fa-truck"></i>
+            Доставка
+        </a>
     </div>
 
     <div class="container" style="padding-right: 0px;
@@ -233,50 +222,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
     background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
     border-width: 1px;
     border-radius: 4px;">
-
-
-            <!-- Grid row-->
-            <!--<div class="row justify-content-md-end" >
-
-
-
-
-                &lt;!&ndash; Grid column &ndash;&gt;
-                <div class="col-md-2 col-lg-2 text-right text-md-right mb-0 mb-md-0">
-                    <h6 class="mb-0" style="font-size: 24px;">СПОДЕЛИ НИ В ...</h6>
-                </div>
-                &lt;!&ndash; Grid column &ndash;&gt;
-
-                &lt;!&ndash; Grid column &ndash;&gt;
-                <div class="col-md-2 col-lg-2 text-center ">
-
-                    &lt;!&ndash; Facebook &ndash;&gt;
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f white-text mr-4"> </i>
-                    </a>
-                    &lt;!&ndash; Twitter &ndash;&gt;
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter white-text mr-4"> </i>
-                    </a>
-                    &lt;!&ndash; Google +&ndash;&gt;
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
-                    </a>
-                    &lt;!&ndash;Linkedin &ndash;&gt;
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
-                    </a>
-                    &lt;!&ndash;Instagram&ndash;&gt;
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram white-text"> </i>
-                    </a>
-
-                </div>
-                &lt;!&ndash; Grid column &ndash;&gt;
-
-            </div>-->
             <div class="row justify-content-md-center">
-
                 <div class="col-md-3 text-right align-self-end">
                     <div class="subscribe-text mb-15">
                         <span style="color:black;">ЗАПИШИ СЕ ЗА НАШИЯ</span>
@@ -428,21 +374,14 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
     <!-- Footer -->
 </div>
 
-
 <div th:fragment="body-bottom-scripts">
-    <!--<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>-->
+
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-
-
-
 
 
     </script>
@@ -454,7 +393,6 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
 
 </div>
-
 
 </body>
 </html>

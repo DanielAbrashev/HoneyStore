@@ -8,11 +8,13 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbars/">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
-    <script src="https://cdn.tiny.cloud/1/3epp5di5a6agoibb5z61lb3xizpw6i8bu46dk9ndu755ad61/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/3epp5di5a6agoibb5z61lb3xizpw6i8bu46dk9ndu755ad61/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'textarea'});</script>
 
     <!-- Bootstrap core CSS -->
@@ -26,7 +28,8 @@
         max-width: 375px;
         height: auto;
         }
-</style>
+
+    </style>
 </head>
 
 <body>
@@ -42,7 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Продукт
                         </a>
@@ -63,11 +66,9 @@
 
 
 <div th:fragment="body-bottom-scripts">
-<!--    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"-->
-<!--            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
-<!--            crossorigin="anonymous"></script>-->
-<!--    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>-->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script th:src="@{js/bootstrap.min.js}"></script>
 
     <script th:src="@{/js/jquery.min.js}"></script>
@@ -78,11 +79,11 @@
     <!--bootbox-->
     <script th:src="@{/js/bootbox.min.js}"></script>
 
-<!--    &lt;!&ndash;data table&ndash;&gt;-->
-<!--    <script th:src="@{/js/jquery.dataTables.min.js}"></script>-->
-<!--    <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>-->
+    <!--    &lt;!&ndash;data table&ndash;&gt;-->
+    <!--    <script th:src="@{/js/jquery.dataTables.min.js}"></script>-->
+    <!--    <script th:src="@{/js/dataTables.bootstrap.min.js}"></script>-->
 
-<!--    main js-->
+    <!--    main js-->
     <script th:src="@{/js/scripts.js}"></script>
 </div>
 

@@ -13,8 +13,7 @@
     <div class="row" style="margin-bottom: -100px">
         <div class="col-sm-8">
             <h2 class="section-headline">
-                <!--/*@thymesVar id="user" type="User"*/-->
-                <!--/*@thymesVar id="username" type="String"*/-->
+
                 <span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Products'"></span>
             </h2>
         </div>

@@ -20,8 +20,6 @@ public class UserRole {
     @JoinColumn(name = "role_id")
     private Role role;
 
-
-
     public UserRole() {
     }
 

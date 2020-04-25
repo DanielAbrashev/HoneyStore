@@ -1,6 +1,6 @@
 package com.adminportal.domain;
 
-import  com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.adminportal.domain.security.Authority;
 import com.adminportal.domain.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
@@ -132,11 +132,8 @@ public class User implements UserDetails {
         return true;
     }
 
-
-
     @Override
-    public boolean isEnabled()
-    {
+    public boolean isEnabled() {
         return enabled;
     }
 

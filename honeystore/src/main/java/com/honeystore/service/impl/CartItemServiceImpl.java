@@ -22,7 +22,6 @@ public class CartItemServiceImpl implements CartItemService {
 
     public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
         return cartItemRepository.findByShoppingCart(shoppingCart);
-
     }
 
     public CartItem updateCartItem(CartItem cartItem) {
@@ -35,7 +34,7 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItem;
     }
 
-    public void removeCartItem (CartItem cartItem) {
+    public void removeCartItem(CartItem cartItem) {
         productToCartItemRepository.deleteByCartItem(cartItem);
         cartItemRepository.delete(cartItem);
     }
@@ -73,15 +72,12 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItemRepository.getOne(id);
     }
 
-
-    public CartItem save(CartItem cartItem){
+    public CartItem save(CartItem cartItem) {
         return cartItemRepository.save(cartItem);
     }
 
     public List<CartItem> findByOrder(Order order) {
         return cartItemRepository.findByOrder(order);
     }
-
-
 
 }

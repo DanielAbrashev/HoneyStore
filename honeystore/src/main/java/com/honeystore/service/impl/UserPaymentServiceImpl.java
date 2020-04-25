@@ -8,16 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-/**
- * created by saikat on 4/18/19
- */
 @Service
 public class UserPaymentServiceImpl implements UserPaymentService {
 
     @Autowired
     private UserPaymentRepository userPaymentRepository;
-
-
 
     @Override
     public UserPayment getOne(Long id) {

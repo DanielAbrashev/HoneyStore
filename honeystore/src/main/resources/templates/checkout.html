@@ -154,20 +154,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="col-sm-4">
-                                         <div class="form-group">
-                                             <label for="ShippingCountry">* Country </label>
-                                             <select id="CountryList" th:name="userShippingCountry"
-                                                     class="form-control"
-                                                     th:value="${userShipping.userShippingCountry}"
-                                                     required="required">
-                                                 <option value="" disabled="disabled">Please Select an option
-                                                 </option>
-                                                 <option th:each="country : ${countryList}" th:text="${country}"
-                                                         th:selected="(${userShipping.userShippingCountry} == ${country})"></option>
-                                             </select>
-                                         </div>
-                                     </div>-->
                                 </div>
 
                                 <a data-toggle="collapse" data-parent="#accordion" class="btn btn-warning pull-right"
@@ -348,7 +334,7 @@
                                 <!--Billing address-->
                                 <div class="checkbox">
                                     <label>
-                                        <input id="theSameAsShippingAddress"  type="checkbox"
+                                        <input id="theSameAsShippingAddress" type="checkbox"
                                                name="billingSameAsShipping" value="true"/> The same as Shipping Address
                                     </label>
                                 </div>
@@ -409,20 +395,6 @@
                                         </div>
                                     </div>
 
-                                    <!--<div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="billingCountry">* Country </label>
-                                            <select id="CountryList" th:name="userBillingCountry"
-                                                    class="form-control"
-                                                    th:value="${userBilling.userBillingCountry}"
-                                                    required="required">
-                                                <option value="" disabled="disabled">Please Select an option
-                                                </option>
-                                                <option th:each="country : ${countryList}" th:text="${country}"
-                                                        th:selected="(${userBilling.userBillingCountry} == ${country})"></option>
-                                            </select>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <a data-toggle="collapse" data-parent="#accordion" class="btn btn-warning pull-right"
                                    href="#reviewItems">
@@ -520,7 +492,6 @@
     </div>
 
 </div>
-
 
 <div th:replace="common/header :: body-bottom-scripts"/>
 

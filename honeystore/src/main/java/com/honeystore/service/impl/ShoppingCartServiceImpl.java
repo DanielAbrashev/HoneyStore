@@ -21,13 +21,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-
-    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart){
+    public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
         BigDecimal cartTotal = new BigDecimal(0);
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
-        for (CartItem cartItem:cartItemList){
-            if(cartItem.getProduct().getInStockNumber()>0){
+        for (CartItem cartItem : cartItemList) {
+            if (cartItem.getProduct().getInStockNumber() > 0) {
                 cartItemService.updateCartItem(cartItem);
                 cartTotal = cartTotal.add(cartItem.getSubtotal());
             }
@@ -40,10 +39,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     }
 
-    public void clearShoppingCart(ShoppingCart shoppingCart){
+    public void clearShoppingCart(ShoppingCart shoppingCart) {
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
-        for(CartItem cartItem : cartItemList){
+        for (CartItem cartItem : cartItemList) {
             cartItem.setShoppingCart(null);
             cartItemService.save(cartItem);
         }
@@ -52,6 +51,5 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
         shoppingCartRepository.save(shoppingCart);
     }
-
 
 }

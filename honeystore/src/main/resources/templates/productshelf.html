@@ -8,6 +8,8 @@ height: auto;
 }
 
 
+
+
 </style>
 <body>
 <div th:replace="common/header :: navbar"/>
@@ -46,7 +48,8 @@ height: auto;
                 <a th:href="@{/searchByCategory(category='Pollen')}"
                    th:classappend="${activePollen}? 'active'" class="list-group-item">Пчелен прашец</a>
                 <a th:href="@{/searchByCategory(category='ImunoStimulant')}"
-                   th:classappend="${activeArtsLiterature}? 'active'" class="list-group-item">Пчелни имуностимулатори</a>
+                   th:classappend="${activeArtsLiterature}? 'active'" class="list-group-item">Пчелни
+                    имуностимулатори</a>
             </div>
         </div>
         <div class="col-sm-9">
@@ -72,7 +75,8 @@ height: auto;
                                     </a>
                                 </div>
                                 <div class="col-xs-9">
-                                    <a th:href="@{/productDetail?id=}+${product.id}"><h4 th:text="${product.productName}"></h4></a>
+                                    <a th:href="@{/productDetail?id=}+${product.id}"><h4
+                                            th:text="${product.productName}"></h4></a>
                                     <a th:href="@{/productDetail?id=}+${product.id}"><span
                                             style="font-size: x-large; color: #db3208">$<span
                                             th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span></span></a>
@@ -94,7 +98,6 @@ height: auto;
 <script>$(document).ready( function () {
     $('#productList').DataTable();
 });
-
 
 </script>
 

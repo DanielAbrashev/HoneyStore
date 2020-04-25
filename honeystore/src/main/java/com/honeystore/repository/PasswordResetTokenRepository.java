@@ -15,7 +15,6 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
 
     PasswordResetToken findByUser(User user);
 
-
     Stream<PasswordResetToken> findAllByExpiryDateLessThan(Date now);
 
     @Modifying

@@ -5,12 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * created by saikat on 4/16/19
- */
 public class USConstants {
 
-    public final static Map<String, String> mapofUSStates = new HashMap<String, String>(){
+    public final static Map<String, String> mapofUSStates = new HashMap<String, String>() {
 
         {
             put("AL", "Alabama");
@@ -69,6 +66,5 @@ public class USConstants {
 
     public static final List<String> listOfUSStatesCode = new ArrayList<>(mapofUSStates.keySet());
     public static final List<String> listOfUSStatesName = new ArrayList<>(mapofUSStates.values());
-
 
 }

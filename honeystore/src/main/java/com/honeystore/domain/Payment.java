@@ -2,9 +2,6 @@ package com.honeystore.domain;
 
 import javax.persistence.*;
 
-/**
- * created by saikat on 4/16/19
- */
 @Entity
 public class Payment {
 

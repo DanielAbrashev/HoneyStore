@@ -11,12 +11,8 @@ import java.util.List;
 
 @Transactional
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-      List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) ;
+    List<CartItem> findByShoppingCart(ShoppingCart shoppingCart);
 
-      List<CartItem> findByOrder(Order order);
+    List<CartItem> findByOrder(Order order);
 
-
-/*
-      void removeCartItem(CartItem cartItem);
-*/
 }

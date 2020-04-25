@@ -4,5 +4,5 @@ import com.honeystore.domain.BillingAddress;
 import com.honeystore.domain.UserBilling;
 
 public interface BillingAddressService {
-    BillingAddress setByUserBilling(UserBilling userBilling,BillingAddress billingAddress);
+    BillingAddress setByUserBilling(UserBilling userBilling, BillingAddress billingAddress);
 }

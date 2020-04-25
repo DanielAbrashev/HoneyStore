@@ -262,9 +262,6 @@ public class HomeController {
             return "redirect:/badRequest";
         }
 
-//        Authentication auth = new UsernamePasswordAuthenticationToken(
-//                user, "test", userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(auth);
         User user = passToken.getUser();
 
         String username = user.getUsername();
@@ -307,10 +304,10 @@ public class HomeController {
             }
         }
 
-        if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
+        if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
             BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
             String dbPassword = currentUser.getPassword();
-            if(passwordEncoder.matches(user.getPassword(), dbPassword)){
+            if (passwordEncoder.matches(user.getPassword(), dbPassword)) {
                 currentUser.setPassword(passwordEncoder.encode(newPassword));
             } else {
                 model.addAttribute("incorrectPassword", true);
@@ -319,7 +316,6 @@ public class HomeController {
         }
 
         SecurityConfig securityConfig = new SecurityConfig();
-
 
         currentUser.setFirstName(user.getFirstName());
         currentUser.setLastName(user.getLastName());
@@ -333,9 +329,6 @@ public class HomeController {
         model.addAttribute("orderList", user.getOrderList());
         model.addAttribute("listOfShippingAddresses", true);
         model.addAttribute("listOfCreditCards", true);
-
-
-
 
         UserDetails userDetails = userSecurityService.loadUserByUsername(currentUser.getUsername());
 
@@ -354,7 +347,7 @@ public class HomeController {
         model.addAttribute("user", user);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
         model.addAttribute("userShippingList", user.getUserShippingList());
-        model.addAttribute("orderList",user.getOrderList());
+        model.addAttribute("orderList", user.getOrderList());
 
         UserShipping userShipping = new UserShipping();
         model.addAttribute("userShipping", userShipping);
@@ -374,11 +367,11 @@ public class HomeController {
     public String orderDetail(
             @RequestParam("id") Long orderId,
             Principal principal, Model model
-    ){
+    ) {
         User user = userService.findByUsername(principal.getName());
         Order order = orderService.getOne(orderId);
 
-        if(order.getUser().getId()!=user.getId()) {
+        if (order.getUser().getId() != user.getId()) {
             return "badRequestPage";
         } else {
             List<CartItem> cartItemList = cartItemService.findByOrder(order);
@@ -414,7 +407,7 @@ public class HomeController {
         model.addAttribute("user", user);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
         model.addAttribute("userShippingList", user.getUserShippingList());
-        model.addAttribute("orderList",user.getOrderList());
+        model.addAttribute("orderList", user.getOrderList());
 
         model.addAttribute("listOfCreditCards", true);
         model.addAttribute("listOfShippingAddresses", true);
@@ -522,10 +515,6 @@ public class HomeController {
     ) {
         User user = userService.findByUsername(principal.getName());
 
-/*
-        userPaymentService.findById(creditCardId).ifPresent(o -> model.addAttribute("userPayment", o));
-*/
-
         UserPayment userPayment = userPaymentService.getOne(creditCardId);
 
         if (user.getId() != userPayment.getUser().getId()) {
@@ -566,21 +555,20 @@ public class HomeController {
         model.addAttribute("classActiveBilling", true);
         model.addAttribute("orderList", user.getOrderList());
 
-
         return "myProfile";
 
     }
 
     @RequestMapping("/listOfShippingAddresses")
     public String listOfShippingAddresses(
-            Model model, Principal principal,HttpServletRequest request
+            Model model, Principal principal, HttpServletRequest request
     ) {
 
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
         model.addAttribute("userShippingList", user.getUserShippingList());
-        model.addAttribute("orderList",user.getOrderList());
+        model.addAttribute("orderList", user.getOrderList());
 
         model.addAttribute("listOfCreditCards", true);
         model.addAttribute("listOfShippingAddresses", true);
@@ -687,7 +675,6 @@ public class HomeController {
         model.addAttribute("classActiveShipping", true);
         model.addAttribute("orderList", user.getOrderList());
 
-
         return "myProfile";
 
     }
@@ -734,6 +721,4 @@ public class HomeController {
         model.addAttribute("updateUserPaymentInfo", true);
         return "myProfile";
     }
-
-
 }

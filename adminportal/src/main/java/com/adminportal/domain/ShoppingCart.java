@@ -6,9 +6,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * created by saikat on 5/6/19
- */
 @Entity
 public class ShoppingCart {
 

@@ -10,17 +10,19 @@
         <form class="form-horizontal" th:action="@{/product/add}" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend class="center-block" style="font-size: 40px;">Нов продукт
-                  <br/>  <span style="font-size: small">* са задължителни</span>
+                    <br/> <span style="font-size: small">* са задължителни</span>
                 </legend>
 
                 <br/>
                 <br/>
 
                 <!--productName-->
+
                 <div class="form-group">
                     <label class="col-md-6 control-label" for="productName">* Име на продукта</label>
                     <div class="col-md-12">
-                        <input type="text" class="form-control" id="productName" name="productName" placeholder="Име на продукта"
+                        <input type="text" class="form-control" id="productName" name="productName"
+                               placeholder="Име на продукта"
                                th:value="${product.productName}" required="required"/>
 
                         <span class="help-block">Името на продукта</span>
@@ -48,7 +50,8 @@
                             <option value="" selected="selected" disabled="disabled">Моля, изберете опция</option>
                             <option value="Honey" th:selected="${product.category}=='Honey'">Пчелен мед</option>
                             <option value="Propolis" th:selected="${product.category}=='Propolis'">Пчелен клей</option>
-                            <option value="PropolisTincture" th:selected="${product.category}=='PropolisTincture'">Клеева тинктура
+                            <option value="PropolisTincture" th:selected="${product.category}=='PropolisTincture'">
+                                Клеева тинктура
                             </option>
                             <option value="Pollen" th:selected="${product.category}=='Pollen'">Пчелен прашец
                             </option>
@@ -112,7 +115,7 @@
                         <div class="input-group">
                             <input type="number" class="form-control" id="inStockNumber" name="inStockNumber"
                                    placeholder="Number of in-stock-copies"
-                                   th:value="${product.inStockNumber}" required="required" />
+                                   th:value="${product.inStockNumber}" required="required"/>
                         </div>
                         <span class="help-block">Броят на оставащите продукти</span>
                     </div>
@@ -155,7 +158,8 @@
                 <div class="form-group">
                     <label class="col-md-6 control-label" for="productImage">Добавяне на изображение</label>
                     <div class="col-md-12">
-                        <input type="file" id="productImage" placeholder="Избери файл" name="productImage" th:value="${product.productImage}"/>
+                        <input type="file" id="productImage" placeholder="Избери файл" name="productImage"
+                               th:value="${product.productImage}"/>
                     </div>
                 </div>
 

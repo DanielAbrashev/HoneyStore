@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="user_order")
+@Table(name = "user_order")
 public class Order {
 
     @Id
@@ -25,7 +25,7 @@ public class Order {
     private ShippingAddress shippingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private  BillingAddress billingAddress;
+    private BillingAddress billingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Payment payment;

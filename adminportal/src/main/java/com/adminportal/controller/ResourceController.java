@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-/**
- * Created by z00382545 on 1/3/17.
- */
 @RestController
 public class ResourceController {
 
@@ -22,7 +19,7 @@ public class ResourceController {
     @RequestMapping(value = "/product/removeList", method = RequestMethod.POST)
     public String removeList(
             @RequestBody ArrayList<String> productIdList, Model model
-    ){
+    ) {
         for (String id : productIdList) {
             String productId = id.substring(8);
             productService.removeOne(Long.parseLong(productId));

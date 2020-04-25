@@ -16,7 +16,6 @@
         <hr style="position: absolute; width:100%; height:6px; background-color: #333; z-index: -1; margin-top: -80px;"/>
     </div>
 
-
     <div class="row" style="margin-top: 120px;">
         <div class="col-sm-12">
             <div class="alert alert-success">
@@ -32,11 +31,12 @@
                 <div class="col-sm-2"></div>
                 <div class="col-sm-2">
                     <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><img class="img-responsive shelf-product"
-                                                                             th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'.png'"
-                                                                             style="width:70px;"/></a>
+                                                                                   th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'.png'"
+                                                                                   style="width:70px;"/></a>
                 </div>
                 <div class="col-sm-6">
-                    <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.productName}">
+                    <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4
+                            th:text="${cartItem.product.productName}">
                         ...</h4></a>
                     <p th:if="${cartItem.product.inStockNumber&gt;10}" style="color: green;">In Stock</p>
                 </div>

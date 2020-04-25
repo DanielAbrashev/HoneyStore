@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.List;
 
-/**
- * Created by z00382545 on 1/2/17.
- */
-
 @Controller
 public class SearchController {
 
@@ -38,9 +34,9 @@ public class SearchController {
             model.addAttribute("user", user);
         }
 
-        String classActiveCategory = "active"+category;
-        classActiveCategory=classActiveCategory.replaceAll("\\s+","");
-        classActiveCategory=classActiveCategory.replaceAll("&","");
+        String classActiveCategory = "active" + category;
+        classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
+        classActiveCategory = classActiveCategory.replaceAll("&", "");
         model.addAttribute(classActiveCategory, true);
 
         List<Product> productList = productService.findByCategory(category);
@@ -59,7 +55,7 @@ public class SearchController {
     public String searchProduct(
             @ModelAttribute("keyword") String keyword,
             Principal principal, Model model
-            ) {
+    ) {
         if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
