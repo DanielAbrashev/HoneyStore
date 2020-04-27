@@ -179,3 +179,122 @@ padding: 5px 22px;
 }
 
 
+
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+
+
+/* Arrow Breadcrumb */
+.breadcrumb-arrow .breadcrumb-item+.breadcrumb-item::before {
+  content: '';
+}
+
+.breadcrumb-arrow {
+  height: 40px;
+  line-height: 40px;
+}
+
+.breadcrumb-arrow .breadcrumb-item:first-child a {
+  border-radius: 4px 0 0 4px;
+}
+
+.breadcrumb-arrow .breadcrumb-item,
+.breadcrumb-arrow .breadcrumb-item a,
+.breadcrumb-arrow .breadcrumb-item span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.breadcrumb-arrow .breadcrumb-item:not(:first-child) {
+  margin-left: -10px;
+}
+
+.breadcrumb-arrow .breadcrumb-item+.breadcrumb-item:before {
+  padding: 0;
+  content: "";
+}
+
+.breadcrumb-arrow .breadcrumb-item a,
+.breadcrumb-arrow .breadcrumb-item.active {
+  height: 40px;
+  padding: 0 15px 0 25px;
+  line-height: 40px;
+}
+
+.breadcrumb-arrow .breadcrumb-item a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  background-color: #3bafda;
+  border: 1px solid #3bafda;
+}
+
+.breadcrumb-arrow .breadcrumb-item a:after,
+.breadcrumb-arrow .breadcrumb-item a:before {
+  position: absolute;
+  top: -1px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+.breadcrumb-arrow .breadcrumb-item a:before {
+  right: -10px;
+  z-index: 3;
+  border-left-color: #3bafda;
+  border-left-style: solid;
+  border-left-width: 11px;
+}
+
+.breadcrumb-arrow .breadcrumb-item a:after {
+  right: -11px;
+  z-index: 2;
+  border-left: 11px solid #2494be;
+}
+
+.breadcrumb-arrow .breadcrumb-item a:focus,
+.breadcrumb-arrow li a:hover {
+  background-color: #4fc1e9;
+  border: 1px solid #4fc1e9;
+}
+
+.breadcrumb-arrow .breadcrumb-item a:focus:before,
+.breadcrumb-arrow li a:hover:before {
+  border-left-color: #4fc1e9;
+}
+
+.breadcrumb-arrow li.active:after,
+.breadcrumb-arrow li.active:before {
+  border-left-color: #2494be;
+}
+
+
+ .card button {
+   border: none;
+   outline: 0;
+   padding: 3px;
+   color: white;
+   background-color: rgba(255, 122, 0, 0.80);
+   text-align: center;
+   cursor: pointer;
+   width: 100%;
+   font-size: 18px;
+   margin-bottom:0px;
+ }
+
+ hr.rounded {
+     width:40%;
+   border: 4px solid;
+   border-radius: 5px;
+     background-color: rgba(232, 28, 28, 0.80);
+      background: -webkit-linear-gradient(top, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+     background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
+ }

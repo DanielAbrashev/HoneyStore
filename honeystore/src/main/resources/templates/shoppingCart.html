@@ -14,7 +14,6 @@
         <div class="col-sm-8">
             <h2 class="section-headline">
 
-                <span th:text="${user}? ${#strings.toUpperCase(user.username)} : 'All Products'"></span>
             </h2>
         </div>
 
@@ -33,24 +32,24 @@
         <div class="col-sm-12">
             <div class="row justify-content-between">
                 <div class="col-sm-6 text-left">
-                    <a class="btn btn-primary" th:href="@{/productshelf}">Continue shopping</a>
+                    <a class="btn btn-primary" th:href="@{/productshelf}">Продължи да пазаруваш</a>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a class="btn btn-primary" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Check out</a>
+                    <a class="btn btn-primary" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Поръчване</a>
                 </div>
             </div>
             <br/>
             <div th:if="${notEnoughStock}" class="alert alert-warning">
-                SOme products dont have enough stock please update quantity
+                Някои от продуктите нямат достатъчно налично количество!
             </div>
             <div th:if="${emptyCart}" class="alert alert-warning">
-                Your cart is empty
+                Количката Ви е празна!
             </div>
             <br/> <br/> <br/>
             <div class="row">
-                <div class="col-sm-8"><h4>Products</h4></div>
-                <div class="col-sm-2"><h4>Price</h4></div>
-                <div class="col-sm-2"><h4>Qty</h4></div>
+                <div class="col-sm-8"><h4>Продукти</h4></div>
+                <div class="col-sm-2"><h4>Цена</h4></div>
+                <div class="col-sm-2"><h4>Кол.</h4></div>
             </div>
             <!--Display products-->
             <div class="row" th:each="cartItem : ${cartItemList}">
@@ -91,10 +90,10 @@
             <hr/>
             <div class="row">
                 <hr/>
-                <h4 class="col-sm-12 text-right"><strong style="font-size:large;">Total Price(<span
-                        th:text="${#lists.size(cartItemList)}"></span> items):</strong><span
-                        style="color:#db3208; font size:large;"></span>$<span
-                        th:text="${shoppingCart.grandTotal}"></span></h4>
+                <h4 class="col-sm-12 text-right"><strong style="font-size:large;">Сума (<span
+                        th:text="${#lists.size(cartItemList)}"></span> продукта):</strong><span
+                        style="color:#db3208; font size:large;"></span><span
+                        th:text="${shoppingCart.grandTotal}"></span>лв.</h4>
             </div>
         </div>
     </div>
@@ -102,6 +101,7 @@
 
 </div>   <!--end of conatainer-->
 
+<div th:replace="common/header :: footer"/>
 
 <div th:replace="common/header :: body-bottom-scripts"></div>
 

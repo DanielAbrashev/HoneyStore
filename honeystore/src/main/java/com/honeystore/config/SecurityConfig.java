@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/searchByCategory",
             "/searchProduct",
             "/hours",
-            "/faq"
+            "/faq",
+
     };
 
     @Override

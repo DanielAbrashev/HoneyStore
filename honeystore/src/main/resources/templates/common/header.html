@@ -28,6 +28,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
+
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/image/bee_icon.jpg" rel="icon">
@@ -184,7 +185,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/shoppingCart/cart}">Количка<span
                                 style="color:#db3208; font size:large;"></span>$<span
-                                th:each="cartItem : ${cartItemList}"
+                                th:each="shoppingCart : ${shoppingCartList}"
                                 th:text="${shoppingCart.grandTotal}"></span></a>
                     </li>
                     <li class="nav-item">
@@ -211,10 +212,15 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
         </nav>
     </div>
 </div>
+<div th:fragment="header(breadcrumb)">
+    <ol class="breadcrumb breadcrumb-arrow p-0" th:replace="${breadcrumb}">
+        <li class="breadcrumb-item"><a th:href="{/}">Home</a></li>
+    </ol>
+</div>
 <div th:fragment="footer">
     <!-- Footer -->
     <!-- Footer -->
-    <footer class="page-footer font-small unique-color-dark">
+    <footer class="page-footer font-small unique-color-dark" style="background: #333333;">
 
         <div style="font-size: 25px;
     background-color: rgba(232, 28, 28, 0.80);
@@ -277,17 +283,17 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
         </div>
 
         <!-- Footer Links -->
-        <div class="text-center text-md-left mt-5">
+        <div class="text-center text-md-left mt-5" style="background: #333333; color:white;" >
 
             <!-- Grid row -->
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center" >
 
                 <!-- Grid column -->
                 <div class="col-md-1 col-lg-1 col-xl-2 mx-right mb-2">
 
                     <!-- Content -->
                     <h6 class="text-uppercase font-weight-bold">За компанията</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
                     <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
                         consectetur
                         adipisicing elit.</p>
@@ -300,7 +306,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
                     <!-- Links -->
                     <h6 class="text-uppercase font-weight-bold" style="font-color:purple">Продукти</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color:white;">
                     <p>
                         <a href="/productshelf">Пчелен мед</a>
                     </p>
@@ -322,7 +328,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
                     <!-- Links -->
                     <h6 class="text-uppercase font-weight-bold">Меню</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
                     <p>
                         <a href="#!">Your Account</a>
                     </p>
@@ -344,7 +350,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
                     <!-- Links -->
                     <h6 class="text-uppercase font-weight-bold">Контакти</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
                     <p>
                         <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
                     <p>
@@ -364,8 +370,8 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
         <!-- Footer Links -->
 
         <!-- Copyright -->
-        <footer class="page-footer" style="background: darkgrey;">
-            <div class="footer-copyright text-center py-3" style="">© 2020 :
+        <footer class="page-footer" style="background: black">
+            <div class="footer-copyright text-center py-3" style="color: white;">© 2020 :
                 <a href="/"> Abrahoney:</a> Всички права запазени!
             </div>
             <!-- Copyright -->

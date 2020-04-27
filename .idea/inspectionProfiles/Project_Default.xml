@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="15">
+          <list size="19">
             <item index="0" class="java.lang.String" itemvalue="th:classappend" />
             <item index="1" class="java.lang.String" itemvalue="th:href" />
             <item index="2" class="java.lang.String" itemvalue="th:fragment" />
@@ -20,6 +20,10 @@
             <item index="12" class="java.lang.String" itemvalue="th:each" />
             <item index="13" class="java.lang.String" itemvalue="th:style" />
             <item index="14" class="java.lang.String" itemvalue="th:name" />
+            <item index="15" class="java.lang.String" itemvalue="th:insert" />
+            <item index="16" class="java.lang.String" itemvalue="th:disabled" />
+            <item index="17" class="java.lang.String" itemvalue="th:id" />
+            <item index="18" class="java.lang.String" itemvalue="th:field" />
           </list>
         </value>
       </option>
