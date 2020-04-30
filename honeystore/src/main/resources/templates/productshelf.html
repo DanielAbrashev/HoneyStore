@@ -22,8 +22,8 @@ height: auto;
 
     <header th:insert="common/header :: header(~{ :: .breadcrumb})">
         <ol class="breadcrumb breadcrumb-arrow p-0">
-            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Tasks</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Пчелни продукти</a></li>
         </ol>
     </header>
 
@@ -33,11 +33,13 @@ height: auto;
     <div class="row">
         <div class="col-sm-3">
             <div class="col-sm-12" th:fragment="Category">
-                <h3><label for="category" >Категория</label></h3>
-                <div class="list-group" id="category">
+                <h3><label for="category" >Категории продукти</label></h3>
+                <hr class="rounded">
+
+                <div class="list-group" id="category" >
                     <a th:href="@{/productshelf(category='all')}" th:classappend="${activeAll}? 'active'"
-                       class="list-group-item">
-                        Всички продукти
+                       class="list-group-item" style="">
+                        Всички продукти <!--<span class="badge badge-primary badge-pill" >14</span>-->
                     </a>
                     <a th:href="@{/searchByCategory(category='Honey')}" th:classappend="${activeHoney}? 'active'"
                        class="list-group-item">

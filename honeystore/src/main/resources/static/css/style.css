@@ -231,8 +231,8 @@ padding: 5px 22px;
   position: relative;
   color: #fff;
   text-decoration: none;
-  background-color: #3bafda;
-  border: 1px solid #3bafda;
+  background-color: rgba(255, 122, 0, 0.80);
+  border: 1px solid rgba(255, 122, 0, 0.80);
 }
 
 .breadcrumb-arrow .breadcrumb-item a:after,
@@ -249,7 +249,7 @@ padding: 5px 22px;
 .breadcrumb-arrow .breadcrumb-item a:before {
   right: -10px;
   z-index: 3;
-  border-left-color: #3bafda;
+  border-left-color: rgba(255, 122, 0, 0.80);
   border-left-style: solid;
   border-left-width: 11px;
 }

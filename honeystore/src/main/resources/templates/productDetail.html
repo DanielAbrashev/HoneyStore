@@ -9,6 +9,19 @@
 
 <!-- Main component for a primary marketing message or call to action -->
 <div class="container ">
+
+    <br/>
+
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Пчелни продукти</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productDetail?id=}+${product.id}"><span th:text="${product.productName}"></span></a></li>
+        </ol>
+    </header>
+
+    <br/>
+
     <div class="row">
         <form th:action="@{/shoppingCart/addItem}" method="post">
             <input hidden="hidden" th:field="*{product.id}"/>

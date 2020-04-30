@@ -28,7 +28,6 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/image/bee_icon.jpg" rel="icon">
@@ -106,7 +105,38 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
     padding-left: 5px;
 }
 
+a {
+  color: rgba(255, 122, 0, 0.80);
+  text-decoration: none;
+  background-color: transparent;
+}
 
+.form-control::placeholder {
+  color: #ffc107;
+  opacity: 1;
+}
+
+
+
+.dropdown-divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid black;
+}
+
+.dropdown-item{
+font-weight: 550;}
+.dropdown-item:hover{
+  cursor: pointer;
+  background-color: rgba(255, 238, 0, 1) ;
+  border-radius: 4px;
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1400px;
+  }
+}
 
 
     </style>
@@ -115,7 +145,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 <body>
 
 
-<div th:fragment="navbar">
+<div th:fragment="navbar" style="color:black">
 
     <div class="row justify-content-md-end" style="font-size: 15px;
     background-color: rgba(232, 28, 28, 0.80);
@@ -123,58 +153,95 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
     background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
     border-width: 1px;
     border-radius: 4px;">
-        <a class="animated" style="color:black" onclick="gtag_report_conversion(https://localhost:8080)"
-           href="tel:+359899351757">
-            <i class="fa fa-phone"></i>
-            +359899351757
-        </a>
-        <a class="animated" style="color:black" href="#">
-            <i class="fa fa-truck"></i>
-            Доставка
-        </a>
+        <div class="container" style="background-color: transparent;">
+            <a class="animated" style="color:black" onclick="gtag_report_conversion(https://localhost:8080)"
+               href="tel:+359899351757">
+                <i class="fa fa-phone"></i>
+                +359899351757
+            </a>
+            <a class="animated" style="color:black" href="#">
+                <i class="fa fa-truck"></i>
+                Доставка
+            </a>
+        </div>
     </div>
+    <div class="container">
+        <div class="row justify-content-md-center" style="background-color: white;">
+            <form class="form-inline my-2 my-lg-0" th:action="@{/searchProduct}" method="post">
+                <input class="form-control mr-sm-2" style="background: white;
+    border-radius: 30px;
+    color: black;" name="keyword" type="search" placeholder="Потърси продукт"
+                       aria-label="Search">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+                        style="border-radius: 30px;">Търси
+                </button>
+            </form>
+            <a th:href="@{/}"><img class="img responsive" th:href="@{/}" style="max-width:250px;"
+                                   src="/image/beelogo.png"/></a>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/shoppingCart/cart}">
+
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" style="background: #ffff;
+    border-radius: 30px;
+   ">Количка / <span >0.00</span>лв. <i class="fas fa-shopping-cart mr-3"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
 
     <div class="container" style="padding-right: 0px;
       padding-left: 0px;">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand" th:href="@{/} " style="font-size: 30px"><img src="/image/bee_icon.jpg"
-                                                                                 alt="Logo"
-                                                                                 width="40px;">AbraHoney</a>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light " style="font-weight:500; color: black;">
+
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                    style="font-weight:500; color:black;">Меню</i>
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 18px">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 20px;color: black;">
+                <ul class="navbar-nav mr-auto" style="color:black">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/} ">Начало<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/} " style="color:black">Начало<span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" style="color:black" href="#">Link</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" th:href="@{/productshelf}" id="navbarDropdown"
+                        <a class="nav-link dropdown-toggle" style="color:black;" th:href="@{/productshelf}"
+                           id="navbarDropdown"
                            role="button"
                            data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             Продукти
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" th:href="@{/productshelf}">Всички продукти</a>
-                            <a class="dropdown-item" th:href="@{/faq}">Пчелен клей</a>
-                            <a class="dropdown-item" href="#">Пчелен прашец </a>
+                        <div class="dropdown-menu" style="color:black;
+    background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 10%, rgba(255, 122, 0, 1) 100%);
+    border-radius: 4px; " aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/searchByCategory(category='Honey')}"
+                               th:classappend="${activeHoney}? 'active'">Пчелен мед</a>
+                            <a class="dropdown-item" th:href="@{/searchByCategory(category='Propolis')}"
+                               th:classappend="${activePropolis}? 'active'">Пчелен клей</a>
+                            <a class="dropdown-item" th:href="@{/searchByCategory(category='PropolisTincture')}"
+                               th:classappend="${activePropolisTincture}? 'active'">Клеева тинктура</a>
+                            <a class="dropdown-item" th:href="@{/searchByCategory(category='Pollen')}"
+                               th:classappend="${activePollen}? 'active'">Пчелен прашец</a>
+                            <a class="dropdown-item" th:href="@{/searchByCategory(category='ImunoStimulant')}"
+                               th:classappend="${activeArtsLiterature}? 'active'">Пчелни имуностимулатори</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Всички</a>
+                            <a class="dropdown-item" th:href="@{/productshelf}">Всички</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">За нас</a>
+                        <a class="nav-link" href="#" style="color:black">За нас</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Контакти</a>
+                        <a class="nav-link" href="#" style="color:black">Контакти</a>
                     </li>
 
                 </ul>
@@ -182,14 +249,9 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
 
                 <ul class="navbar-nav navbar-right">
 
+
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/shoppingCart/cart}">Количка<span
-                                style="color:#db3208; font size:large;"></span>$<span
-                                th:each="shoppingCart : ${shoppingCartList}"
-                                th:text="${shoppingCart.grandTotal}"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Вход</a>
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">Вход/Регистрация</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/myProfile}">Моят
@@ -198,15 +260,7 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
                     <li class="nav-item">
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Излизане</a>
                     </li>
-                    <form class="form-inline my-2 my-lg-0" th:action="@{/searchProduct}" method="post">
-                        <input class="form-control mr-sm-2" style="background: white;
-    border-radius: 30px;
-    color: black;" name="keyword" type="search" placeholder="Потърси продукт"
-                               aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                style="border-radius: 30px;">Търси
-                        </button>
-                    </form>
+
                 </ul>
             </div>
         </nav>
@@ -228,144 +282,151 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
     background: linear-gradient(to bottom, rgba(255, 238, 0, 1) 0%, rgba(255, 122, 0, 0.80) 100%);
     border-width: 1px;
     border-radius: 4px;">
-            <div class="row justify-content-md-center">
-                <div class="col-md-3 text-right align-self-end">
-                    <div class="subscribe-text mb-15">
-                        <span style="color:black;">ЗАПИШИ СЕ ЗА НАШИЯ</span>
-                        <h2 style="color:black;">Е-БЮЛЕТИН</h2>
-                    </div>
-                </div>
-                <div class="col-sm-5  text-left align-self-end">
-                    <div class="subscribe-wrapper subscribe2-wrapper mb-15">
-                        <div class="subscribe-form">
-                            <form action="#">
-                                <input placeholder="въведете вашия имейл адрес" type="email">
-                                <button>ЗАПИШИ СЕ<i class="fas fa-long-arrow-alt-right"></i></button>
-                            </form>
+            <div class="container" style="background-color:transparent">
+
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3 text-right align-self-end">
+                        <div class="subscribe-text mb-15">
+                            <span style="color:black;">ЗАПИШИ СЕ ЗА НАШИЯ</span>
+                            <h2 style="color:black;">Е-БЮЛЕТИН</h2>
                         </div>
                     </div>
+                    <div class="col-sm-5  text-left align-self-end">
+                        <div class="subscribe-wrapper subscribe2-wrapper mb-15">
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input placeholder="въведете вашия имейл адрес" type="email">
+                                    <button>ЗАПИШИ СЕ<i class="fas fa-long-arrow-alt-right"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-lg-2 text-right align-self-center ">
+                        <h6 style="font-size: 24px;">СПОДЕЛИ НИ В ...</h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 text-left col align-self-center ">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f white-text mr-4"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter white-text mr-4"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram white-text"> </i>
+                        </a>
+
+                    </div>
+
                 </div>
-                <div class="col-md-2 col-lg-2 text-right align-self-center ">
-                    <h6 style="font-size: 24px;">СПОДЕЛИ НИ В ...</h6>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 text-left col align-self-center ">
-
-                    <!-- Facebook -->
-                    <a class="fb-ic">
-                        <i class="fab fa-facebook-f white-text mr-4"> </i>
-                    </a>
-                    <!-- Twitter -->
-                    <a class="tw-ic">
-                        <i class="fab fa-twitter white-text mr-4"> </i>
-                    </a>
-                    <!-- Google +-->
-                    <a class="gplus-ic">
-                        <i class="fab fa-google-plus-g white-text mr-4"> </i>
-                    </a>
-                    <!--Linkedin -->
-                    <a class="li-ic">
-                        <i class="fab fa-linkedin-in white-text mr-4"> </i>
-                    </a>
-                    <!--Instagram-->
-                    <a class="ins-ic">
-                        <i class="fab fa-instagram white-text"> </i>
-                    </a>
-
-                </div>
-
+                <!-- Grid row-->
             </div>
-            <!-- Grid row-->
-
 
         </div>
 
         <!-- Footer Links -->
-        <div class="text-center text-md-left mt-5" style="background: #333333; color:white;" >
+        <div class="text-center text-md-left mt-5" style="background: #333333; color: #e6e6e6;">
+            <div class="container" style="background: #333333;">
+                <!-- Grid row -->
+                <div class="row justify-content-md-center">
 
-            <!-- Grid row -->
-            <div class="row justify-content-md-center" >
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-3 mx-right mb-2">
 
-                <!-- Grid column -->
-                <div class="col-md-1 col-lg-1 col-xl-2 mx-right mb-2">
+                        <!-- Content -->
+                        <h6 class="text-uppercase font-weight-bold">За компанията</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px;background-color:white;">
+                        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit
+                            amet,
+                            consectetur
+                            adipisicing elit.</p>
 
-                    <!-- Content -->
-                    <h6 class="text-uppercase font-weight-bold">За компанията</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
-                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                        consectetur
-                        adipisicing elit.</p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-3 mx-right mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold" style="font-color:purple">Продукти</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color:white;">
+                        <p>
+                            <a href="/productshelf" style="color:rgba(255, 122, 0, 0.80);">Пчелен мед</a>
+                        </p>
+                        <p>
+                            <a href="/productshelf">Пчелен клей</a>
+                        </p>
+                        <p>
+                            <a href="/productshelf">Пчелен прашец</a>
+                        </p>
+                        <p>
+                            <a href="/productshelf">Пчелни имуностимулатори</a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-3 mx-right mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Меню</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px;background-color:white;">
+                        <p>
+                            <a href="#!">Your Account</a>
+                        </p>
+                        <p>
+                            <a href="#!">Become an Affiliate</a>
+                        </p>
+                        <p>
+                            <a href="#!">Shipping Rates</a>
+                        </p>
+                        <p>
+                            <a href="#!">Help</a>
+                        </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-3 col-xl-3 mx-right mb-md-0 mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Контакти</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px;background-color:white;">
+                        <p>
+                            <i class="fas fa-home mr-3"></i> гр. Ямбол</p>
+                        <p>
+                            <i class="fas fa-envelope mr-3"></i> info@abrahoney.com</p>
+                        <p>
+                            <i class="fas fa-phone mr-3"></i> + 359 89 935 1757</p>
+                        <p>
+                            <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+
+                    </div>
+                    <!-- Grid column -->
 
                 </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-right mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold" style="font-color:purple">Продукти</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color:white;">
-                    <p>
-                        <a href="/productshelf">Пчелен мед</a>
-                    </p>
-                    <p>
-                        <a href="/productshelf">Пчелен клей</a>
-                    </p>
-                    <p>
-                        <a href="/productshelf">Пчелен прашец</a>
-                    </p>
-                    <p>
-                        <a href="/productshelf">Пчелни имуностимулатори</a>
-                    </p>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-right mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold">Меню</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
-                    <p>
-                        <a href="#!">Your Account</a>
-                    </p>
-                    <p>
-                        <a href="#!">Become an Affiliate</a>
-                    </p>
-                    <p>
-                        <a href="#!">Shipping Rates</a>
-                    </p>
-                    <p>
-                        <a href="#!">Help</a>
-                    </p>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-3 col-xl-3 mx-right mb-md-0 mb-4">
-
-                    <!-- Links -->
-                    <h6 class="text-uppercase font-weight-bold">Контакти</h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;background-color:white;">
-                    <p>
-                        <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                    <p>
-                        <i class="fas fa-envelope mr-3"></i> info@example.com</p>
-                    <p>
-                        <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                    <p>
-                        <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
-                </div>
-                <!-- Grid column -->
-
+                <!-- Grid row -->
             </div>
-            <!-- Grid row -->
-
         </div>
         <!-- Footer Links -->
 
@@ -388,6 +449,12 @@ background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+
+
+
+
+
+
 
 
     </script>

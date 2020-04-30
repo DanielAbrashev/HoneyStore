@@ -10,21 +10,19 @@
 <!-- Main component for a primary marketing message or call to action -->
 <div class="container">
 
-    <div class="row" style="margin-bottom: -100px">
-        <div class="col-sm-8">
-            <h2 class="section-headline">
+    <br/>
 
-            </h2>
-        </div>
-
-
-    </div>
-
-    <hr style="position: absolute; width: 90%; height: 6px; background-color: #333; z-index: -1; margin-top: -80px"/>
-
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Пчелни продукти</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Количка</a></li>
+        </ol>
+    </header>
 
     <br/>
-    <br/>
+
+
     <br/>
     <br/>
     <br/>
@@ -32,10 +30,10 @@
         <div class="col-sm-12">
             <div class="row justify-content-between">
                 <div class="col-sm-6 text-left">
-                    <a class="btn btn-primary" th:href="@{/productshelf}">Продължи да пазаруваш</a>
+                    <a class="btn btn-warning" th:href="@{/productshelf}">Продължи да пазаруваш</a>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a class="btn btn-primary" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Поръчване</a>
+                    <a class="btn btn-warning" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Поръчване</a>
                 </div>
             </div>
             <br/>
@@ -52,41 +50,56 @@
                 <div class="col-sm-2"><h4>Кол.</h4></div>
             </div>
             <!--Display products-->
-            <div class="row" th:each="cartItem : ${cartItemList}">
-                <form th:action="@{/shoppingCart/updateCartItem}" method="post">
-                    <hr/>
-                    <div class="col-sm-4">
+            <form th:action="@{/shoppingCart/updateCartItem}" method="post">
+                <div class="row" th:each="cartItem : ${cartItemList}">
+
+                    <div class="col-sm-2">
                         <a th:href="@{productDetail(id=${cartItem.product.id})}">
                             <img class="responsive"
                                  th:src="#{adminPath} + @{/image/product/} + ${cartItem.product.id}+'.png'"/>
                         </a>
+                        <br/>
+                        <br/>
                     </div>
-                    <div class="col-sm-4">
-                        <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.productName}">
+
+                    <div class="col-sm-6">
+                        <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4
+                                th:text="${cartItem.product.productName}">
                             ...</h4></a>
                         <p th:if="${cartItem.product.inStockNumber&gt;10}" style="color:green;">В наличност</p>
-                        <p th:if="${cartItem.product.inStockNumber&gt;10 and cartItem.product.inStockNumber&gt;0}"
-                           style="color:green;">Само<span th:text="${cartItem.product.inStockNumber}"></span> броя остават
+                        <p th:if="${cartItem.product.inStockNumber&lt;10 and cartItem.product.inStockNumber&gt;0}"
+                           style="color:green;">Само <span th:text="${cartItem.product.inStockNumber}"></span> броя
+                            остават
                         </p>
                         <p th:if="${cartItem.product.inStockNumber==0}" style="color:red;">Продуктът не е наличен</p>
                         <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Изтрий</a>
+
                     </div>
 
                     <div class="col-sm-2">
-                        <h5 style="color:#db3208;font-size:large;">$<span th:text="${cartItem.product.ourPrice}"
-                                                                          th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''"></span>
+                        <h5 style="color:#db3208;font-size:large;"><span th:text="${cartItem.product.ourPrice}"
+                                                                          th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''"></span>лв.
                         </h5>
                     </div>
                     <div class="col-sm-2">
                         <input hidden="hidden" name="id" th:value="${cartItem.id}"/>
                         <input th:id="${cartItem.id}" th:name="qty" th:value="${cartItem.qty}"
+
                                th:disabled="${cartItem.product.inStockNumber==0}" class="form-control cartItemQty"/>
+
                         <button th:id="'update-item-'+${cartItem.id}" type="submit"
                                 class="btn btn-warning btn-cs">Промени
                         </button>
+
+
                     </div>
-                </form>
-            </div>
+                    <hr/>
+
+                </div>
+
+            </form>
+
+
             <hr/>
             <div class="row">
                 <hr/>
@@ -95,6 +108,9 @@
                         style="color:#db3208; font size:large;"></span><span
                         th:text="${shoppingCart.grandTotal}"></span>лв.</h4>
             </div>
+            <br/>
+            <br/>
+            <br/>
         </div>
     </div>
 

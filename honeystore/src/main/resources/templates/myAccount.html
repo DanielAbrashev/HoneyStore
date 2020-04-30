@@ -5,15 +5,7 @@
 <div th:replace="common/header :: navbar"/>
 
 <div class="container">
-    <div class="row" style="margin-bottom: -100px; margin-left: -50px;">
-        <div class="col-sm-8">
-            <h2 class="section-headline" style="margin-top: 70px;"><span>Потребителски акаунт</span></h2>
-        </div>
-        <div class="col-sm-4">
-            <img src="/image/beelogo.png" class="img-responsive" style="margin-left: 150px; margin-top: 120px;"/>
-        </div>
-    </div>
-    <hr style="position:absolute; width:50%; height:6px; background-color:#333; z-index:-1; margin-top: -190px; margin-left: -100px;"/>
+
 
     <div class="row">
         <div class="col-sm-5 col-sm-offset-3">
@@ -21,7 +13,7 @@
                 <li classappend="nav-item" th:classappend="${classActiveNewAccount}? 'in active'"><a href="#tab-1"
                                                                                                      class="nav-link"
                                                                                                      data-toggle="tab"><span
-                        style="color:#f46b42;">Създай нов акаунт</span></a></li>
+                        style="color:#f46b42;">Регистрация</span></a></li>
                 <li classappend="nav-item active" th:classappend="${classActiveLogin}? 'in active'"><a href="#tab-2"
                                                                                                        class="nav-link"
                                                                                                        data-toggle="tab"><span
@@ -30,13 +22,13 @@
                         href="#tab-3" class="nav-link" data-toggle="tab"><span
                         style="color:#f46b42;">Забравена парола</span></a></li>
             </ul>
-            <!--Tab panels-->
+            <!--Tab cards-->
             <div class="tab-content">
                 <!--Create new user pane-->
-                <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'">
-                    <div class="panel-group">
-                        <div class="panel panel-default" style="border:none;">
-                            <div class="panel-body" style="background-color:#ededed; margin-top:20px;">
+                <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'"  style="background-color:white">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
                                 <div class="alert alert-info" th:if="${emailSent}">
                                     An email has been sent to the email address you just registered. Please validate
                                     your email address and update your password information.
@@ -57,7 +49,7 @@
                                                name="email"/>
                                         <p style="color:#828282">Въведете валиден имейл адрес.</p>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Създайте нов акаунт</button>
+                                    <button type="submit" class="btn btn-primary">Регистрация</button>
                                 </form>
 
                             </div>
@@ -66,9 +58,9 @@
                 </div>
                 <!--Login-->
                 <div class="tab-pane active" id="tab-2" th:classappend="${classActiveLogin}? 'in active'">
-                    <div class="panel-group">
-                        <div class="panel panel-default" style="border:none;">
-                            <div class="panel-body" style="background-color:#ededed; margin-top:20px;">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
                                 <div th:if="${param.error != null}" style="color: red;">Incorrect username or password
                                 </div>
                                 <form class="was-validated" th:action="@{/login}" method="post">
@@ -98,9 +90,9 @@
                 </div>
                 <!--forgotten password-->
                 <div class="tab-pane fade" id="tab-3" th:classappend="${classActiveForgottenPassword}? 'in active'">
-                    <div class="panel-group">
-                        <div class="panel panel-default" style="border:none;">
-                            <div class="panel-body" style="background-color:#ededed; margin-top:20px;">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
                                 <div th:if="${emailNotExist}" class="alert alert-danger" style="color:red;">Email
                                     doesn't exist!
                                 </div>
@@ -124,7 +116,11 @@
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </div>
+
 <div th:replace="common/header :: footer"/>
 
 

@@ -6,44 +6,33 @@
 <div th:replace="common/header :: navbar"/>
 
 <div class="container">
-    <div class="row" style="margin-bottom: -100px; margin-left: -50px;">
-        <div class="col-sm-8">
-            <h2 class="section-headline" style="margin-top: 70px;">
-                <h2 class="section-headline">
-                    <span th:text="${#strings.toUpperCase(user.username)}"></span>
-                </h2>
-            </h2>
-        </div>
-        <div class="col-sm-4">
-            <img src="/image/beelogo.png" class="img-responsive" style="margin-left: 150px; margin-top: 120px;"/>
-        </div>
-    </div>
-    <hr style="position:absolute; width:100%; height:6px; background-color:#333; z-index:-1; margin-top: -190px; margin-left: -100px;"/>
+    <br/>
+    <br/>
 
-    <div class="row">
+    <div class="row justify-content-md-center">
         <div class="col-sm-9 col-sm-offset-3">
             <ul class="nav nav-tabs">
-                <li classappend="nav-item" th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1"
-                                                                                            class="nav-link"
-                                                                                            data-toggle="tab"><span
+                <li th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1"
+                                                                     class="nav-link"
+                                                                     data-toggle="tab"><span
                         style="color:#f46b42;">Редактиране</span></a></li>
-                <li classappend="nav-item" th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2"
-                                                                                              class="nav-link"
-                                                                                              data-toggle="tab"><span
+                <li th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2"
+                                                                       class="nav-link"
+                                                                       data-toggle="tab"><span
                         style="color:#f46b42;">Поръчки</span></a></li>
-                <li classappend="nav-item" th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3"
-                                                                                               class="nav-link"
-                                                                                               data-toggle="tab"><span
+                <li th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3"
+                                                                        class="nav-link"
+                                                                        data-toggle="tab"><span
                         style="color:#f46b42;">Фактуриране</span></a></li>
-                <li classappend="nav-item" th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4"
-                                                                                                class="nav-link"
-                                                                                                data-toggle="tab"><span
+                <li th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4"
+                                                                         class="nav-link"
+                                                                         data-toggle="tab"><span
                         style="color:#f46b42;">Доставка</span></a></li>
             </ul>
             <!--Tab cards-->
             <div class="tab-content">
                 <!--Edit user information -->
-                <div class="tab-pane active" id="tab-1" th:classappend="${classActiveEdit}? 'in active' ">
+                <div class="tab-pane " id="tab-1" th:classappend="${classActiveEdit}? 'in active' ">
                     <div class="card-group">
                         <div class="card " style="border: none">
                             <div class="card-body" style="background-color: #ededed;margin-top: 20px">
@@ -63,13 +52,13 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="firstName">First Name</label>
+                                                <label for="firstName">Име</label>
                                                 <input type="text" class="form-control" id="firstName" name="firstName"
                                                        th:value="${user.firstName}"/>
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="lastName">Last Name</label>
+                                                <label for="lastName">Фамилия</label>
                                                 <input type="text" class="form-control" id="lastName" name="lastName"
                                                        th:value="${user.lastName}"/>
                                             </div>
@@ -78,46 +67,40 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="userName">Username</label>
+                                        <label for="userName">Потребителско име</label>
                                         <input type="text" class="form-control" id="userName" name="username"
                                                th:value="${user.username}"/>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="currentPassword">Current Password</label>
+                                        <label for="currentPassword">Текуща парола</label>
                                         <input type="text" class="form-control" id="currentPassword" name="password"
                                                th:value="${currentPassword}"/>
                                     </div>
-                                    <p style="color: #828282">Enter your current password to change the email address or
-                                        password</p>
+                                    <p style="color: #828282">Въведете текущата си парола, за да промените вашите имейл или парола</p>
 
                                     <div class="form-group">
-                                        <label for="email">Email Address</label>
+                                        <label for="email">Email Адрес</label>
                                         <input type="text" class="form-control" id="email" name="email"
                                                th:value="${user.email}"/>
                                     </div>
-                                    <p style="color: #828282">A valid email address. All
-                                        emails from the system will be sent to this address.The
-                                        email address is not make public and will only be used if
-                                        you wish to receive a new password or wish to receive
-                                        certain notification</p>
+                                    <p style="color: #828282">Валиден имейл адрес. </p>
 
                                     <div class="form-group">
-                                        <label for="txtNewPassword">Password</label>
+                                        <label for="txtNewPassword">Парола</label>
                                         <input type="password" class="form-control" id="txtNewPassword"
                                                name="txtNewPassword"/>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="txtConfirmPassword">Confirm Password</label>&nbsp;<span
+                                        <label for="txtConfirmPassword">Потвърди парола</label>&nbsp;<span
                                             id="checkPasswordMatch" style="color:red"></span>
                                         <input type="password" class="form-control" id="txtConfirmPassword"/>
                                     </div>
-                                    <p style="color: #828282">To change the current user password, enter new password in
-                                        both fileds </p>
+                                    <p style="color: #828282">За да смените текущата парола, моля въведете новата си парола в двете полета</p>
 
 
-                                    <button id="updateUserInfoButton" type="submit" class="btn btn-primary">Save All
+                                    <button id="updateUserInfoButton" type="submit" class="btn btn-primary">Запиши
                                     </button>
                                 </form>
                             </div>
@@ -127,7 +110,7 @@
 
                 <!--order information-->
 
-                <div class="tab-pane fade" id="tab-2" th:classappend="${classActiveOrders}? 'in active' ">
+                <div class="tab-pane " id="tab-2" th:classappend="${classActiveOrders}? 'in active' ">
                     <div class="card-group">
                         <div class="card " style="border: none">
                             <div class="card-body" style="background-color: #ededed;margin-top: 20px">
@@ -135,10 +118,10 @@
                                 <table class="table table-sm table-inverse">
                                     <thead>
                                     <tr>
-                                        <th>Order Date</th>
-                                        <th>Order Number</th>
-                                        <th>Total</th>
-                                        <th>Status</th>
+                                        <th>Дата на поръчка</th>
+                                        <th>Номер на поръчка</th>
+                                        <th>Всичко</th>
+                                        <th>Статус</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -158,13 +141,13 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="text-center">
-                                                <h2>Order Detail for purchase #<span th:text="${order.id}"></span></h2>
+                                                <h2>Данни за поръчка номер:<span th:text="${order.id}"></span></h2>
                                             </div>
                                             <hr/>
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="panel panel-default height">
-                                                        <div class="panel-heading"><strong>Billing Details</strong>
+                                                        <div class="panel-heading"><strong>Данни на платежно средство</strong>
                                                         </div>
                                                         <div class="panel-body">
                                                             <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
@@ -177,12 +160,12 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="panel panel-default height">
-                                                        <div class="panel-heading"><strong>Payment Information</strong>
+                                                        <div class="panel-heading"><strong>Платежни Данни</strong>
                                                         </div>
                                                         <div class="panel-body">
-                                                            <span th:text="${order.payment.holderName}">Card Name</span><br/>
-                                                            <span th:text="${order.payment.cardNumber}">Card Number</span><br/>
-                                                            <span>Exp Date:</span> <span
+                                                            <span th:text="${order.payment.holderName}">Име на карта</span><br/>
+                                                            <span th:text="${order.payment.cardNumber}">Номер на карта</span><br/>
+                                                            <span>Дата на изтичане:</span> <span
                                                                 th:text="${order.payment.expiryMonth}"></span>/<span
                                                                 th:text="${order.payment.expiryYear}"></span><br/>
                                                         </div>
@@ -191,7 +174,7 @@
 
                                                 <div class="col-sm-4">
                                                     <div class="panel panel-default height">
-                                                        <div class="panel-heading"><strong>Shipping Address</strong>
+                                                        <div class="panel-heading"><strong>Адрес за доставка</strong>
                                                         </div>
                                                         <div class="panel-body">
                                                             <span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
@@ -209,18 +192,18 @@
                                         <div class="col-md-12">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h3 class="text-center"><strong>Order summary</strong></h3>
+                                                    <h3 class="text-center"><strong>Поръчка</strong></h3>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="table-responsive">
                                                         <table class="table table-condensed">
                                                             <thead>
                                                             <tr>
-                                                                <td><strong>Item Name</strong></td>
-                                                                <td class="text-center"><strong>Item Price</strong></td>
-                                                                <td class="text-center"><strong>Item Quantity</strong>
+                                                                <td><strong>Име на продукт</strong></td>
+                                                                <td class="text-center"><strong>Цена</strong></td>
+                                                                <td class="text-center"><strong>Брой</strong>
                                                                 </td>
-                                                                <td class="text-right"><strong>Total</strong></td>
+                                                                <td class="text-right"><strong>Общо</strong></td>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -248,7 +231,7 @@
                                                             <tr>
                                                                 <td class="emptyrow"></td>
                                                                 <td class="emptyrow"></td>
-                                                                <td class="emptyrow text-center"><strong>Tax</strong>
+                                                                <td class="emptyrow text-center"><strong>Такса</strong>
                                                                 </td>
                                                                 <td data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06, 0, 2)}"
                                                                     class="emptyrow text-right">
@@ -258,7 +241,7 @@
                                                                 <td class="emptyrow"><i
                                                                         class="fa fa-barcode iconbig"></i></td>
                                                                 <td class="emptyrow"></td>
-                                                                <td class="emptyrow text-center"><strong>Total</strong>
+                                                                <td class="emptyrow text-center"><strong>Общо</strong>
                                                                 </td>
                                                                 <td th:with="total=${order.orderTotal+order.orderTotal*0.06}"
                                                                     data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
@@ -281,18 +264,17 @@
 
 
                 <!--billing information-->
-                <div class="tab-pane fade" id="tab-3" th:classappend="${classActiveBilling}? 'in active' ">
+                <div class="tab-pane " id="tab-3" th:classappend="${classActiveBilling}? 'in active' ">
                     <div class="card-group">
                         <div class="card " style="border: none">
                             <div class="card-body" style="background-color: #ededed;margin-top: 20px">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active">
                                         <a th:href="@{/listOfCreditCards}"
-                                           th:style="${listOfCreditCards} ? 'color:red' ">List of Credit Cards</a>
+                                           th:style="${listOfCreditCards} ? 'color:red' ">Списък от платежни средства</a>
                                     </li>
                                     <li class="breadcrumb-item active">
-                                        <a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard} ? 'color:red' ">Add(Update)
-                                            Credit Card</a>
+                                        <a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard} ? 'color:red' ">Добави(Промени) платежно средство</a>
                                     </li>
                                 </ol>
 
@@ -301,9 +283,9 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>Default</th>
-                                                <th>Credit Card</th>
-                                                <th>Operations</th>
+                                                <th>По подразбиране</th>
+                                                <th>Платежно средство</th>
+                                                <th>Действия</th>
                                             </tr>
                                             </thead>
 
@@ -327,15 +309,15 @@
                                             </tbody>
                                         </table>
 
-                                        <button class="btn btn-primary" type="submit">Save</button>
+                                        <button class="btn btn-primary" type="submit">Запиши</button>
                                     </form>
                                 </div>
                                 <div th:if="${addNewCreditCard}">
                                     <form th:action="@{/addNewCreditCard}" method="post">
-                                        <div class="bg-info" th:if="${updateUserPaymentInfo}">User info updated.</div>
+                                        <div class="bg-info" th:if="${updateUserPaymentInfo}">Данните са променени</div>
                                         <input hidden="hidden" th:value="${userPayment.id}" name="id"/>
                                         <div class="form-group">
-                                            <h5>* Give a name of your card </h5>
+                                            <h5>* Име на вашето платежно средство </h5>
                                             <input type="text" class="form-control" id="cardName"
                                                    placeholder="Card Name"
                                                    th:name="cardName" required="required"
@@ -411,7 +393,7 @@
 
                                         <hr/>
                                         <div class="form-group">
-                                            <h4>Credit Card Information</h4>
+                                            <h4>Данни на вашето платежно средство</h4>
                                         </div>
 
                                         <div class="row">
@@ -422,7 +404,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="form-group">
-                                                            <label for="cardType">* Select Card Type</label>
+                                                            <label for="cardType">* Изберете тип карта</label>
                                                             <select class="form-control" id="cardType" th:name="type"
                                                                     th:value="${userPayment.type}">
                                                                 <option th:selected="${userPayment.type} == 'visa'">
@@ -444,7 +426,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="cardHolder">* Card Holder Name</label>
+                                                    <label for="cardHolder">* Име на картодържателя</label>
                                                     <input type="text" class="form-control" id="cardHolder"
                                                            placeholder="Card Holder Name"
                                                            name="holderName" required="required"
@@ -452,7 +434,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="cardNumber">* Card Number</label>
+                                                    <label for="cardNumber">* Номер на картата</label>
                                                     <div class="input-group">
                                                         <input type="tel" class="form-control" id="cardNumber"
                                                                placeholder="Card Number"
@@ -466,55 +448,55 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-7">
-                                                <label for="expirationDate">* Expiration Date</label>
+                                                <label for="expirationDate">* Дата на изтичане</label>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <select class="form-control" name="expiryMonth"
                                                                 required="required"
                                                                 th:value="${userPayment.expiryMonth}">
-                                                            <option disabled="disabled">-- Month --</option>
+                                                            <option disabled="disabled">-- Месец --</option>
                                                             <option th:selected="${userPayment.type} == '1' "
-                                                                    th:value="1">Jan (01)
+                                                                    th:value="1">Ян (01)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '2' "
-                                                                    th:value="2">Feb (02)
+                                                                    th:value="2">Февр (02)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '3' "
-                                                                    th:value="3">Mar (03)
+                                                                    th:value="3">Март (03)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '4' "
-                                                                    th:value="4">Apr (04)
+                                                                    th:value="4">Апр (04)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '5' "
-                                                                    th:value="5">May (05)
+                                                                    th:value="5">Май (05)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '6' "
-                                                                    th:value="6">June (06)
+                                                                    th:value="6">Юни (06)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '7' "
-                                                                    th:value="7">July (07)
+                                                                    th:value="7">Юли (07)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '8' "
-                                                                    th:value="8">Aug (08)
+                                                                    th:value="8">Авг (08)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '9' "
-                                                                    th:value="9">Sep (09)
+                                                                    th:value="9">Сеп (09)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '10' "
-                                                                    th:value="10">Oct (10)
+                                                                    th:value="10">Окт (10)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '11' "
-                                                                    th:value="11">Nov (11)
+                                                                    th:value="11">Ноем (11)
                                                             </option>
                                                             <option th:selected="${userPayment.type} == '12' "
-                                                                    th:value="12">Dec (12)
+                                                                    th:value="12">Дек (12)
                                                             </option>
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <select class="form-control" name="expiryYear"
                                                                 th:value="${userPayment.expiryYear}">
-                                                            <option disabled="disabled">-- Year --</option>
+                                                            <option disabled="disabled">-- Година --</option>
                                                             <option th:selected="${userPayment.expiryYear} == '2019' ">
                                                                 2019
                                                             </option>
@@ -555,7 +537,7 @@
                                             <div class="col-sm-5">
 
                                                 <div class="form-group">
-                                                    <label for="cardCVC">* CV code</label>
+                                                    <label for="cardCVC">* CV код</label>
                                                     <div class="input-group">
                                                         <input type="tel" class="form-control" id="cardCVC"
                                                                placeholder="CVC"
@@ -565,7 +547,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-lg">Save All</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Запиши</button>
                                     </form>
                                 </div>
                             </div>
@@ -576,32 +558,32 @@
 
                 <!--shipping information-->
 
-                <div class="tab-pane fade" id="tab-4" th:classappend="${classActiveShipping}? 'in active' ">
+                <div class="tab-pane " id="tab-4" th:classappend="${classActiveShipping}? 'in active' ">
                     <div class="card-group">
                         <div class="card " style="border: none">
                             <div class="card-body" style="background-color: #ededed;margin-top: 20px">
 
                                 <ol class="breadcrumb">
-                                    <li class="breadcrum-item active">
+                                    <li class="breadcrumb-item active">
                                         <a th:href="@{/listOfShippingAddresses}"
-                                           th:style="${listOfShippingAddresses} ? 'color:red' ">List of Shipping
-                                            Addresses</a>
+                                           th:style="${listOfShippingAddresses} ? 'color:red' ">Списък с адреси за доставка</a>
                                     </li>
-                                    <li class="breadcrum-item active">
+
+                                    <li class="breadcrumb-item active">
                                         <a th:href="@{/addNewShippingAddress}"
-                                           th:style="${addNewShippingAddress} ? 'color:red' ">Add(Update) Shipping
-                                            Address</a>
+                                           th:style="${addNewShippingAddress} ? 'color:red' ">Добави(Промени) адрес за доставка</a>
                                     </li>
                                 </ol>
+
 
                                 <div th:if="${listOfShippingAddresses}">
                                     <form th:action="@{/setDefaultShipping}" method="post">
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>Default</th>
-                                                <th>Shipping Addresses</th>
-                                                <th>Operations</th>
+                                                <th>По подразбиране</th>
+                                                <th>Адреси за доставка</th>
+                                                <th>Действия</th>
                                             </tr>
                                             </thead>
 
@@ -630,12 +612,12 @@
                                             </tbody>
                                         </table>
 
-                                        <button class="btn btn-primary" type="submit">Save</button>
+                                        <button class="btn btn-primary" type="submit">Запиши</button>
                                     </form>
                                 </div>
                                 <div th:if="${addNewShippingAddress}">
                                     <form th:action="@{/addNewShippingAddress}" method="post">
-                                        <div class="bg-info" th:if="${updateUserShippingInfo}">User info updated.</div>
+                                        <div class="bg-info" th:if="${updateUserShippingInfo}">Информацията е променена.</div>
                                         <input hidden="hidden" th:value="${userShipping.id}" name="id"/>
 
                                         <!--Shipping Address-->
@@ -643,10 +625,10 @@
                                         <hr/>
 
                                         <div class="form-group">
-                                            <h4>Shipping Address</h4>
+                                            <h4>Адрес за доставка</h4>
                                         </div>
                                         <div class="form-group">
-                                            <label for="shippingName">* Receiver Name </label>
+                                            <label for="shippingName">* Име на получател </label>
                                             <input type="text" class="form-control" id="shippingName"
                                                    placeholder="Receiver Name"
                                                    th:name="userShippingName" required="required"
@@ -654,7 +636,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="shippingAddress">* Street Address </label>
+                                            <label for="shippingAddress">* Адрес </label>
                                             <input type="text" class="form-control" id="usershippingStreet1"
                                                    placeholder="Street Address 1 "
                                                    th:name="userShippingStreet1" required="required"
@@ -668,7 +650,7 @@
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label for="ShippingCity">* City </label>
+                                                    <label for="ShippingCity">* Град </label>
                                                     <input type="text" class="form-control" id="ShippingCity"
                                                            placeholder="City"
                                                            th:name="userShippingCity" required="required"
@@ -698,7 +680,7 @@
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-lg">Save All</button>
+                                        <button type="submit" class="btn btn-primary btn-lg">Запиши</button>
                                     </form>
                                 </div>
 
@@ -710,6 +692,9 @@
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </div>
 <div th:replace="common/header :: footer"/>
 
