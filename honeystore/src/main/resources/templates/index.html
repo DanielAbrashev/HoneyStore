@@ -11,6 +11,9 @@
 
 
 
+
+
+
 </style>
 <body>
 
@@ -83,34 +86,39 @@
 
 
                 <div th:fragment="productList" class="col-lg-4 col-md-6 mb-4" data-th-each="product : ${productList}">
-                    <div class="card h-100 text-center card-light">
+                    <form th:action="@{/shoppingCart/addItemIndex}" method="post">
 
-                        <a th:href="@{/productDetail?id=}+${product.id}"><img class="card-img-top"
-                                                                              th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"
-                                                                              alt=""/></a>
-                        <div class="card-body">
-                            <h4 class="card-productName">
-                                <a th:href="@{/productDetail?id=}+${product.id}" style="color:black;"><h4
-                                        th:text="${product.productName}"></h4></a>
-                            </h4>
-                            <h5><span
-                                    th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span>лв
-                            </h5>
+                        <div class="card h-100 text-center card-light">
+
+
+                            <a th:href="@{/productDetail?id=}+${product.id}"><img class="card-img-top"
+                                                                                  th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"
+                                                                                  alt=""/></a>
+                            <div class="card-body">
+                                <h4 class="card-productName">
+                                    <a th:href="@{/productDetail?id=}+${product.id}" style="color:black;"><h4
+                                            th:text="${product.productName}"></h4></a>
+                                </h4>
+                                <h5><span
+                                        th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span>лв
+                                </h5>
+                            </div>
+                            <div class="card-footer" style="border: none; background: white;">
+                                <a th:href="@{/shoppingCart/cart}">
+
+                                    <p>
+                                        <button class="btn btn-outline-success" type="submit"><i
+                                                class="fas fa-shopping-cart mr-3"></i>
+
+                                            Добави в количка
+                                        </button>
+                                    </p>
+                                </a>
+                            </div>
+
+
                         </div>
-                        <div class="card-footer" style="border: none; background: white;">
-                            <a th:href="@{/shoppingCart/cart}">
-                                <p>
-                                    <button class="btn btn-outline-success" type="submit"><i
-                                            class="fas fa-shopping-cart mr-3"></i>
-                                        Добави в количка
-                                    </button>
-                                </p>
-                            </a>
-                        </div>
-
-
-                    </div>
-
+                    </form>
                 </div>
 
                 <!--<div class="col-lg-4 col-md-6 mb-4">

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -49,8 +50,9 @@ public class ProductController {
                     (new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
             stream.write(bytes);
             stream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(IOException ex) {
+            System.err.println("An IOException was caught!");
+            ex.printStackTrace();
         }
         return "redirect:productList";
     }

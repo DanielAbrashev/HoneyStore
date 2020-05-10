@@ -6,6 +6,15 @@
 
 <div class="container">
 
+    <br/>
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/aboutUs}">Вход/Регистрация</a></li>
+        </ol>
+    </header>
+    <br/>
+
 
     <div class="row">
         <div class="col-sm-5 col-sm-offset-3">

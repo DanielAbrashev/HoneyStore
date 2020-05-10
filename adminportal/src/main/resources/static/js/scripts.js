@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    $('.delete-book').on('click', function (e) {
+    $('.delete-product').on('click', function (e) {
         /*<![CDATA[*/
         var path = /*[[@{/}]]*/'remove';
         /*]]>*/
         var id= $(this).attr('id');
 
         bootbox.confirm({
-            message: "Are you sure to remove this book? It can't be undone.",
+            message: "Are you sure to remove this product? It can't be undone.",
             buttons: {
                 cancel: {
                     label: '<i class="fa fa-times"></i> Cancel'
@@ -25,30 +25,30 @@ $(document).ready(function() {
         });
     });
 
-    var bookIdList=[];
+    var productIdList=[];
 
-    $('.checkboxBook').click(function () {
+    $('.checkboxProduct').click(function () {
         var id = $(this).attr('id');
         if(this.checked){
-            bookIdList.push(id);
+            productIdList.push(id);
         }
         else {
-            bookIdList.splice(bookIdList.indexOf(id), 1);
+            productIdList.splice(productIdList.indexOf(id), 1);
         }
     })
 
     $('#deleteSelected').click(function(){
-        var idList = $('.checkboxBook');
-        var bookIdList = [];
+        var idList = $('.checkboxProduct');
+        var productIdList = [];
         for (var i = 0; i < idList.length; i++){
             if(idList[i].checked == true){
-            bookIdList.push(idList[i]['id'])}}
+            productIdList.push(idList[i]['id'])}}
         /*<![CDATA[*/
         var path = /*[[@{/}]]*/'removeList';
         /*]]>*/
 
         bootbox.confirm({
-            message: "Are you sure to remove all selected books? It can't be undone.",
+            message: "Are you sure to remove all selected products? It can't be undone.",
             buttons: {
                 cancel: {
                     label: '<i class="fa fa-times"></i> Cancel'
@@ -59,14 +59,14 @@ $(document).ready(function() {
             },
             callback: function (confirmed) {
                 if(confirmed) {
-                    // $.post(path, JSON.stringify(bookIdList), function (res) {
+                    // $.post(path, JSON.stringify(productIdList), function (res) {
                     //     location.reload();
                     // });
 
                     $.ajax({
                         type: 'POST',
                         url: path,
-                        data: JSON.stringify(bookIdList),
+                        data: JSON.stringify(productIdList),
                         contentType: "application/json",
                         success: function(res) {
                             console.log(res);
@@ -82,14 +82,14 @@ $(document).ready(function() {
         });
     });
 
-    $("#selectAllBooks").click(function(){
+    $("#selectAllProducts").click(function(){
         if($(this).prop("checked") == true){
-            // $('.checkboxBook').prop("checked", true);
-            $('.checkboxBook').click();
+            // $('.checkboxProduct').prop("checked", true);
+            $('.checkboxProduct').click();
         }
         else if($(this).prop("checked") == false){
-            // $('.checkboxBook').prop("checked", false);
-            $('.checkboxBook').click();
+            // $('.checkboxProduct').prop("checked", false);
+            $('.checkboxProduct').click();
         }
 
     });

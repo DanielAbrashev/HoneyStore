@@ -1,7 +1,10 @@
 package com.honeystore.controller;
 
+import com.honeystore.domain.CartItem;
 import com.honeystore.domain.Product;
+import com.honeystore.domain.ShoppingCart;
 import com.honeystore.domain.User;
+import com.honeystore.service.CartItemService;
 import com.honeystore.service.ProductService;
 import com.honeystore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class SearchController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CartItemService cartItemService;
+
     @RequestMapping("/searchByCategory")
     public String searchByCategory(
             @RequestParam("category") String category,
@@ -32,6 +38,14 @@ public class SearchController {
             String username = principal.getName();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user);
+        }
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+
+            model.addAttribute("cartItemList", cartItemList);
+            ShoppingCart shoppingCart = user.getShoppingCart();
+            model.addAttribute("shoppingCart", shoppingCart);
         }
 
         String classActiveCategory = "active" + category;
@@ -60,6 +74,14 @@ public class SearchController {
             String username = principal.getName();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user);
+        }
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+
+            model.addAttribute("cartItemList", cartItemList);
+            ShoppingCart shoppingCart = user.getShoppingCart();
+            model.addAttribute("shoppingCart", shoppingCart);
         }
 
         List<Product> productList = productService.blurrySearch(keyword);

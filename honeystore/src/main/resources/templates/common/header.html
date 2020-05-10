@@ -112,7 +112,7 @@ a {
 }
 
 .form-control::placeholder {
-  color: #ffc107;
+  color: rgba(255, 122, 0, 0.80);
   opacity: 1;
 }
 
@@ -137,6 +137,7 @@ font-weight: 550;}
     max-width: 1400px;
   }
 }
+
 
 
     </style>
@@ -169,7 +170,7 @@ font-weight: 550;}
         <div class="row justify-content-md-center" style="background-color: white;">
             <form class="form-inline my-2 my-lg-0" th:action="@{/searchProduct}" method="post">
                 <input class="form-control mr-sm-2" style="background: white;
-    border-radius: 30px;
+    border-radius: 30px; border-color: rgba(255, 122, 0, 0.80);
     color: black;" name="keyword" type="search" placeholder="Потърси продукт"
                        aria-label="Search">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"
@@ -178,10 +179,18 @@ font-weight: 550;}
             </form>
             <a th:href="@{/}"><img class="img responsive" th:href="@{/}" style="max-width:250px;"
                                    src="/image/beelogo.png"/></a>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/shoppingCart/cart}">
+            <form class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()" th:action="@{/shoppingCart/cart}" >
 
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" style="background: #ffff;
-    border-radius: 30px;
+    border-radius: 30px; border-color: rgba(255, 122, 0, 0.80); color:rgba(255, 122, 0, 0.80)
+   ">Количка / <span th:text="${shoppingCart.grandTotal}" >0.00</span>лв. <i class="fas fa-shopping-cart mr-3"></i>
+                </button>
+            </form>
+
+            <form class="form-inline my-2 my-lg-0" sec:authorize="isAnonymous()" th:action="@{/shoppingCart/cart}" >
+
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" style="background: #ffff;
+    border-radius: 30px; border-color: rgba(255, 122, 0, 0.80); color:rgba(255, 122, 0, 0.80)
    ">Количка / <span >0.00</span>лв. <i class="fas fa-shopping-cart mr-3"></i>
                 </button>
             </form>
@@ -194,7 +203,7 @@ font-weight: 550;}
       padding-left: 0px;">
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light " style="font-weight:500; color: black;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light " style="font-weight:500; ">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent"
@@ -209,9 +218,7 @@ font-weight: 550;}
                         <a class="nav-link" th:href="@{/} " style="color:black">Начало<span
                                 class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color:black" href="#">Link</a>
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" style="color:black;" th:href="@{/productshelf}"
                            id="navbarDropdown"
@@ -238,8 +245,12 @@ font-weight: 550;}
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color:black">За нас</a>
+                        <a class="nav-link" style="color:black" th:href="@{/shipping}">Доставка</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/aboutUs}" style="color:black">За нас</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="color:black">Контакти</a>
                     </li>
@@ -348,13 +359,14 @@ font-weight: 550;}
                     <div class="col-md-2 col-lg-2 col-xl-3 mx-right mb-2">
 
                         <!-- Content -->
-                        <h6 class="text-uppercase font-weight-bold">За компанията</h6>
+                        <h6 class="text-uppercase font-weight-bold">За нас</h6>
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                             style="width: 60px;background-color:white;">
                         <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit
                             amet,
                             consectetur
                             adipisicing elit.</p>
+                        <a th:href="@{/aboutUs}">Прочети повече</a>
 
                     </div>
                     <!-- Grid column -->
@@ -367,16 +379,20 @@ font-weight: 550;}
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                             style="width: 60px; background-color:white;">
                         <p>
-                            <a href="/productshelf" style="color:rgba(255, 122, 0, 0.80);">Пчелен мед</a>
+                            <a  style="color:rgba(255, 122, 0, 0.80);" th:href="@{/searchByCategory(category='Honey')}"
+                               th:classappend="${activeHoney}? 'active'">Пчелен мед</a>
                         </p>
                         <p>
-                            <a href="/productshelf">Пчелен клей</a>
+                            <a th:href="@{/searchByCategory(category='Propolis')}"
+                               th:classappend="${activePropolis}? 'active'">Пчелен клей</a>
                         </p>
                         <p>
-                            <a href="/productshelf">Пчелен прашец</a>
+                            <a th:href="@{/searchByCategory(category='Pollen')}"
+                               th:classappend="${activePollen}? 'active'">Пчелен прашец</a>
                         </p>
                         <p>
-                            <a href="/productshelf">Пчелни имуностимулатори</a>
+                            <a th:href="@{/searchByCategory(category='ImunoStimulant')}"
+                               th:classappend="${activeArtsLiterature}? 'active'">Пчелни имуностимулатори</a>
                         </p>
 
                     </div>
@@ -390,13 +406,13 @@ font-weight: 550;}
                         <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                             style="width: 60px;background-color:white;">
                         <p>
-                            <a href="#!">Your Account</a>
+                            <a th:href="@{/myProfile}">Вход/Регистрация</a>
                         </p>
                         <p>
-                            <a href="#!">Become an Affiliate</a>
+                            <a href="#!">Доставка</a>
                         </p>
                         <p>
-                            <a href="#!">Shipping Rates</a>
+                            <a href="#!">Блог</a>
                         </p>
                         <p>
                             <a href="#!">Help</a>

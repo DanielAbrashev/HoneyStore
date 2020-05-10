@@ -23,9 +23,10 @@
     <br/>
 
     <div class="row">
+        <div class="container">
         <form th:action="@{/shoppingCart/addItem}" method="post">
             <input hidden="hidden" th:field="*{product.id}"/>
-            <div class="row" style="margin-top: 120px">
+            <div class="row" >
                 <div class="col-sm-3">
                     <a th:href="@{/productshelf}">Обратно към всички продукти</a> <br/>
                     <img class="responsive" th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"/>
@@ -63,7 +64,7 @@
                                             <h4 th:if="*{product.inStockNumber&gt;10}" style="color: green;">В
                                                 наличност</h4>
                                             <h4 th:if="*{product.inStockNumber&lt;10}" style="color: green;">Само <span
-                                                    th:text="${product.inStockNumber}"></span>Налични</h4>
+                                                    th:text="${product.inStockNumber}"></span> налични</h4>
                                             <h4 th:if="*{product.inStockNumber==0}" style="color: darkred">Не са в
                                                 наличност</h4>
                                             <button type="submit" class="btn btn-warning"
@@ -81,7 +82,7 @@
                 </div>
             </div>
         </form>
-
+        </div>
     </div>
 </div>   <!--end of conatainer-->
 <div th:replace="common/header :: footer"/>

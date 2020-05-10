@@ -60,6 +60,8 @@ public class ShoppingCartController {
 
         product = productService.getOne(product.getId());
 
+
+
         if (Integer.parseInt(qty) > product.getInStockNumber()) {
             model.addAttribute("notEnoughStock", true);
             return "forward:/productDetail?id=" + product.getId();
@@ -68,8 +70,61 @@ public class ShoppingCartController {
         CartItem cartItem = cartItemService.addProductToCartItem(product, user, Integer.parseInt(qty));
         model.addAttribute("addProductSuccess", true);
 
+        if (principal != null) {
+
+
+            ShoppingCart shoppingCart = user.getShoppingCart();
+
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+            shoppingCartService.updateShoppingCart(shoppingCart);
+
+            model.addAttribute("cartItemList", cartItemList);
+
+            model.addAttribute("shoppingCart", shoppingCart);
+        }
+
         return "forward:/productDetail?id=" + product.getId();
     }
+    @RequestMapping("/addItemIndex")
+    public String addItemIndex(Product product,
+
+            Model model, Principal principal
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        int qty = 1;
+        product = productService.getOne((long) 4);
+
+        if (qty > product.getInStockNumber()) {
+            model.addAttribute("notEnoughStock", true);
+            return "index";
+        }
+
+        List<Product> productList = productService.findAll();
+
+
+
+        model.addAttribute("productList", productList);
+        model.addAttribute("activeAll", true);
+
+        CartItem cartItem = cartItemService.addProductToCartItem(product, user, qty);
+        model.addAttribute("addProductSuccess", true);
+        if (principal != null) {
+
+
+            ShoppingCart shoppingCart = user.getShoppingCart();
+
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+            shoppingCartService.updateShoppingCart(shoppingCart);
+
+            model.addAttribute("cartItemList", cartItemList);
+
+            model.addAttribute("shoppingCart", shoppingCart);
+        }
+
+        return "index";
+
+    }
+
 
     @RequestMapping("/removeItem")
     public String removeItem(@RequestParam("id") Long id) {
