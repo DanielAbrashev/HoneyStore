@@ -65,9 +65,13 @@ public class HomeController {
     private ShoppingCartService shoppingCartService;
 
     @RequestMapping("/")
-    public String index(Model model, Principal principal) {
+    public String index(Model model, Principal principal,String categoryIndex) {
         List<Product> productList = productService.findAll();
 
+        List<Product> productListIndexBestSold = productService.findByCategoryIndex("BestSold");
+        List<Product> productListIndexNew = productService.findByCategoryIndex("New");
+        List<Product> productListIndexPromotion = productService.findByCategoryIndex("Promotion");
+        List<Product> productListIndexRecommended = productService.findByCategoryIndex("Recommended");
         if (principal != null) {
             User user = userService.findByUsername(principal.getName());
             ShoppingCart shoppingCart = user.getShoppingCart();
@@ -82,6 +86,10 @@ public class HomeController {
         }
 
         model.addAttribute("productList", productList);
+        model.addAttribute("productListIndexBestSold", productListIndexBestSold);
+        model.addAttribute("productListIndexNew", productListIndexNew);
+        model.addAttribute("productListIndexPromotion", productListIndexPromotion);
+        model.addAttribute("productListIndexRecommended", productListIndexRecommended);
         model.addAttribute("activeAll", true);
        /* if (principal != null) {
             product = productService.getOne(product.getId());

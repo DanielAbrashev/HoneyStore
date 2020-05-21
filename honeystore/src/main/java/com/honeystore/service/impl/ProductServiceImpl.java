@@ -60,6 +60,20 @@ public class ProductServiceImpl implements ProductService {
         return activeProductList;
     }
 
+    public List<Product> findByCategoryIndex(String categoryIndex) {
+        List<Product> productListIndex = productRepository.findByCategoryIndex(categoryIndex);
+
+        List<Product> activeProductListIndex = new ArrayList<>();
+
+        for (Product product : productListIndex) {
+            if (product.isActive()) {
+                activeProductListIndex.add(product);
+            }
+        }
+
+        return activeProductListIndex;
+    }
+
     public List<Product> blurrySearch(String productName) {
         List<Product> productList = productRepository.findByProductNameContaining(productName);
 

@@ -34,8 +34,8 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="harvest">* Реколта</label>
                     <div class="col-md-12">
-                        <input type="date" class="form-control" id="harvest" name="harvest"
-                               placeholder="Publication Date"
+                        <input type="text" class="form-control" id="harvest" name="harvest"
+                               placeholder="Реколта"
                                th:value="${product.harvest}" required="required"/>
                         <span class="help-block">Реколта, от която е продукта</span>
                     </div>
@@ -61,6 +61,30 @@
                         </select>
                     </div>
                 </div>
+
+                <!--category for index-->
+
+
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="categoryIndex">Категория за начална страница</label>
+                    <div class="col-md-12">
+                        <select th:value="${product.categoryIndex}" id="categoryIndex" name="categoryIndex"
+                                class="form-control">
+                            <option value="" selected="selected" disabled="disabled">Моля, изберете опция</option>
+                            <option value="BestSold" th:selected="${product.categoryIndex}=='BestSold'">Най-продавани
+                            </option>
+                            <option value="New" th:selected="${product.categoryIndex}=='New'">Нови продукти</option>
+                            <option value="Promotion" th:selected="${product.category}=='Promotion'">
+                                Промоционални
+                            </option>
+                            <option value="Recommended" th:selected="${product.category}=='Recommended'">Препоръчани
+                            </option>
+
+
+                        </select>
+                    </div>
+                </div>
+
 
                 <!-- shipping weight-->
 

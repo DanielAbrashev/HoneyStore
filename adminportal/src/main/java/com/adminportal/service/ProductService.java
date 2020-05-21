@@ -11,7 +11,7 @@ public interface ProductService {
 
     List<Product> findAll();
 
-    Optional<Product> findById(Long id);
+    Product getOne(Long id);
 
     void removeOne(Long id);
 

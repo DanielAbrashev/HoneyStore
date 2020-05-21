@@ -15,6 +15,7 @@ public class Product {
     private String productName;
     private String harvest;
     private String category;
+    private String categoryIndex;
     private double shippingWeight;
     private double listPrice;
     private double ourPrice;
@@ -125,5 +126,13 @@ public class Product {
 
     public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
         this.productToCartItemList = productToCartItemList;
+    }
+
+    public String getCategoryIndex() {
+        return categoryIndex;
+    }
+
+    public void setCategoryIndex(String categoryIndex) {
+        this.categoryIndex = categoryIndex;
     }
 }

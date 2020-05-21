@@ -15,6 +15,7 @@
                 <th><input th:id="selectAllProducts" type="checkbox"/></th>
                 <th>ProductName</th>
                 <th>Category</th>
+                <th>CategoryIndex</th>
                 <th>List Price</th>
                 <th>Our Price</th>
                 <th>Active?</th>
@@ -30,6 +31,7 @@
                 <td><a th:href="@{/product/productInfo?id=}+${product.id}"><span
                         th:text="${product.productName}"></span></a></td>
                 <td data-th-text="${product.category}">...</td>
+                <td data-th-text="${product.categoryIndex}">...</td>
                 <td data-th-text="${product.listPrice}">...</td>
                 <td data-th-text="${product.ourPrice}">...</td>
                 <td data-th-text="${product.active}">...</td>

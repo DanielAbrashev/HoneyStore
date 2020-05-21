@@ -15,4 +15,7 @@ public interface ProductService {
 
     List<Product> blurrySearch(String productName);
 
+    List<Product> findByCategoryIndex(String categoryIndex);
+
+
 }

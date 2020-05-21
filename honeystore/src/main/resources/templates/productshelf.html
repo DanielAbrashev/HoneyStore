@@ -24,6 +24,7 @@ height: auto;
 }
 
 
+
 </style>
 <body>
 <div th:replace="common/header :: navbar"/>
@@ -44,10 +45,10 @@ height: auto;
     <div class="row">
         <div class="col-sm-3">
             <div class="col-sm-12" th:fragment="Category">
-                <h3><label for="category" >Категории продукти</label></h3>
+                <h3><label for="category">Категории продукти</label></h3>
                 <hr class="rounded">
 
-                <div class="list-group" id="category" >
+                <div class="list-group" id="category">
                     <a th:href="@{/productshelf(category='all')}" th:classappend="${activeAll}? 'active'"
                        class="list-group-item" style="">
                         Всички продукти <!--<span class="badge badge-primary badge-pill" >14</span>-->
@@ -71,16 +72,52 @@ height: auto;
         <div class="col-sm-9">
             <div class="row">
                 <div th:if="${emptyList}">
-                    <h5 style="font-style: italic">Опа, няма намерени резултати. Пробвайте друга категория или по-късно...</h5>
+                    <h5 style="font-style: italic">Opps, no result is found.Try something else or try again
+                        later.</h5>
                 </div>
-                <div th:replace="index :: productList"/>
+
+
+                <div class="col-lg-4 col-md-6 mb-4" data-th-each="product : ${productList}">
+                    <form th:action="@{/shoppingCart/addItemIndex}" method="post">
+
+                        <div class="card h-100 text-center card-light">
+
+
+                            <a th:href="@{/productDetail?id=}+${product.id}"><img class="card-img-top"
+                                                                                  th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"
+                                                                                  alt=""/></a>
+                            <div class="card-body">
+                                <h4 class="card-productName">
+                                    <a th:href="@{/productDetail?id=}+${product.id}" style="color:black;"><h4
+                                            th:text="${product.productName}"></h4></a>
+                                </h4>
+                                <h5><span
+                                        th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span>лв
+                                </h5>
+                            </div>
+                            <div class="card-footer" style="border: none; background: white;">
+                                <a th:href="@{/shoppingCart/cart}">
+
+                                    <p>
+                                        <button class="btn btn-outline-success" type="submit"><i
+                                                class="fas fa-shopping-cart mr-3"></i>
+
+                                            Добави в количка
+                                        </button>
+                                    </p>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <br/>
+        <br/>
     </div>
-    <br/>
-    <br/>
 </div>
-
 <div th:replace="common/header :: footer"/>
 
 
@@ -88,6 +125,7 @@ height: auto;
 <script>$(document).ready( function () {
     $('#productList').DataTable();
 });
+
 
 
 

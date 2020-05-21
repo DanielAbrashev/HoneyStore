@@ -50,9 +50,8 @@ public class ProductController {
                     (new FileOutputStream(new File("src/main/resources/static/image/product/" + name)));
             stream.write(bytes);
             stream.close();
-        } catch(IOException ex) {
-            System.err.println("An IOException was caught!");
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "redirect:productList";
     }
@@ -70,16 +69,21 @@ public class ProductController {
             @RequestParam("id") Long id,
             Model model
     ) {
-        productService.findById(id).ifPresent(o -> model.addAttribute("product", o));
+        Product product = productService.getOne(id);
+        model.addAttribute("product", product);
         return "productInfo";
     }
 
-    @RequestMapping(value = "/updateProduct", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateProduct")
     public String updateProduct(
             @RequestParam("id") Long id,
             Model model
     ) {
-        productService.findById(id).ifPresent(product -> model.addAttribute("product", product));
+
+        Product product = productService.getOne(id);
+        model.addAttribute("product", product);
+
+
         return "updateProduct";
     }
 
