@@ -170,8 +170,8 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                <div class="carousel-item active" style="border: 1px solid #dee2e6;">
+                    <img class="d-block img-fluid" style="border: 1px solid #dee2e6;" src="/image/bezplatnaDostavka.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
                     <img class="d-block img-fluid" src="/image/carousel1.jpg" alt="Second slide">
@@ -199,7 +199,7 @@
             <br/>
             <br/>
 
-            <div th:replace="productshelf :: Category">
+            <div th:replace="productList :: Category">
 
             </div>
 
@@ -227,8 +227,9 @@
                     <section class="bestSelling slider">
                         <form th:action="@{/shoppingCart/addItemIndex}" method="post"
                               th:each="product : ${productListIndexBestSold}">
+                            <input hidden="hidden" name="id" th:value="${product.id}"/>
 
-                            <div class="card h-100 text-center card-light">
+                            <div class="card h-100 text-center card-light" style="height: 50%;">
 
 
                                 <a th:href="@{/productDetail?id=}+${product.id}"><img class="card-img-top"
@@ -239,8 +240,8 @@
                                         <a th:href="@{/productDetail?id=}+${product.id}" style="color:black;"><h4
                                                 th:text="${product.productName}"></h4></a>
                                     </h4>
-                                    <h5><span
-                                            th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}"></span>лв
+                                    <h5 style="color:rgba(255, 122, 0, 0.80);"><span
+                                            th:text="${#numbers.formatDecimal(product.ourPrice, 0, 'COMMA', 2, 'POINT')}" ></span>лв
                                     </h5>
                                 </div>
                                 <div class="card-footer" style="border: none; background: white;">
@@ -248,9 +249,7 @@
 
                                         <p>
                                             <button class="btn btn-outline-success" type="submit"><i
-                                                    class="fas fa-shopping-cart mr-3"></i>
-
-                                                Добави в количка
+                                                    class="fas fa-shopping-cart mr-3"></i>Добави в количка
                                             </button>
                                         </p>
                                     </a>
@@ -286,6 +285,7 @@
                     <section class="bestSelling slider">
                         <form th:action="@{/shoppingCart/addItemIndex}" method="post"
                               th:each="product : ${productListIndexNew}">
+                            <input hidden="hidden" name="id" th:value="${product.id}"/>
 
                             <div class="card h-100 text-center card-light">
 
@@ -307,9 +307,7 @@
 
                                         <p>
                                             <button class="btn btn-outline-success" type="submit"><i
-                                                    class="fas fa-shopping-cart mr-3"></i>
-
-                                                Добави в количка
+                                                    class="fas fa-shopping-cart mr-3"></i>Добави в количка
                                             </button>
                                         </p>
                                     </a>
@@ -345,6 +343,7 @@
                     <section class="bestSelling slider">
                         <form th:action="@{/shoppingCart/addItemIndex}" method="post"
                               th:each="product : ${productListIndexPromotion}">
+                            <input hidden="hidden" name="id" th:value="${product.id}"/>
 
                             <div class="card h-100 text-center card-light">
 
@@ -366,9 +365,7 @@
 
                                         <p>
                                             <button class="btn btn-outline-success" type="submit"><i
-                                                    class="fas fa-shopping-cart mr-3"></i>
-
-                                                Добави в количка
+                                                    class="fas fa-shopping-cart mr-3"></i>Добави в количка
                                             </button>
                                         </p>
                                     </a>
@@ -404,6 +401,7 @@
                     <section class="bestSelling slider">
                         <form th:action="@{/shoppingCart/addItemIndex}" method="post"
                               th:each="product : ${productListIndexRecommended}">
+                            <input hidden="hidden" name="id" th:value="${product.id}"/>
 
                             <div class="card h-100 text-center card-light">
 
@@ -425,9 +423,7 @@
 
                                         <p>
                                             <button class="btn btn-outline-success" type="submit"><i
-                                                    class="fas fa-shopping-cart mr-3"></i>
-
-                                                Добави в количка
+                                                    class="fas fa-shopping-cart mr-3"></i>Добави в количка
                                             </button>
                                         </p>
                                     </a>

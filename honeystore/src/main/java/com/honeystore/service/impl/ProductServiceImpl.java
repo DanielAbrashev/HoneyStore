@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
     public List<Product> findAll() {
         List<Product> productList = (List<Product>) productRepository.findAll();
-
+        Pageable pageable = PageRequest.of(0,2);
         List<Product> activeProductList = new ArrayList<>();
 
         for (Product product : productList) {

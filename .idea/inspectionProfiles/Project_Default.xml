@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="20">
+          <list size="23">
             <item index="0" class="java.lang.String" itemvalue="th:classappend" />
             <item index="1" class="java.lang.String" itemvalue="th:href" />
             <item index="2" class="java.lang.String" itemvalue="th:fragment" />
@@ -25,6 +25,9 @@
             <item index="17" class="java.lang.String" itemvalue="th:id" />
             <item index="18" class="java.lang.String" itemvalue="th:field" />
             <item index="19" class="java.lang.String" itemvalue="sec:authorize" />
+            <item index="20" class="java.lang.String" itemvalue="th:with" />
+            <item index="21" class="java.lang.String" itemvalue="th:unless" />
+            <item index="22" class="java.lang.String" itemvalue="th:inline" />
           </list>
         </value>
       </option>
@@ -33,7 +36,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="7">
+          <list size="8">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -41,6 +44,7 @@
             <item index="4" class="java.lang.String" itemvalue="embed" />
             <item index="5" class="java.lang.String" itemvalue="script" />
             <item index="6" class="java.lang.String" itemvalue="mat-icon" />
+            <item index="7" class="java.lang.String" itemvalue="th:block" />
           </list>
         </value>
       </option>

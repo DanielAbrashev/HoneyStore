@@ -15,7 +15,7 @@
     <header th:insert="common/header :: header(~{ :: .breadcrumb})">
         <ol class="breadcrumb breadcrumb-arrow p-0">
             <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/productshelf}">Пчелни продукти</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productList}">Пчелни продукти</a></li>
             <li class="breadcrumb-item"><a th:href="@{/productDetail?id=}+${product.id}"><span th:text="${product.productName}"></span></a></li>
         </ol>
     </header>
@@ -28,7 +28,7 @@
             <input hidden="hidden" th:field="*{product.id}"/>
             <div class="row" >
                 <div class="col-sm-3">
-                    <a th:href="@{/productshelf}">Обратно към всички продукти</a> <br/>
+                    <a th:href="@{/productList}">Обратно към всички продукти</a> <br/>
                     <img class="responsive" th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"/>
                 </div>
                 <div class="col-sm-9">

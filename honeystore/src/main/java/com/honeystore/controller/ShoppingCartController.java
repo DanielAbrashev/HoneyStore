@@ -4,17 +4,20 @@ import com.honeystore.domain.Product;
 import com.honeystore.domain.CartItem;
 import com.honeystore.domain.ShoppingCart;
 import com.honeystore.domain.User;
+import com.honeystore.repository.ProductRepository;
 import com.honeystore.service.ProductService;
 import com.honeystore.service.CartItemService;
 import com.honeystore.service.ShoppingCartService;
 import com.honeystore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +37,9 @@ public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {
@@ -61,7 +67,6 @@ public class ShoppingCartController {
         product = productService.getOne(product.getId());
 
 
-
         if (Integer.parseInt(qty) > product.getInStockNumber()) {
             model.addAttribute("notEnoughStock", true);
             return "forward:/productDetail?id=" + product.getId();
@@ -85,14 +90,14 @@ public class ShoppingCartController {
 
         return "forward:/productDetail?id=" + product.getId();
     }
-    @RequestMapping("/addItemIndex")
-    public String addItemIndex(Product product,
 
-            Model model, Principal principal
+    @RequestMapping("/addItemIndex")
+    public String addItemIndex(
+            Product product, Model model, Principal principal
     ) {
         User user = userService.findByUsername(principal.getName());
         int qty = 1;
-        product = productService.getOne((long) 4);
+        product = productService.getOne(product.getId());
 
         if (qty > product.getInStockNumber()) {
             model.addAttribute("notEnoughStock", true);
@@ -101,10 +106,18 @@ public class ShoppingCartController {
 
         List<Product> productList = productService.findAll();
 
-
+        List<Product> productListIndexBestSold = productService.findByCategoryIndex("BestSold");
+        List<Product> productListIndexNew = productService.findByCategoryIndex("New");
+        List<Product> productListIndexPromotion = productService.findByCategoryIndex("Promotion");
+        List<Product> productListIndexRecommended = productService.findByCategoryIndex("Recommended");
 
         model.addAttribute("productList", productList);
         model.addAttribute("activeAll", true);
+        model.addAttribute("productListIndexBestSold", productListIndexBestSold);
+        model.addAttribute("productListIndexNew", productListIndexNew);
+        model.addAttribute("productListIndexPromotion", productListIndexPromotion);
+        model.addAttribute("productListIndexRecommended", productListIndexRecommended);
+
 
         CartItem cartItem = cartItemService.addProductToCartItem(product, user, qty);
         model.addAttribute("addProductSuccess", true);
@@ -122,6 +135,69 @@ public class ShoppingCartController {
         }
 
         return "index";
+
+
+    }
+
+    @RequestMapping("/addItemProductList")
+    public String addItemProductList(
+            Product product, Model model, Principal principal, HttpServletRequest request
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        int qty = 1;
+        product = productService.getOne(product.getId());
+
+        if (qty > product.getInStockNumber()) {
+            model.addAttribute("notEnoughStock", true);
+            return "index";
+        }
+
+        int page = 0; //default page number is 0 (yes it is weird)
+        int size = 2; //default page size is 10
+
+        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+
+        if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+            size = Integer.parseInt(request.getParameter("size"));
+        }
+
+
+        model.addAttribute("productList", productRepository.findAll(PageRequest.of(page, size)));
+
+        List<Product> productListIndexBestSold = productService.findByCategoryIndex("BestSold");
+        List<Product> productListIndexNew = productService.findByCategoryIndex("New");
+        List<Product> productListIndexPromotion = productService.findByCategoryIndex("Promotion");
+        List<Product> productListIndexRecommended = productService.findByCategoryIndex("Recommended");
+
+
+        model.addAttribute("activeAll", true);
+        model.addAttribute("productListIndexBestSold", productListIndexBestSold);
+        model.addAttribute("productListIndexNew", productListIndexNew);
+        model.addAttribute("productListIndexPromotion", productListIndexPromotion);
+        model.addAttribute("productListIndexRecommended", productListIndexRecommended);
+
+
+        CartItem cartItem = cartItemService.addProductToCartItem(product, user, qty);
+        model.addAttribute("addProductSuccess", true);
+        if (principal != null) {
+
+
+            ShoppingCart shoppingCart = user.getShoppingCart();
+
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+            shoppingCartService.updateShoppingCart(shoppingCart);
+
+            model.addAttribute("cartItemList", cartItemList);
+
+            model.addAttribute("shoppingCart", shoppingCart);
+        }
+
+
+
+        return "productList";
+
 
     }
 

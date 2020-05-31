@@ -33,7 +33,7 @@
                     <a class="btn btn-warning" th:href="@{/productList}">Продължи да пазаруваш</a>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a class="btn btn-warning" style="" th:href="@{/checkout(id=${shoppingCart.id})}">Поръчване</a>
+                    <a class="btn btn-warning" style="" th:href="@{/checkout(id=${shoppingCartUnauthorized.id})}">Поръчване</a>
                 </div>
             </div>
             <br/>
@@ -78,7 +78,7 @@
 
                     <div class="col-sm-2">
                         <h5 style="color:#db3208;font-size:large;"><span th:text="${cartItem.product.ourPrice}"
-                                                                          th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''"></span>лв.
+                                                                         th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''"></span>лв.
                         </h5>
                     </div>
                     <div class="col-sm-2">

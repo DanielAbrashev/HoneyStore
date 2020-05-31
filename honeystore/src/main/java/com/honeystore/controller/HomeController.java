@@ -5,13 +5,18 @@ import com.honeystore.domain.*;
 import com.honeystore.domain.security.PasswordResetToken;
 import com.honeystore.domain.security.Role;
 import com.honeystore.domain.security.UserRole;
-import com.honeystore.repository.UserPaymentRepository;
+import com.honeystore.repository.ProductRepository;
 import com.honeystore.service.*;
+import com.honeystore.service.impl.ProductServiceImpl;
 import com.honeystore.service.impl.UserSecurityService;
 import com.honeystore.utility.MailConstructor;
 import com.honeystore.utility.SecurityUtility;
 import com.honeystore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,15 +26,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class HomeController {
@@ -63,6 +68,10 @@ public class HomeController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @RequestMapping("/")
     public String index(Model model, Principal principal,String categoryIndex) {
@@ -158,8 +167,35 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/productshelf")
-    public String productshelf(Model model, Principal principal) {
+    /*@RequestMapping("/productList")
+    public String productList( Model model, Principal principal) {
+        if (principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            ShoppingCart shoppingCart = user.getShoppingCart();
+
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+            shoppingCartService.updateShoppingCart(shoppingCart);
+
+            model.addAttribute("cartItemList", cartItemList);
+
+            model.addAttribute("shoppingCart", shoppingCart);
+        }
+        Pageable pageable = PageRequest.of(0, 2, Sort.by("productName").ascending());
+
+        List<Product> productList = productService.findAll();
+        model.addAttribute("productList", productList);
+        model.addAttribute("activeAll", true);
+
+        return "productList";
+    }
+*/
+    /*@RequestMapping(value = "/productList/page/{page}")
+    public String listArticlesPageByPage(Model model, Principal principal) {
         if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
@@ -177,11 +213,55 @@ public class HomeController {
             model.addAttribute("shoppingCart", shoppingCart);
         }
 
-        List<Product> productList = productService.findAll();
-        model.addAttribute("productList", productList);
-        model.addAttribute("activeAll", true);
 
-        return "productshelf";
+        *//*ModelAndView modelAndView = new ModelAndView("/productList/page?page");*//*
+        PageRequest pageable = PageRequest.of(  0, 2,Sort.by("productName").ascending());
+        Page<Product> productList = productRepository.findAll(pageable);
+
+        int totalPages = productList.getTotalPages();
+        if(totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1,totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("activeAll", true);
+        model.addAttribute("productList", productList);
+
+        return "productList";
+    }*/
+
+    @GetMapping("/productList")
+    public String productList(HttpServletRequest request, Model model, Principal principal) {
+
+        if (principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName());
+            ShoppingCart shoppingCart = user.getShoppingCart();
+
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
+            shoppingCartService.updateShoppingCart(shoppingCart);
+
+            model.addAttribute("cartItemList", cartItemList);
+
+            model.addAttribute("shoppingCart", shoppingCart);
+        }
+
+        int page = 0; //default page number is 0 (yes it is weird)
+        int size = 2; //default page size is 10
+
+        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+
+        if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+            size = Integer.parseInt(request.getParameter("size"));
+        }
+
+        model.addAttribute("productList", productRepository.findAll(PageRequest.of(page, size)));
+        return "productList";
     }
 
     @RequestMapping("/productDetail")

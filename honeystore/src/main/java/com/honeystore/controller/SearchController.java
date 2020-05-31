@@ -57,12 +57,12 @@ public class SearchController {
 
         if (productList.isEmpty()) {
             model.addAttribute("emptyList", true);
-            return "productshelf";
+            return "productList";
         }
 
         model.addAttribute("productList", productList);
 
-        return "productshelf";
+        return "productList";
     }
 
     @RequestMapping("/searchProduct")
@@ -88,11 +88,11 @@ public class SearchController {
 
         if (productList.isEmpty()) {
             model.addAttribute("emptyList", true);
-            return "productshelf";
+            return "productList";
         }
 
         model.addAttribute("productList", productList);
 
-        return "productshelf";
+        return "productList";
     }
 }
