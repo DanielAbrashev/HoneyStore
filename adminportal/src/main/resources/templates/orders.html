@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar"></div>
+
+<div class="container">
+    <div class="table-responsive">
+        <div class="card-group">
+            <div class="card " style="border: none">
+                <div class="card-body" style="background-color: #ededed;margin-top: 20px">
+
+                    <table class="table table-sm table-inverse">
+                        <thead>
+                        <tr>
+                            <th>Дата на поръчка</th>
+                            <th>Номер на поръчка</th>
+                            <th>Всичко</th>
+                            <th>Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="order : ${orderList}">
+                            <td>
+                                <a th:href="@{/orderDetail(id=${order.id})}"><span
+                                        th:text="${order.orderDate}"></span></a>
+                            </td>
+                            <td>
+                                <a th:href="@{/orderDetail(id=${order.id})}"><span
+                                        th:text="${order.id}"></span></a>
+                            </td>
+                            <td th:text="${order.orderTotal}">...</td>
+                            <td>
+                                <div class="form-group">
+                                    <form class="form" th:action="@{/updateOrderStatus}" method="post">
+                                        <input hidden="hidden" name="id" th:value="${order.id}"/>
+                                        <input hidden="hidden"  th:value="${order.orderDate}"/>
+
+                                        <select th:value="${order.orderStatus}" id="orderStatus" name="orderStatus"
+                                                class="form-control">
+                                            <option value="създадена" th:selected="${order.orderStatus}=='създадена'">
+                                                създадена
+                                            </option>
+                                            <option value="обработва се"
+                                                    th:selected="${order.orderStatus}=='обработва се'">обработва се
+                                            </option>
+                                            <option value="изпратена" th:selected="${order.orderStatus}=='изпратена'">
+                                                изпратена
+                                            </option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary btn-lg">Запиши</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div th:if="${displayOrderDetail}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <h2>Данни за поръчка номер:<span th:text="${order.id}"></span></h2>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="panel panel-default height">
+                                            <div class="panel-heading"><strong>Данни на платежно средство</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
+                                                <span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
+                                                <span th:text="${order.billingAddress.billingAddressCity}"></span><br/>
+                                                <span th:text="${order.billingAddress.billingAddressState}"></span><br/>
+                                                <span th:text="${order.billingAddress.billingAddressZipCode}"></span><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="panel panel-default height">
+                                            <div class="panel-heading"><strong>Платежни Данни</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <span th:text="${order.payment.holderName}">Име на карта</span><br/>
+                                                <span th:text="${order.payment.cardNumber}">Номер на карта</span><br/>
+                                                <span>Дата на изтичане:</span> <span
+                                                    th:text="${order.payment.expiryMonth}"></span>/<span
+                                                    th:text="${order.payment.expiryYear}"></span><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="panel panel-default height">
+                                            <div class="panel-heading"><strong>Адрес за доставка</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressCity}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressState}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressZipCode}"></span><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="text-center"><strong>Поръчка</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr>
+                                                    <td><strong>Име на продукт</strong></td>
+                                                    <td class="text-center"><strong>Цена</strong></td>
+                                                    <td class="text-center"><strong>Брой</strong>
+                                                    </td>
+                                                    <td class="text-right"><strong>Общо</strong></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="cartItem : ${cartItemList}">
+                                                    <td data-th-text="${cartItem.product.productName}">
+                                                    </td>
+                                                    <td data-th-text="${cartItem.product.ourPrice}"
+                                                        class="text-center">
+                                                    </td>
+                                                    <td data-th-text="${cartItem.qty}" class="text-center">
+                                                    </td>
+                                                    <td data-th-text="${cartItem.subtotal}"
+                                                        class="text-right">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <!--                                                                <td class="highrow"></td>-->
+                                                    <!--                                                                <td class="highrow"></td>-->
+                                                    <!-- <td class="highrow text-center">
+                                                         <strong>Subtotal</strong></td>
+                                                     <td data-th-text="${order.orderTotal}"
+                                                         class="highrow text-right">
+                                                     </td>-->
+                                                </tr>
+                                                <!--<tr>
+                                                    &lt;!&ndash;<td class="emptyrow"></td>
+                                                    <td class="emptyrow"></td>&ndash;&gt;
+                                                   &lt;!&ndash; <td class="emptyrow text-center"><strong>Такса</strong>
+                                                    </td>
+                                                    <td data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06, 0, 2)}"
+                                                        class="emptyrow text-right">
+                                                    </td>&ndash;&gt;
+                                                </tr>-->
+                                                <tr>
+                                                    <td class="emptyrow"><i
+                                                            class="fa fa-barcode iconbig"></i></td>
+                                                    <td class="emptyrow"></td>
+                                                    <td class="emptyrow text-center"><strong>Общо</strong>
+                                                    </td>
+                                                    <td th:with="total=${order.orderTotal}"
+                                                        th:text="${#numbers.formatDecimal(total, 0, 2)}"
+                                                        class="emptyrow text-right">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+
+
+</body>
+</html>
