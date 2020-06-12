@@ -20,10 +20,6 @@
                                                                        class="nav-link"
                                                                        data-toggle="tab"><span
                         style="color:#f46b42;">Поръчки</span></a></li>
-               <!-- <li th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3"
-                                                                        class="nav-link"
-                                                                        data-toggle="tab"><span
-                        style="color:#f46b42;">Фактуриране</span></a></li>-->
                 <li th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4"
                                                                          class="nav-link"
                                                                          data-toggle="tab"><span
@@ -77,7 +73,8 @@
                                         <input type="text" class="form-control" id="currentPassword" name="password"
                                                th:value="${currentPassword}"/>
                                     </div>
-                                    <p style="color: #828282">Въведете текущата си парола, за да промените вашите имейл или парола</p>
+                                    <p style="color: #828282">Въведете текущата си парола, за да промените вашите имейл
+                                        или парола</p>
 
                                     <div class="form-group">
                                         <label for="email">Email Адрес</label>
@@ -87,17 +84,18 @@
                                     <p style="color: #828282">Валиден имейл адрес. </p>
 
                                     <div class="form-group">
-                                        <label for="txtNewPassword">Парола</label>
-                                        <input type="password" class="form-control" id="txtNewPassword"
-                                               name="txtNewPassword"/>
+                                        <label for="newPassword">Парола</label>
+                                        <input type="text" class="form-control" id="newPassword"
+                                               name="newPassword"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="txtConfirmPassword">Потвърди парола</label>&nbsp;<span
                                             id="checkPasswordMatch" style="color:red"></span>
-                                        <input type="password" class="form-control" id="txtConfirmPassword"/>
+                                        <input type="text" class="form-control" id="txtConfirmPassword"/>
                                     </div>
-                                    <p style="color: #828282">За да смените текущата парола, моля въведете новата си парола в двете полета</p>
+                                    <p style="color: #828282">За да смените текущата парола, моля въведете новата си
+                                        парола в двете полета</p>
 
 
                                     <button id="updateUserInfoButton" type="submit" class="btn btn-primary">Запиши
@@ -147,14 +145,10 @@
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <div class="panel panel-default height">
-                                                        <div class="panel-heading"><strong>Данни на платежно средство</strong>
+                                                        <div class="panel-heading"><strong>Данни на платежно
+                                                            средство</strong>
                                                         </div>
                                                         <div class="panel-body">
-                                                            <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
-                                                            <span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
-                                                            <span th:text="${order.billingAddress.billingAddressCity}"></span><br/>
-                                                            <span th:text="${order.billingAddress.billingAddressState}"></span><br/>
-                                                            <span th:text="${order.billingAddress.billingAddressZipCode}"></span><br/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,11 +157,7 @@
                                                         <div class="panel-heading"><strong>Платежни Данни</strong>
                                                         </div>
                                                         <div class="panel-body">
-                                                            <span th:text="${order.payment.holderName}">Име на карта</span><br/>
-                                                            <span th:text="${order.payment.cardNumber}">Номер на карта</span><br/>
-                                                            <span>Дата на изтичане:</span> <span
-                                                                th:text="${order.payment.expiryMonth}"></span>/<span
-                                                                th:text="${order.payment.expiryYear}"></span><br/>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -178,10 +168,9 @@
                                                         </div>
                                                         <div class="panel-body">
                                                             <span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
-                                                            <span th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+                                                            <span th:text="${order.shippingAddress.shippingAddressAddress}"></span><br/>
                                                             <span th:text="${order.shippingAddress.shippingAddressCity}"></span><br/>
-                                                            <span th:text="${order.shippingAddress.shippingAddressState}"></span><br/>
-                                                            <span th:text="${order.shippingAddress.shippingAddressZipCode}"></span><br/>
+                                                            <span th:text="${order.shippingAddress.shippingAddressPhone}"></span><br/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,13 +209,13 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-<!--                                                                <td class="highrow"></td>-->
-<!--                                                                <td class="highrow"></td>-->
-                                                               <!-- <td class="highrow text-center">
-                                                                    <strong>Subtotal</strong></td>
-                                                                <td data-th-text="${order.orderTotal}"
-                                                                    class="highrow text-right">
-                                                                </td>-->
+                                                                <!--                                                                <td class="highrow"></td>-->
+                                                                <!--                                                                <td class="highrow"></td>-->
+                                                                <!-- <td class="highrow text-center">
+                                                                     <strong>Subtotal</strong></td>
+                                                                 <td data-th-text="${order.orderTotal}"
+                                                                     class="highrow text-right">
+                                                                 </td>-->
                                                             </tr>
                                                             <!--<tr>
                                                                 &lt;!&ndash;<td class="emptyrow"></td>
@@ -262,300 +251,6 @@
                     </div>
                 </div>
 
-
-                <!--billing information-->
-                <!--<div class="tab-pane " id="tab-3" th:classappend="${classActiveBilling}? 'in active' ">
-                    <div class="card-group">
-                        <div class="card " style="border: none">
-                            <div class="card-body" style="background-color: #ededed;margin-top: 20px">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active">
-                                        <a th:href="@{/listOfCreditCards}"
-                                           th:style="${listOfCreditCards} ? 'color:red' ">Списък от платежни средства</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">
-                                        <a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard} ? 'color:red' ">Добави(Промени) платежно средство</a>
-                                    </li>
-                                </ol>
-
-                                <div th:if="${listOfCreditCards}">
-                                    <form th:action="@{/setDefaultPayment}" method="post">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>По подразбиране</th>
-                                                <th>Платежно средство</th>
-                                                <th>Действия</th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody>
-                                            <tr th:each="userPayment : ${userPaymentList}">
-                                                <td>
-                                                    <input type="radio" name="defaultPayment"
-                                                           th:value="${userPayment.id}"
-                                                           th:checked="${userPayment.defaultPayment}"/>
-                                                </td>
-                                                <td th:text="${userPayment.cardName}"></td>
-                                                <td>
-                                                    <a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i
-                                                            class="fa fa-pencil"></i></a>
-                                                    &nbsp;&nbsp;
-                                                    <a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i
-                                                            class="fa fa-times"></i></a>
-
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <button class="btn btn-primary" type="submit">Запиши</button>
-                                    </form>
-                                </div>
-                                <div th:if="${addNewCreditCard}">
-                                    <form th:action="@{/addNewCreditCard}" method="post">
-                                        <div class="bg-info" th:if="${updateUserPaymentInfo}">Данните са променени</div>
-                                        <input hidden="hidden" th:value="${userPayment.id}" name="id"/>
-                                        <div class="form-group">
-                                            <h5>* Име на вашето платежно средство </h5>
-                                            <input type="text" class="form-control" id="cardName"
-                                                   placeholder="Card Name"
-                                                   th:name="cardName" required="required"
-                                                   th:value="${userPayment.cardName}"/>
-                                        </div>
-                                        &lt;!&ndash;Billing Address&ndash;&gt;
-
-                                        <hr/>
-                                        <div class="form-group">
-                                            <h4>Billing Address</h4>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="billingName">* Name </label>
-                                            <input type="text" class="form-control" id="billingName"
-                                                   placeholder="Receiver Name"
-                                                   th:name="userBillingName" required="required"
-                                                   th:value="${userBilling.userBillingName}"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="billingAddress">* Street Address </label>
-                                            <input type="text" class="form-control" id="userBillingStreet1"
-                                                   placeholder="Street Address 1 "
-                                                   th:name="userBillingStreet1" required="required"
-                                                   th:value="${userBilling.userBillingStreet1}"/>
-                                            <input type="text" class="form-control" id="userBillingStreet2"
-                                                   placeholder="Street Address 2 "
-                                                   th:name="userBillingStreet2" required="required"
-                                                   th:value="${userBilling.userBillingStreet2}"/>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="billingCity">* City </label>
-                                                    <input type="text" class="form-control" id="billingCity"
-                                                           placeholder="City"
-                                                           th:name="userBillingCity" required="required"
-                                                           th:value="${userBilling.userBillingCity}"/>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="billingState">* State </label>
-                                                    <select class="form-control" id="billingState"
-                                                            placeholder="State"
-                                                            th:name="userBillingState" required="required"
-                                                            th:value="${userBilling.userBillingState}">
-                                                        <option value="" disabled="disabled">Please select an option
-                                                        </option>
-                                                        <option th:each="state : ${stateList}" th:text="${state}"
-                                                                th:selected="(${userBilling.userBillingState}==${state})"></option>
-                                                    </select>
-
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="billingZipCode">* ZipCode </label>
-                                                    <input type="text" class="form-control" id="billingZipCode"
-                                                           placeholder="ZipCode"
-                                                           th:name="userBillingZipCode" required="required"
-                                                           th:value="${userBilling.userBillingZipCode}"/>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        &lt;!&ndash;Credit Card information&ndash;&gt;
-
-                                        <hr/>
-                                        <div class="form-group">
-                                            <h4>Данни на вашето платежно средство</h4>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <img src="/image/creditcard.png" class="img-responsive"/>
-                                                <br/>
-
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label for="cardType">* Изберете тип карта</label>
-                                                            <select class="form-control" id="cardType" th:name="type"
-                                                                    th:value="${userPayment.type}">
-                                                                <option th:selected="${userPayment.type} == 'visa'">
-                                                                    Visa
-                                                                </option>
-                                                                <option th:selected="${userPayment.type} == 'mastercard'">
-                                                                    Mastercard
-                                                                </option>
-                                                                <option th:selected="${userPayment.type} == 'discover'">
-                                                                    Discover
-                                                                </option>
-                                                                <option th:selected="${userPayment.type} == 'amex'">
-                                                                    American Express
-                                                                </option>
-                                                            </select>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="cardHolder">* Име на картодържателя</label>
-                                                    <input type="text" class="form-control" id="cardHolder"
-                                                           placeholder="Card Holder Name"
-                                                           name="holderName" required="required"
-                                                           th:value="${userPayment.holderName}"/>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="cardNumber">* Номер на картата</label>
-                                                    <div class="input-group">
-                                                        <input type="tel" class="form-control" id="cardNumber"
-                                                               placeholder="Card Number"
-                                                               name="cardNumber" required="required"
-                                                               th:value="${userPayment.cardNumber}"/>
-                                                        <span class="input-group-addon"><i class="fa fa-credit-card"
-                                                                                           aria-hidden="true"></i> </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-7">
-                                                <label for="expirationDate">* Дата на изтичане</label>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control" name="expiryMonth"
-                                                                required="required"
-                                                                th:value="${userPayment.expiryMonth}">
-                                                            <option disabled="disabled">&#45;&#45; Месец &#45;&#45;</option>
-                                                            <option th:selected="${userPayment.type} == '1' "
-                                                                    th:value="1">Ян (01)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '2' "
-                                                                    th:value="2">Февр (02)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '3' "
-                                                                    th:value="3">Март (03)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '4' "
-                                                                    th:value="4">Апр (04)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '5' "
-                                                                    th:value="5">Май (05)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '6' "
-                                                                    th:value="6">Юни (06)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '7' "
-                                                                    th:value="7">Юли (07)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '8' "
-                                                                    th:value="8">Авг (08)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '9' "
-                                                                    th:value="9">Сеп (09)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '10' "
-                                                                    th:value="10">Окт (10)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '11' "
-                                                                    th:value="11">Ноем (11)
-                                                            </option>
-                                                            <option th:selected="${userPayment.type} == '12' "
-                                                                    th:value="12">Дек (12)
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control" name="expiryYear"
-                                                                th:value="${userPayment.expiryYear}">
-                                                            <option disabled="disabled">&#45;&#45; Година &#45;&#45;</option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2019' ">
-                                                                2019
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2020' ">
-                                                                2020
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2021' ">
-                                                                2021
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2022' ">
-                                                                2022
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2023' ">
-                                                                2023
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2024' ">
-                                                                2024
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2025' ">
-                                                                2025
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2026' ">
-                                                                2026
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2027' ">
-                                                                2027
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2028' ">
-                                                                2028
-                                                            </option>
-                                                            <option th:selected="${userPayment.expiryYear} == '2029' ">
-                                                                2029
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-
-                                                <div class="form-group">
-                                                    <label for="cardCVC">* CV код</label>
-                                                    <div class="input-group">
-                                                        <input type="tel" class="form-control" id="cardCVC"
-                                                               placeholder="CVC"
-                                                               th:name="cvc" required="required"
-                                                               th:value="${userPayment.cvc}"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-lg">Запиши</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-
-
                 <!--shipping information-->
 
                 <div class="tab-pane " id="tab-4" th:classappend="${classActiveShipping}? 'in active' ">
@@ -566,12 +261,14 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item active">
                                         <a th:href="@{/listOfShippingAddresses}"
-                                           th:style="${listOfShippingAddresses} ? 'color:red' ">Списък с адреси за доставка</a>
+                                           th:style="${listOfShippingAddresses} ? 'color:red' ">Списък с адреси за
+                                            доставка</a>
                                     </li>
 
                                     <li class="breadcrumb-item active">
                                         <a th:href="@{/addNewShippingAddress}"
-                                           th:style="${addNewShippingAddress} ? 'color:red' ">Добави(Промени) адрес за доставка</a>
+                                           th:style="${addNewShippingAddress} ? 'color:red' ">Добави(Промени) адрес за
+                                            доставка</a>
                                     </li>
                                 </ol>
 
@@ -594,12 +291,9 @@
                                                            th:value="${userShipping.id}"
                                                            th:checked="${userShipping.userShippingDefault}"/>
                                                 </td>
-                                                <td th:text="${userShipping.userShippingStreet1}+
-                                                ', '+ ${userShipping.userShippingStreet2}+
-                                                ', '+ ${userShipping.userShippingCity}+
-                                                ', '+${userShipping.userShippingState}+
-                                                ', '+${userShipping.userShippingZipCode}+
-                                                ', '+${userShipping.userShippingCountry}"></td>
+                                                <td th:text="${userShipping.userShippingAddressAddress}+
+                                                ', '+ ${userShipping.userShippingAddressPhone}+
+                                                ', '+ ${userShipping.userShippingAddressCity}"></td>
                                                 <td>
                                                     <a th:href="@{/updateUserShipping(id=${userShipping.id})}"><i
                                                             class="fa fa-pencil"></i></a>
@@ -617,7 +311,9 @@
                                 </div>
                                 <div th:if="${addNewShippingAddress}">
                                     <form th:action="@{/addNewShippingAddress}" method="post">
-                                        <div class="bg-info" th:if="${updateUserShippingInfo}">Информацията е променена.</div>
+                                        <div class="bg-info" th:if="${updateUserShippingInfo}">Информацията е
+                                            променена.
+                                        </div>
                                         <input hidden="hidden" th:value="${userShipping.id}" name="id"/>
 
                                         <!--Shipping Address-->
@@ -631,20 +327,21 @@
                                             <label for="shippingName">* Име на получател </label>
                                             <input type="text" class="form-control" id="shippingName"
                                                    placeholder="Receiver Name"
-                                                   th:name="userShippingName" required="required"
-                                                   th:value="${userShipping.userShippingName}"/>
+                                                   th:name="userShippingAddressName" required="required"
+                                                   th:value="${userShipping.userShippingAddressName}"/>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="shippingAddress">* Адрес </label>
-                                            <input type="text" class="form-control" id="usershippingStreet1"
-                                                   placeholder="Street Address 1 "
-                                                   th:name="userShippingStreet1" required="required"
-                                                   th:value="${userShipping.userShippingStreet1}"/>
-                                            <input type="text" class="form-control" id="usershippingStreet2"
-                                                   placeholder="Street Address 2 "
-                                                   th:name="userShippingStreet2" required="required"
-                                                   th:value="${userShipping.userShippingStreet2}"/>
+                                            <label for="shippingAddressAddress">* Адрес </label>
+                                            <input type="text" class="form-control" id="shippingAddressAddress"
+                                                   placeholder="Адрес"
+                                                   th:name="userShippingAddressAddress" required="required"
+                                                   th:value="${userShipping.userShippingAddressAddress}"/>
+                                            <label for="shippingAddressPhone">Телефон</label>
+                                            <input type="text" class="form-control" id="shippingAddressPhone"
+                                                   placeholder="Телефон"
+                                                   th:name="userShippingAddressPhone" required="required"
+                                                   th:value="${userShipping.userShippingAddressPhone}"/>
                                         </div>
 
                                         <div class="row">
@@ -653,29 +350,8 @@
                                                     <label for="ShippingCity">* Град </label>
                                                     <input type="text" class="form-control" id="ShippingCity"
                                                            placeholder="City"
-                                                           th:name="userShippingCity" required="required"
-                                                           th:value="${userShipping.userShippingCity}"/>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="ShippingState">* State </label>
-                                                    <input type="text" class="form-control" id="ShippingState"
-                                                           placeholder="State"
-                                                           th:name="userShippingState" required="required"
-                                                           th:value="${userShipping.userShippingState}"/>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label for="ShippingZipCode">* ZipCode </label>
-                                                    <input type="text" class="form-control" id="ShippingZipCode"
-                                                           placeholder="ZipCode"
-                                                           th:name="userShippingZipCode" required="required"
-                                                           th:value="${userShipping.userShippingZipCode}"/>
+                                                           th:name="userShippingAddressCity" required="required"
+                                                           th:value="${userShipping.userShippingAddressCity}"/>
                                                 </div>
                                             </div>
                                         </div>

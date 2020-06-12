@@ -8,7 +8,7 @@ function checkBillingAddress(){
 }
 
 function checkPasswordMatch(){
-    var password = $("#txtNewPassword").val();
+    var password = $("#newPassword").val();
     var confirmPassword = $("#txtConfirmPassword").val();
 
     if(password == "" && confirmPassword ==""){
@@ -25,6 +25,24 @@ function checkPasswordMatch(){
     }
 }
 
+function checkCreatePasswordMatch(){
+    var createPassword = $("#createPassword").val();
+    var txtConfirmCreatePassword = $("#txtConfirmCreatePassword").val();
+
+    if(createPassword == "" && txtConfirmCreatePassword ==""){
+        $("#checkCreatePasswordMatch").html("");
+        $("#registration").prop('disabled', false);
+    }else{
+        if(createPassword != txtConfirmCreatePassword){
+            $("#checkCreatePasswordMatch").html("Passwords do not match!");
+            $("#registration").prop('disabled', true);
+        }else{
+            $("#checkCreatePasswordMatch").html("Passwords match!");
+            $("#registration").prop('disabled', false);
+        }
+    }
+}
+
 
 $(document).ready(function(){
         $(".cartItemQty").on('change', function(){
@@ -34,7 +52,10 @@ $(document).ready(function(){
         });
         $("#theSameAsShippingAddress").on('click', checkBillingAddress);
         $("#txtConfirmPassword").keyup(checkPasswordMatch);
-        $("#txtNewPassword").keyup(checkPasswordMatch);
+        $("#newPassword").keyup(checkPasswordMatch);
+        $("#createPassword").keyup(checkCreatePasswordMatch);
+        $("#txtConfirmCreatePassword").keyup(checkCreatePasswordMatch);
+
 });
 
 /*
@@ -90,5 +111,48 @@ $(document).ready(function(){
         }]
     });
 });
+
+$("#shippingMethod").change(function() {
+  if ($(this).val() == "toAddress") {
+    $('#toAddress').show();
+    $('#shippingAddressName').attr('required', '');
+    $('#shippingAddressName').attr('data-error', 'This field is required.');
+    $('#shippingAddressAddress').attr('required', '');
+    $('#shippingAddressAddress').attr('data-error', 'This field is required.');
+    $('#shippingAddressPhone').attr('required', '');
+    $('#shippingAddressPhone').attr('data-error', 'This field is required.');
+    $('#shippingAddressCity').attr('required', '');
+    $('#shippingAddressCity').attr('data-error', 'This field is required.');
+    $('#toOffice').hide();
+    $('#shippingAddressNameEkont').removeAttr('required');
+    $('#shippingAddressNameEkont').removeAttr('data-error');
+    $('#shippingAddressAddressEkont').removeAttr('required');
+    $('#shippingAddressAddressEkont').removeAttr('data-error');
+    $('#shippingAddressPhoneEkont').removeAttr('required');
+    $('#shippingAddressPhoneEkont').removeAttr('data-error');
+    $('#shippingAddressCityEkont').removeAttr('required');
+    $('#shippingAddressCityEkont').removeAttr('data-error');
+  } else {
+    $('#toOffice').show();
+    $('#shippingAddressNameEkont').attr('required', '');
+    $('#shippingAddressNameEkont').attr('data-error', 'This field is required.');
+    $('#shippingAddressAddressEkont').attr('required', '');
+    $('#shippingAddressAddressEkont').attr('data-error', 'This field is required.');
+    $('#shippingAddressPhoneEkont').attr('required', '');
+    $('#shippingAddressPhoneEkont').attr('data-error', 'This field is required.');
+    $('#shippingAddressCityEkont').attr('required', '');
+    $('#shippingAddressCityEkont').attr('data-error', 'This field is required.');
+    $('#toAddress').hide();
+    $('#shippingAddressName').removeAttr('required');
+    $('#shippingAddressName').removeAttr('data-error');
+    $('#shippingAddressAddress').removeAttr('required');
+    $('#shippingAddressAddress').removeAttr('data-error');
+    $('#shippingAddressPhone').removeAttr('required');
+    $('#shippingAddressPhone').removeAttr('data-error');
+    $('#shippingAddressCity').removeAttr('required');
+    $('#shippingAddressCity').removeAttr('data-error');
+  }
+});
+$("#shippingMethod").trigger("change");
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -23,8 +24,6 @@ import java.util.Locale;
 public class CheckoutController {
 
     private ShippingAddress shippingAddress = new ShippingAddress();
-    private BillingAddress billingAddress = new BillingAddress();
-    private Payment payment = new Payment();
 
     @Autowired
     private JavaMailSender mailSender;
@@ -44,17 +43,10 @@ public class CheckoutController {
     @Autowired
     private ShippingAddressService shippingAddressService;
 
-    @Autowired
-    private PaymentService paymentService;
-
-    @Autowired
-    private BillingAddressService billingAddressService;
 
     @Autowired
     private UserShippingService userShippingService;
 
-    @Autowired
-    private UserPaymentService userPaymentService;
 
     @Autowired
     private OrderService orderService;
@@ -63,83 +55,64 @@ public class CheckoutController {
     public String checkout(
             @RequestParam("id") Long cartId,
             @RequestParam(value = "missingRequiredField", required = false) boolean missingRequiredField,
+            @ModelAttribute("shippingMethod") String shippingMethod,
+
             Model model, Principal principal
     ) {
         User user = userService.findByUsername(principal.getName());
-        if (cartId != user.getShoppingCart().getId()) {
+        /*if (cartId != user.getShoppingCart().getId()) {
             return "badRequestPage";
-        }
+        }*/
+        /*if (shippingMethod.equals("toAddress")) {*/
+            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 
-        List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
-
-        if (cartItemList.size() == 0) {
-            model.addAttribute("emptyCart", true);
-            return "forward:/shoppingCart/cart";
-        }
-
-        for (CartItem cartItem : cartItemList) {
-            if (cartItem.getProduct().getInStockNumber() < cartItem.getQty()) {
-                model.addAttribute("notEnoughStock", true);
+            if (cartItemList.size() == 0) {
+                model.addAttribute("emptyCart", true);
                 return "forward:/shoppingCart/cart";
             }
-        }
-        List<UserShipping> userShippingList = user.getUserShippingList();
-        List<UserPayment> userPaymentList = user.getUserPaymentList();
 
-        model.addAttribute("userShippingList", userShippingList);
-        model.addAttribute("userPaymentList", userPaymentList);
-
-        if (userPaymentList.size() == 0) {
-            model.addAttribute("emptyPaymentList", true);
-        } else {
-            model.addAttribute("emptyPaymentList", false);
-        }
-
-        if (userShippingList.size() == 0) {
-            model.addAttribute("emptyShippingList", true);
-        } else {
-            model.addAttribute("emptyShippingList", false);
-        }
-
-        ShoppingCart shoppingCart = user.getShoppingCart();
-
-        for (UserShipping userShipping : userShippingList) {
-            if (userShipping.isUserShippingDefault()) {
-                shippingAddressService.setByUserShipping(userShipping, shippingAddress);
+            for (CartItem cartItem : cartItemList) {
+                if (cartItem.getProduct().getInStockNumber() < cartItem.getQty()) {
+                    model.addAttribute("notEnoughStock", true);
+                    return "forward:/shoppingCart/cart";
+                }
             }
-        }
-        for (UserPayment userPayment : userPaymentList) {
-            if (userPayment.isDefaultPayment()) {
-                paymentService.setByUserPayment(userPayment, payment);
-                billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
+            List<UserShipping> userShippingList = user.getUserShippingList();
+
+            model.addAttribute("userShippingList", userShippingList);
+
+            if (userShippingList.size() == 0) {
+                model.addAttribute("emptyShippingList", true);
+            } else {
+                model.addAttribute("emptyShippingList", false);
             }
-        }
 
-        model.addAttribute("shippingAddress", shippingAddress);
-        model.addAttribute("payment", payment);
-        model.addAttribute("billingAddress", billingAddress);
-        model.addAttribute("cartItemList", cartItemList);
-        model.addAttribute("shoppingCart", user.getShoppingCart());
+            ShoppingCart shoppingCart = user.getShoppingCart();
 
-        List<String> stateList = USConstants.listOfUSStatesCode;
-        Collections.sort(stateList);
-        model.addAttribute("stateList", stateList);
+            for (UserShipping userShipping : userShippingList) {
+                if (userShipping.isUserShippingDefault()) {
+                    shippingAddressService.setByUserShipping(userShipping, shippingAddress);
+                }
+            }
 
-        model.addAttribute("classActiveShipping", true);
+            model.addAttribute("shippingAddress", shippingAddress);
+            model.addAttribute("cartItemList", cartItemList);
+            model.addAttribute("shoppingCart", user.getShoppingCart());
+            model.addAttribute("classActiveShipping", true);
 
-        if (missingRequiredField) {
-            model.addAttribute("missingRequiredField", true);
-        }
-
+            if (missingRequiredField) {
+                model.addAttribute("missingRequiredField", true);
+            }
+        /*} else {
+            return "badRequestPage";
+        }*/
         return "checkout";
+
     }
 
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     public String checkoutPost(
             @ModelAttribute("shippingAddress") ShippingAddress shippingAddress,
-            @ModelAttribute("billingAddress") BillingAddress billingAddress,
-            @ModelAttribute("payment") Payment payment,
-            @ModelAttribute("billingSameAsShipping") String billingSameAsShipping,
             @ModelAttribute("shippingMethod") String shippingMethod,
             Principal principal, Model model
     ) {
@@ -147,44 +120,30 @@ public class CheckoutController {
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         model.addAttribute("cartItemList", cartItemList);
 
-        if (billingSameAsShipping.equals("true")) {
-            billingAddress.setBillingAddressName(shippingAddress.getShippingAddressName());
-            billingAddress.setBillingAddressStreet1(shippingAddress.getShippingAddressStreet1());
-            billingAddress.setBillingAddressStreet2(shippingAddress.getShippingAddressStreet2());
-            billingAddress.setBillingAddressCity(shippingAddress.getShippingAddressCity());
-            billingAddress.setBillingAddressState(shippingAddress.getShippingAddressState());
-            billingAddress.setBillingAddressCountry(shippingAddress.getShippingAddressCountry());
-            billingAddress.setBillingAddressZipCode(shippingAddress.getShippingAddressZipCode());
-        }
-
-        if (shippingAddress.getShippingAddressStreet1().isEmpty() ||
+        if (shippingAddress.getShippingAddressAddress().isEmpty() ||
                 shippingAddress.getShippingAddressCity().isEmpty() ||
-                shippingAddress.getShippingAddressState().isEmpty() ||
                 shippingAddress.getShippingAddressName().isEmpty() ||
-                shippingAddress.getShippingAddressZipCode().isEmpty() ||
-                payment.getCardNumber().isEmpty() ||
-                payment.getCvc() == 0 ||
-                billingAddress.getBillingAddressStreet1().isEmpty() ||
-                billingAddress.getBillingAddressCity().isEmpty() ||
-                billingAddress.getBillingAddressState().isEmpty() ||
-                billingAddress.getBillingAddressName().isEmpty() ||
-                billingAddress.getBillingAddressZipCode().isEmpty())
+                shippingAddress.getShippingAddressPhone().isEmpty())
             return "redirect:/checkout?id=" + shoppingCart.getId() + "&missingRequiredField=true";
         User user = userService.findByUsername(principal.getName());
 
-        Order order = orderService.createOrder(shoppingCart, shippingAddress, billingAddress, payment, shippingMethod, user);
+        Order order = orderService.createOrder(shoppingCart, shippingAddress, shippingMethod, user);
 
         mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+
+        model.addAttribute("shoppingCart", shoppingCart);
 
         shoppingCartService.clearShoppingCart(shoppingCart);
 
         LocalDate today = LocalDate.now();
+
         LocalDate estimatedDeliveryDate;
 
-        if (shippingMethod.equals("groundShipping")) {
-            estimatedDeliveryDate = today.plusDays(5);
+        if (today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            estimatedDeliveryDate = today.plusDays(4);
+
         } else {
-            estimatedDeliveryDate = today.plusDays(3);
+            estimatedDeliveryDate = today.plusDays(2);
         }
         model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
         return "orderSubmittedPage";
@@ -205,29 +164,17 @@ public class CheckoutController {
             List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
 //            BillingAddress billingAddress = new BillingAddress();
 
-            model.addAttribute("shippingAddress", shippingAddress);
-            model.addAttribute("payment", payment);
-            model.addAttribute("billingAddress", billingAddress);
+
             model.addAttribute("cartItemList", cartItemList);
             model.addAttribute("shoppingCart", user.getShoppingCart());
-            List<String> stateList = USConstants.listOfUSStatesCode;
-            Collections.sort(stateList);
-            model.addAttribute("stateList", stateList);
+
             List<UserShipping> userShippingList = user.getUserShippingList();
-            List<UserPayment> userPaymentList = user.getUserPaymentList();
 
             model.addAttribute("userShippingList", userShippingList);
-            model.addAttribute("userPaymentList", userPaymentList);
 
             model.addAttribute("shippingAddress", shippingAddress);
 
             model.addAttribute("classActiveShipping", true);
-
-            if (userPaymentList.size() == 0) {
-                model.addAttribute("emptyPaymentList", true);
-            } else {
-                model.addAttribute("emptyPaymentList", false);
-            }
 
             model.addAttribute("emptyShippingList", false);
 
@@ -236,50 +183,4 @@ public class CheckoutController {
         }
     }
 
-    @RequestMapping("/setPaymentMethod")
-    public String setPaymentMethod(
-            @RequestParam("userPaymentId") Long userPaymentId,
-            Principal principal, Model model
-    ) {
-        User user = userService.findByUsername(principal.getName());
-        UserPayment userPayment = userPaymentService.getOne(userPaymentId);
-        UserBilling userBilling = userPayment.getUserBilling();
-
-        if (userPayment.getUser().getId() != user.getId()) {
-            return "badRequestPage";
-        } else {
-            paymentService.setByUserPayment(userPayment, payment);
-            List<CartItem> cartItemList = cartItemService.findByShoppingCart(user.getShoppingCart());
-            billingAddressService.setByUserBilling(userBilling, billingAddress);
-            model.addAttribute("shippingAddress", shippingAddress);
-            model.addAttribute("payment", payment);
-            model.addAttribute("billingAddress", billingAddress);
-            model.addAttribute("cartItemList", cartItemList);
-            model.addAttribute("shoppingCart", user.getShoppingCart());
-            List<String> stateList = USConstants.listOfUSStatesCode;
-            Collections.sort(stateList);
-            model.addAttribute("stateList", stateList);
-            List<UserShipping> userShippingList = user.getUserShippingList();
-            List<UserPayment> userPaymentList = user.getUserPaymentList();
-
-            model.addAttribute("userShippingList", userShippingList);
-            model.addAttribute("userPaymentList", userPaymentList);
-
-            model.addAttribute("shippingAddress", shippingAddress);
-
-            model.addAttribute("classActivePayment", true);
-
-            model.addAttribute("emptyPaymentList", false);
-
-
-            if (userShippingList.size() == 0) {
-                model.addAttribute("emptyShippingList", true);
-            } else {
-                model.addAttribute("emptyShippingList", false);
-            }
-
-            return "checkout";
-
-        }
-    }
 }

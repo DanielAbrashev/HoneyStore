@@ -33,14 +33,23 @@ public class MailConstructor {
             String password
     ) {
         String url = contextPath + "/NewUser?token=" + token;
-        String message = "\nPlease click on this link to verify your email and edit your personal information You password is: \n" + password;
+        String message = "\n Моля, натиснете върху линка и използвайте дадената парола, за да влезете в акаунта си! \n Парола: " + password;
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
-        email.setSubject("AbraHoney - New User");
+        email.setSubject("AbraHoney - подновяване на парола!");
         email.setText(url + message);
         email.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
         return email;
 
+    }
+
+    public SimpleMailMessage constructWelcomeEmail(User user, Locale locale){
+        String message = "\nВие успешно се регистрирахте в AbraHoney.bg. Желаем Ви приятно пазаруване! \n" ;
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getEmail());
+        email.setSubject("AbraHoney - Добре дошли!");
+        email.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
+        return email;
     }
 
     public MimeMessagePreparator constructOrderConfirmationEmail(

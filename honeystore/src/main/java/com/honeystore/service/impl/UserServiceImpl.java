@@ -1,7 +1,9 @@
 package com.honeystore.service.impl;
 
 import com.honeystore.domain.*;
+/*
 import com.honeystore.domain.security.PasswordResetToken;
+*/
 import com.honeystore.domain.security.UserRole;
 import com.honeystore.repository.*;
 import com.honeystore.service.UserService;
@@ -26,27 +28,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordResetTokenRepository passwordResetTokenRepository;
+    /*@Autowired
+    private PasswordResetTokenRepository passwordResetTokenRepository;*/
 
     @Autowired
     private UserShippingRepository userShippingRepository;
 
-    @Autowired
-    private UserPaymentRepository userPaymentRepository;
-
-    @Autowired
-    private UserBillingRepository userBillingRepository;
-
-    public UserServiceImpl(PasswordResetTokenRepository passwordResetTokenRepository, UserRepository userRepository, RoleRepository roleRepository, UserShippingRepository userShippingRepository, UserPaymentRepository userPaymentRepository) {
+    /*public UserServiceImpl(PasswordResetTokenRepository passwordResetTokenRepository, UserRepository userRepository, RoleRepository roleRepository, UserShippingRepository userShippingRepository) {
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userShippingRepository = userShippingRepository;
-        this.userPaymentRepository = userPaymentRepository;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public PasswordResetToken getPasswordResetToken(final String token) {
         return passwordResetTokenRepository.findByToken(token);
     }
@@ -55,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public void createPasswordResetTokenForUser(final User user, final String token) {
         final PasswordResetToken myToken = new PasswordResetToken(token, user);
         passwordResetTokenRepository.save(myToken);
-    }
+    }*/
 
     @Override
     public User findByUsername(String username) {
@@ -90,7 +85,6 @@ public class UserServiceImpl implements UserService {
             user.setShoppingCart(shoppingCart);
 
             user.setUserShippingList(new ArrayList<UserShipping>());
-            user.setUserPaymentList(new ArrayList<UserPayment>());
 
             localUser = userRepository.save(user);
         }
@@ -103,36 +97,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
-
-        userPayment.setUser(user);
-        userPayment.setUserBilling(userBilling);
-        userPayment.setDefaultPayment(true);
-        userBilling.setUserPayment(userPayment);
-        user.getUserPaymentList().add(userPayment);
-        save(user);
-    }
-
-    @Override
-    public void setUserDefaultPayment(Long userPaymentId, User user) {
-
-        List<UserPayment> userPaymentList = (List<UserPayment>) userPaymentRepository.findAll();
-
-        for (UserPayment userPayment : userPaymentList) {
-            if (userPayment.getId() == userPaymentId) {
-                userPayment.setDefaultPayment(true);
-                userPaymentRepository.save(userPayment);
-            } else {
-                userPayment.setDefaultPayment(false);
-                userPaymentRepository.save(userPayment);
-            }
-        }
-    }
-
-    @Override
     public void setUserDefaultShipping(Long shippingAddressId, User user) {
 
-        List<UserShipping> userShippingList = (List<UserShipping>) userShippingRepository.findAll();
+        List<UserShipping> userShippingList = userShippingRepository.findAll();
 
         for (UserShipping userShipping : userShippingList) {
             if (userShipping.getId() == shippingAddressId) {
@@ -152,15 +119,6 @@ public class UserServiceImpl implements UserService {
         userShipping.setUserShippingDefault(true);
         user.getUserShippingList().add(userShipping);
         save(user);
-    }
-
-    @Override
-    public void updateUserPaymentInfo(UserShipping userShipping, UserBilling userBilling, UserPayment userPayment, User user) {
-
-        save(user);
-        userBillingRepository.save(userBilling);
-        userShippingRepository.save(userShipping);
-        userPaymentRepository.save(userPayment);
     }
 
 }

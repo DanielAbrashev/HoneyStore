@@ -51,14 +51,26 @@
                                                name="username"/>
                                         <p style="color:#828282">Въведете вашето потребителско име.</p>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label for="email">Имейл</label>&nbsp;<span style="color:red;"
                                                                                     th:if="${emailExists}">Email already exists. Please chose another one.</span>
                                         <input required="required" type="text" class="form-control" id="email"
                                                name="email"/>
                                         <p style="color:#828282">Въведете валиден имейл адрес.</p>
+                                    </div>-->
+
+                                    <div class="form-group">
+                                        <label for="createPassword">Парола</label>
+                                        <input type="password" class="form-control" id="createPassword"
+                                               name="createPassword"/>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Регистрация</button>
+
+                                    <div class="form-group">
+                                        <label for="txtConfirmCreatePassword">Потвърди парола</label><span
+                                            id="checkCreatePasswordMatch" style="color:red"></span>
+                                        <input type="password" class="form-control" id="txtConfirmCreatePassword"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="registration">Регистрация</button>
                                 </form>
 
                             </div>
@@ -131,7 +143,25 @@
 </div>
 
 <div th:replace="common/header :: footer"/>
+<script>
+    function checkCreatePasswordMatch(){
+    var createPassword = $("#createPassword").val();
+    var txtConfirmCreatePassword = $("#txtConfirmCreatePassword").val();
 
+    if(createPassword == "" && txtConfirmCreatePassword ==""){
+        $("#checkCreatePasswordMatch").html("");
+        $("#registration").prop('disabled', false);
+    }else{
+        if(createPassword != txtConfirmCreatePassword){
+            $("#checkCreatePasswordMatch").html("Passwords do not match!");
+            $("#registration").prop('disabled', true);
+        }else{
+            $("#checkCreatePasswordMatch").html("Passwords match!");
+            $("#registration").prop('disabled', false);
+        }
+    }
+}
+</script>
 
 <div th:replace="common/header :: body-bottom-scripts"/>
 

@@ -36,26 +36,16 @@
     </tr>
     <tr>
         <td>
-            <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
-            <span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
-            <span th:text="${order.billingAddress.billingAddressCity}"></span><br/>
-            <span th:text="${order.billingAddress.billingAddressState}"></span><br/>
-            <span th:text="${order.billingAddress.billingAddressZipCode}"></span><br/>
+
         </td>
         <td>
-            <span th:text="${order.payment.holderName}">Card Name</span><br/>
-            Visa<br/>
-            <span th:text="${order.payment.cardNumber}">Card Number</span><br/>
-            <span>Exp Date:</span> <span
-                th:text="${order.payment.expiryMonth}"></span>/<span
-                th:text="${order.payment.expiryYear}"></span><br/>
+
         </td>
         <td>
             <span th:text="${order.shippingAddress.shippingAddressName}">David Peere:</span><br/>
-            <span th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br/>
+            <span th:text="${order.shippingAddress.shippingAddressAddress}"></span><br/>
+            <span th:text="${order.shippingAddress.shippingAddressPhone}"></span><br/>
             <span th:text="${order.shippingAddress.shippingAddressCity}"></span><br/>
-            <span th:text="${order.shippingAddress.shippingAddressState}"></span><br/>
-            <span th:text="${order.shippingAddress.shippingAddressZipCode}"></span><br/>
         </td>
     </tr>
 </table>

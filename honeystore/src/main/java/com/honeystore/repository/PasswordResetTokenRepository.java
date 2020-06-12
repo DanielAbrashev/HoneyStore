@@ -1,3 +1,4 @@
+/*
 package com.honeystore.repository;
 
 import com.honeystore.domain.User;
@@ -21,3 +22,4 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
     @Query("delete from PasswordResetToken t where t.expiryDate <= ?1")
     void deleteAllExpiredSince(Date now);
 }
+*/

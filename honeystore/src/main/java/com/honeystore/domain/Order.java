@@ -24,12 +24,6 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     private ShippingAddress shippingAddress;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private BillingAddress billingAddress;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Payment payment;
-
     @ManyToOne
     private User user;
 
@@ -97,27 +91,11 @@ public class Order {
         this.shippingAddress = shippingAddress;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public BillingAddress getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(BillingAddress billingAddress) {
-        this.billingAddress = billingAddress;
     }
 }
