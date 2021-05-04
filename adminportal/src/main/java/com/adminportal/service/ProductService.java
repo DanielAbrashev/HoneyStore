@@ -3,7 +3,6 @@ package com.adminportal.service;
 import com.adminportal.domain.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
 

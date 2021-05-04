@@ -89,7 +89,6 @@ public class OrdersController {
         model.addAttribute("user", user);
         model.addAttribute("order", order);
 
-        model.addAttribute("userPaymentList", user.getUserPaymentList());
         model.addAttribute("userShippingList", user.getUserShippingList());
         model.addAttribute("orderList", orderList);
 
@@ -97,7 +96,6 @@ public class OrdersController {
         model.addAttribute("userShipping", userShipping);
 
 
-        model.addAttribute("listOfCreditCards", true);
         model.addAttribute("listOfShippingAddresses", true);
 
 

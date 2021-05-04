@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar"></div>
+
+<!-- Main component for a primary marketing message or call to action -->
+<div class="container ">
+
+    <br/>
+
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productList}">Пчелни продукти</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productDetail?id=}+${product.id}"><span th:text="${product.productName}"></span></a></li>
+        </ol>
+    </header>
+
+    <br/>
+
+    <div class="row">
+        <div class="container">
+        <form th:action="@{/shoppingCart/addItem}" method="post">
+            <input hidden="hidden" th:field="*{product.id}"/>
+            <div class="row" >
+                <div class="col-sm-3">
+                    <a th:href="@{/productList}">Обратно към всички продукти</a> <br/>
+                    <img class="responsive" th:src="#{adminPath}+@{/image/product/}+${product.id}+'.png'"/>
+                </div>
+                <div class="col-sm-9">
+                    <h3 th:text="${product.productName}"></h3>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h5><strong>Реколта: </strong><span th:text="${product.harvest}"></span>г.</h5>
+                            <h5><strong>Категория: </strong><span th:text="${product.category}"></span></h5>
+                            <p><strong>Тегло: </strong><span th:text="${product.shippingWeight}"></span> гр.</p>
+                        </div>
+
+                        <div class="col-sm-7">
+                            <div class="panel panel-default" style="border-width: 5px; margin-top: 20px">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h4>Промоционална цена: <span style="color: #db3208;"></span><span
+                                                    style="color: #db3208" th:text="${product.ourPrice}"></span>лв.</h4>
+                                            <p>Цена: <span style="text-decoration: line-through"></span><span
+                                                    style="text-decoration: line-through"
+                                                    th:text="${product.listPrice}"></span>лв.</p>
+                                            <p>Спестяваш: <span
+                                                    th:text="${#numbers.formatDecimal((product.listPrice - product.ourPrice), 0, 'COMMA', 2, 'POINT' )}"></span>лв.
+                                            </p>
+                                            <span>Кол: </span>
+                                            <select name="qty">
+                                                <option th:each="qty :${qtyList}" th:value="${qty}" th:text="${qty}">
+
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h4 th:if="*{product.inStockNumber&gt;10}" style="color: green;">В
+                                                наличност</h4>
+                                            <h4 th:if="*{product.inStockNumber&lt;10}" style="color: green;">Само <span
+                                                    th:text="${product.inStockNumber}"></span> налични</h4>
+                                            <h4 th:if="*{product.inStockNumber==0}" style="color: darkred">Не са в
+                                                наличност</h4>
+                                            <button type="submit" class="btn btn-warning"
+                                                    style="color: black;border: 1px; padding: 10px 40px 10px 40px">
+                                                Добави в количка
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <p th:utext="${product.description}"></p>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>   <!--end of conatainer-->
+<div th:replace="common/header :: footer"/>
+
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+
+</body>
+</html>

@@ -72,11 +72,7 @@
                                             <div class="panel-heading"><strong>Данни на платежно средство</strong>
                                             </div>
                                             <div class="panel-body">
-                                                <span th:text="${order.billingAddress.billingAddressName}"></span><br/>
-                                                <span th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br/>
-                                                <span th:text="${order.billingAddress.billingAddressCity}"></span><br/>
-                                                <span th:text="${order.billingAddress.billingAddressState}"></span><br/>
-                                                <span th:text="${order.billingAddress.billingAddressZipCode}"></span><br/>
+
                                             </div>
                                         </div>
                                     </div>
@@ -85,11 +81,7 @@
                                             <div class="panel-heading"><strong>Платежни Данни</strong>
                                             </div>
                                             <div class="panel-body">
-                                                <span th:text="${order.payment.holderName}">Име на карта</span><br/>
-                                                <span th:text="${order.payment.cardNumber}">Номер на карта</span><br/>
-                                                <span>Дата на изтичане:</span> <span
-                                                    th:text="${order.payment.expiryMonth}"></span>/<span
-                                                    th:text="${order.payment.expiryYear}"></span><br/>
+
                                             </div>
                                         </div>
                                     </div>
@@ -100,10 +92,9 @@
                                             </div>
                                             <div class="panel-body">
                                                 <span th:text="${order.shippingAddress.shippingAddressName}"></span><br/>
-                                                <span th:text="${order.shippingAddress.shippingAddress}+' '+${order.shippingAddress.shippingAddressPhone}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressPhone}"></span><br/>
                                                 <span th:text="${order.shippingAddress.shippingAddressCity}"></span><br/>
-                                                <span th:text="${order.shippingAddress.shippingAddressState}"></span><br/>
-                                                <span th:text="${order.shippingAddress.shippingAddressZipCode}"></span><br/>
+                                                <span th:text="${order.shippingAddress.shippingAddressAddress}"></span><br/>
                                             </div>
                                         </div>
                                     </div>

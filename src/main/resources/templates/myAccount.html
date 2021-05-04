@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+
+    <br/>
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/aboutUs}">Вход/Регистрация</a></li>
+        </ol>
+    </header>
+    <br/>
+
+
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3">
+            <ul class="nav nav-tabs">
+                <li classappend="nav-item" th:classappend="${classActiveNewAccount}? 'in active'"><a href="#tab-1"
+                                                                                                     class="nav-link"
+                                                                                                     data-toggle="tab"><span
+                        style="color:#f46b42;">Регистрация</span></a></li>
+                <li classappend="nav-item active" th:classappend="${classActiveLogin}? 'in active'"><a href="#tab-2"
+                                                                                                       class="nav-link"
+                                                                                                       data-toggle="tab"><span
+                        style="color:#f46b42;">Влез</span></a></li>
+                <li classappend="nav-item" th:classappend="${classActiveForgottenPassword}? 'in active'"><a
+                        href="#tab-3" class="nav-link" data-toggle="tab"><span
+                        style="color:#f46b42;">Забравена парола</span></a></li>
+            </ul>
+            <!--Tab cards-->
+            <div class="tab-content">
+                <!--Create new user pane-->
+                <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'"  style="background-color:white">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
+                                <div class="alert alert-info" th:if="${emailSent}">
+                                    An email has been sent to the email address you just registered. Please validate
+                                    your email address and update your password information.
+                                </div>
+                                <form class="was-validated" th:action="@{/newUser}" method="post">
+                                    <div class="form-group">
+                                        <label for="newUsername" style="">Потребителско име</label>&nbsp;<span
+                                            style="color:red;"
+                                            th:if="${usernameExists}">Username already exists. Please chose another one.</span>
+                                        <input required="required" type="text" class="form-control" id="newUsername"
+                                               name="username"/>
+                                        <p style="color:#828282">Въведете вашето потребителско име.</p>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label for="email">Имейл</label>&nbsp;<span style="color:red;"
+                                                                                    th:if="${emailExists}">Email already exists. Please chose another one.</span>
+                                        <input required="required" type="text" class="form-control" id="email"
+                                               name="email"/>
+                                        <p style="color:#828282">Въведете валиден имейл адрес.</p>
+                                    </div>-->
+
+                                    <div class="form-group">
+                                        <label for="createPassword">Парола</label>
+                                        <input type="password" class="form-control" id="createPassword"
+                                               name="createPassword"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txtConfirmCreatePassword">Потвърди парола</label><span
+                                            id="checkCreatePasswordMatch" style="color:red"></span>
+                                        <input type="password" class="form-control" id="txtConfirmCreatePassword"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="registration">Регистрация</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Login-->
+                <div class="tab-pane active" id="tab-2" th:classappend="${classActiveLogin}? 'in active'">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
+                                <div th:if="${param.error != null}" style="color: red;">Incorrect username or password
+                                </div>
+                                <form class="was-validated" th:action="@{/login}" method="post">
+                                    <div class="form-group">
+                                        <label for="Username">Потребителско име</label>
+                                        <input required="required" type="text" class="form-control" id="Username"
+                                               name="username"/>
+                                        <p style="color:#828282">Въведете вашето потребителско име.</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Парола</label>
+                                        <input required="required" type="password" class="form-control" id="password"
+                                               name="password"/>
+                                        <p style="color:#828282">Въведете вашата парола.</p>
+                                    </div>
+                                    <div class="form-group form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox"> Запомни ме
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Вход</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--forgotten password-->
+                <div class="tab-pane fade" id="tab-3" th:classappend="${classActiveForgottenPassword}? 'in active'">
+                    <div class="card-group">
+                        <div class="card card-default" style="border:none;">
+                            <div class="card-body" style="background-color:#ededed; margin-top:20px;">
+                                <div th:if="${emailNotExist}" class="alert alert-danger" style="color:red;">Email
+                                    doesn't exist!
+                                </div>
+                                <div th:if="${forgetPasswordEmailSent}" class="alert alert-success" style="color:red;">
+                                    Email sent!
+                                </div>
+                                <form class="was-validated" th:action="@{/forgetPassword}" method="post">
+                                    <div class="form-group">
+                                        <label for="recoverEmail">Имейл</label>
+                                        <input required="required" type="text" class="form-control" id="recoverEmail"
+                                               name="email"/>
+                                        <p style="color:#828282">Въведете вашия имейл</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Изпрати</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+<div th:replace="common/header :: footer"/>
+<script>
+    function checkCreatePasswordMatch(){
+    var createPassword = $("#createPassword").val();
+    var txtConfirmCreatePassword = $("#txtConfirmCreatePassword").val();
+
+    if(createPassword == "" && txtConfirmCreatePassword ==""){
+        $("#checkCreatePasswordMatch").html("");
+        $("#registration").prop('disabled', false);
+    }else{
+        if(createPassword != txtConfirmCreatePassword){
+            $("#checkCreatePasswordMatch").html("Passwords do not match!");
+            $("#registration").prop('disabled', true);
+        }else{
+            $("#checkCreatePasswordMatch").html("Passwords match!");
+            $("#registration").prop('disabled', false);
+        }
+    }
+}
+</script>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body>
+<div th:replace="common/header :: navbar"/>
+
+<div class="container">
+    <br/>
+    <header th:insert="common/header :: header(~{ :: .breadcrumb})">
+        <ol class="breadcrumb breadcrumb-arrow p-0">
+            <li class="breadcrumb-item"><a th:href="@{/}">Начало</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/productList}">Пчелни продукти</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/shoppingCart/cart}">Количка</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/checkout}">Поръчка</a></li>
+        </ol>
+    </header>
+    <br/>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+
+            <form th:action="@{/checkout}" method="post">
+                <!--            Left Panel-->
+                <div class="card ">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-warning btn-black">
+                            Направете поръчка
+                        </button>
+                        <p style="font-size:smaller">Поръчвайки, Вие се съгласявате с политиката на Abrahoney
+                            <a href="#">privacy</a>notice and<a href="#">conditions</a>of use.</p>
+                        <hr/>
+                        <h3>Преглед на доставка</h3>
+                        <div class="row">
+                            <div class="col-sm-7 text-left">
+                                Общо;
+                            </div>
+                            <div class="col-sm-5 text-right">
+                                <span th:text="${shoppingCart.grandTotal}">лв.</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-7 text-left">
+                                <h3 style="color:darkred;"><strong>Общо: </strong></h3>
+                            </div>
+                            <div class="col-sm-5 text-right">
+                                <h3 style="color:darkred;"><span
+                                        th:with="total=${shoppingCart.grandTotal}"
+                                        th:text="${#numbers.formatDecimal(total,0,2)}">лв.</span></h3>
+                            </div>
+                        </div>
+
+                        <div class="card-footer" th:if="${shoppingCart.grandTotal&lt;95}">Цената на доставката не е
+                            включена! Остават Ви <span th:with="total=95-${shoppingCart.grandTotal}"
+                                                       th:text="${#numbers.formatDecimal(total,0,2)}"></span>лв. до
+                            безплатна доставка
+                        </div>
+                        <div class="card-footer"
+                             th:if="${shoppingCart.grandTotal&gt;95 or shoppingCart.grandTotal == '95'}"> Безплатна
+                            доставка !
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!--            Checkout info-->
+        <div class="col-sm-8">
+
+            <form th:action="@{/checkout}" method="post">
+
+                <div th:if="${missingRequiredField}">
+                    <h5 class="alert alert-warning">Липсват полета. Полета с * са задължителни</h5>
+                </div>
+
+                <div id="accordion">
+                    <!--                    1.Shipping Address-->
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="card-tittle">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#shippingInfo">
+                                    Адрес за доставка
+                                </a>
+                            </h4>
+                        </div>
+
+
+                        <div id="shippingInfo" class="card-collapse active"
+                             th:classappend="${classActiveShipping}? 'active'">
+
+
+                            <div class="form-group">
+                                <label class="col-md-6 control-label" for="shippingMethod">* Изберете начин на
+                                    доставка</label>
+                                <div class="col-md-12">
+                                    <select id="shippingMethod" name="shippingMethod" class="form-control">
+                                        <option value="toAddress" th:selected="selected">До адрес</option>
+                                        <option value="toOffice">До офис на Еконт</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" th:if="${not emptyShippingList}">
+                                    <thead>
+                                    <tr>
+                                        <th>Available shipping address</th>
+                                        <th>Operations</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="userShipping : ${userShippingList}">
+                                        <td th:text="${userShipping.userShippingAddressAddress}+
+                                        ', '+ ${userShipping.userShippingAddressPhone}+
+                                        ', '+ ${userShipping.userShippingAddressCity}">
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/setShippingAddress(userShippingId=${userShipping.id})}">използвай
+                                                адрес</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group" id="toAddress">
+                                    <label for="shippingAddressName">* Име</label>
+                                    <input type="text" class="form-control" id="shippingAddressName"
+                                           placeholder="Име" name="shippingAddressName"
+                                           th:value="${shippingAddress.shippingAddressName}"/>
+
+
+                                    <label for="shippingAddressAddress">* Адрес за доставка</label>
+                                    <input type="text" class="form-control" id="shippingAddressAddress"
+                                           placeholder="Адрес" name="shippingAddressAddress" required="required"
+                                           th:value="${shippingAddress.shippingAddressAddress}"/>
+
+                                    <label for="shippingAddressPhone">* Телефон</label>
+                                    <input type="text" class="form-control" id="shippingAddressPhone"
+                                           placeholder="Телефон" name="shippingAddressPhone" required="required"
+                                           th:value="${shippingAddress.shippingAddressPhone}"/>
+
+
+                                    <label for="shippingAddressCity">* Град </label>
+                                    <input type="text" class="form-control" id="shippingAddressCity"
+                                           placeholder="Град"
+                                           th:name="shippingAddressCity" required="required"
+                                           th:value="${shippingAddress.shippingAddressCity}"/>
+                                </div>
+
+
+                                <div class="form-group" id="toOffice">
+                                    <label for="shippingAddressNameEkont">* Име ekont</label>
+                                    <input type="text" class="form-control" id="shippingAddressNameEkont"
+                                           placeholder="Име" name="shippingAddressName"
+                                           th:value="${shippingAddress.shippingAddressName}"/>
+
+
+                                    <label for="shippingAddressAddressEkont">* Адрес за доставка ekont</label>
+                                    <input type="text" class="form-control" id="shippingAddressAddressEkont"
+                                           placeholder="Адрес" name="shippingAddressAddress" required="required"
+                                           th:value="${shippingAddress.shippingAddressAddress}"/>
+
+                                    <label for="shippingAddressPhoneEkont">* Телефон ekont</label>
+                                    <input type="text" class="form-control" id="shippingAddressPhoneEkont"
+                                           placeholder="Телефон" name="shippingAddressPhone" required="required"
+                                           th:value="${shippingAddress.shippingAddressPhone}"/>
+
+
+                                    <label for="shippingAddressCityEkont">* Град ekont </label>
+                                    <input type="text" class="form-control" id="shippingAddressCityEkont"
+                                           placeholder="Град"
+                                           th:name="shippingAddressCity" required="required"
+                                           th:value="${shippingAddress.shippingAddressCity}"/>
+                                </div>
+
+                                <a data-toggle="collapse" data-parent="#accordion" class="btn btn-warning pull-right"
+                                   href="#reviewItems">
+                                    Преглед на поръчката
+                                </a>
+                                <button type="submit" class="btn btn-warning btn-block">Поръчай</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--2.Review items and Shipping-->
+                    <div class="card ">
+                        <div class="card-header">
+                            <h4 class="card-productName">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#reviewItems">
+                                    Преглед на поръчката
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="reviewItems" class="card-collapse collapse">
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h4>Продукти</h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h4>Цена</h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h4>Кол.</h4>
+                                </div>
+                            </div>
+
+                            <!-- Display products in cart-->
+                            <div class="row" th:each="cartItem : ${cartItemList}">
+                                <hr/>
+                                <div class="col-sm-2">
+                                    <a th:href="@{/productDetail(id=${cartItem.product.id})}">
+                                        <img class="img-responsive shelf-product"
+                                             th:src="#{adminPath} +@{/image/product/}+${cartItem.product.id}+'.png'"
+                                             style="width:70px;"/>
+                                    </a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p th:if="${cartItem.product.inStockNumber&gt;10}" style="color:green;">В
+                                        наличност</p>
+                                    <p th:if="${cartItem.product.inStockNumber&gt;10 and cartItem.product.inStockNumber&gt;0}"
+                                       style="color:green;">Само<span
+                                            th:text="${cartItem.product.inStockNumber}"></span> Налични
+                                    </p>
+                                    <p th:if="${cartItem.product.inStockNumber==0}" style="color:red;">Продуктът не е
+                                        наличен</p>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <h5 style="color:#db3208;font-size:large;"><span
+                                            th:text="${cartItem.product.ourPrice}"
+                                            th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-trough' : ''">лв.</span>
+                                    </h5>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h5 style="font-size:Large;" th:text="${cartItem.qty}"></h5>
+                                </div>
+                            </div>
+                            <hr/>
+                            <hr/>
+                            <h4 class="col-sm-12 text-right"><strong style="font-size:large;">Общо(<span
+                                    th:text="${#lists.size(cartItemList)}"></span> продукти):</strong><span
+                                    style="color:#db3208; font size:large;"></span><span
+                                    th:text="${shoppingCart.grandTotal}"></span>лв.</h4>
+                            <br/>
+                            <br/>
+                            <button type="submit" class="btn btn-warning btn-block">Поръчай</button>
+                            <p style="font-size: smaller;">
+                                Поръчвайки от АбраХъни, се съгласявате с политика за <a href="#">сигурност</a>
+                                и <a href="#">общи условия </a> на ползване
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="common/header :: footer"/>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+
+</body>
+</html>

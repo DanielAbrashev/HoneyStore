@@ -9,12 +9,9 @@ public class ShippingAddress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String shippingAddressName;
-    private String shippingAddressStreet1;
-    private String shippingAddressStreet2;
+    private String shippingAddressPhone;
+    private String shippingAddressAddress;
     private String shippingAddressCity;
-    private String shippingAddressState;
-    private String shippingAddressCountry;
-    private String shippingAddressZipCode;
 
     @OneToOne
     private Order order;
@@ -35,52 +32,12 @@ public class ShippingAddress {
         this.shippingAddressName = shippingAddressName;
     }
 
-    public String getShippingAddressStreet1() {
-        return shippingAddressStreet1;
-    }
-
-    public void setShippingAddressStreet1(String shippingAddressStreet1) {
-        this.shippingAddressStreet1 = shippingAddressStreet1;
-    }
-
-    public String getShippingAddressStreet2() {
-        return shippingAddressStreet2;
-    }
-
-    public void setShippingAddressStreet2(String shippingAddressStreet2) {
-        this.shippingAddressStreet2 = shippingAddressStreet2;
-    }
-
     public String getShippingAddressCity() {
         return shippingAddressCity;
     }
 
     public void setShippingAddressCity(String shippingAddressCity) {
         this.shippingAddressCity = shippingAddressCity;
-    }
-
-    public String getShippingAddressState() {
-        return shippingAddressState;
-    }
-
-    public void setShippingAddressState(String shippingAddressState) {
-        this.shippingAddressState = shippingAddressState;
-    }
-
-    public String getShippingAddressCountry() {
-        return shippingAddressCountry;
-    }
-
-    public void setShippingAddressCountry(String shippingAddressCountry) {
-        this.shippingAddressCountry = shippingAddressCountry;
-    }
-
-    public String getShippingAddressZipCode() {
-        return shippingAddressZipCode;
-    }
-
-    public void setShippingAddressZipCode(String shippingAddressZipCode) {
-        this.shippingAddressZipCode = shippingAddressZipCode;
     }
 
     public Order getOrder() {
@@ -91,4 +48,19 @@ public class ShippingAddress {
         this.order = order;
     }
 
+    public String getShippingAddressPhone() {
+        return shippingAddressPhone;
+    }
+
+    public void setShippingAddressPhone(String shippingAddressPhone) {
+        this.shippingAddressPhone = shippingAddressPhone;
+    }
+
+    public String getShippingAddressAddress() {
+        return shippingAddressAddress;
+    }
+
+    public void setShippingAddressAddress(String shippingAddressAddress) {
+        this.shippingAddressAddress = shippingAddressAddress;
+    }
 }
